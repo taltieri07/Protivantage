@@ -1,0 +1,52 @@
+C:\Documents and Settings\Autumn\Local Settings\Application Data\Temporary Projects\Coumadin Tracker\bin\Release\Coumadin Tracker.exe
+C:\Documents and Settings\Autumn\Local Settings\Application Data\Temporary Projects\Coumadin Tracker\bin\Release\Coumadin Tracker.pdb
+C:\Documents and Settings\Autumn\Local Settings\Application Data\Temporary Projects\Coumadin Tracker\bin\Release\Coumadin Tracker.xml
+C:\Documents and Settings\Autumn\Local Settings\Application Data\Temporary Projects\Coumadin Tracker\obj\Release\ResolveAssemblyReference.cache
+C:\Documents and Settings\Autumn\Local Settings\Application Data\Temporary Projects\Coumadin Tracker\obj\Release\Coumadin_Tracker.Form1.resources
+C:\Documents and Settings\Autumn\Local Settings\Application Data\Temporary Projects\Coumadin Tracker\obj\Release\Coumadin_Tracker.Resources.resources
+C:\Documents and Settings\Autumn\Local Settings\Application Data\Temporary Projects\Coumadin Tracker\obj\Release\Coumadin Tracker.vbproj.GenerateResource.Cache
+C:\Documents and Settings\Autumn\Local Settings\Application Data\Temporary Projects\Coumadin Tracker\obj\Release\Coumadin Tracker.exe
+C:\Documents and Settings\Autumn\Local Settings\Application Data\Temporary Projects\Coumadin Tracker\obj\Release\Coumadin Tracker.xml
+C:\Documents and Settings\Autumn\Local Settings\Application Data\Temporary Projects\Coumadin Tracker\obj\Release\Coumadin Tracker.pdb
+C:\Documents and Settings\Autumn\My Documents\Visual Studio 2008\Projects\Coumadin Tracker\Coumadin Tracker\obj\Release\ResolveAssemblyReference.cache
+C:\Documents and Settings\Autumn\My Documents\Visual Studio 2008\Projects\Coumadin Tracker\Coumadin Tracker\obj\Release\Coumadin_Tracker.AddRecords.resources
+C:\Documents and Settings\Autumn\My Documents\Visual Studio 2008\Projects\Coumadin Tracker\Coumadin Tracker\obj\Release\Coumadin_Tracker.AllscriptsUAI.resources
+C:\Documents and Settings\Autumn\My Documents\Visual Studio 2008\Projects\Coumadin Tracker\Coumadin Tracker\obj\Release\Coumadin_Tracker.FrmTrackerMain.resources
+C:\Documents and Settings\Autumn\My Documents\Visual Studio 2008\Projects\Coumadin Tracker\Coumadin Tracker\obj\Release\Coumadin_Tracker.Resources.resources
+C:\Documents and Settings\Autumn\My Documents\Visual Studio 2008\Projects\Coumadin Tracker\Coumadin Tracker\obj\Release\Coumadin Tracker.vbproj.GenerateResource.Cache
+C:\Documents and Settings\Autumn\My Documents\Visual Studio 2008\Projects\Coumadin Tracker\Coumadin Tracker\obj\Release\Coumadin Tracker.exe
+C:\Documents and Settings\Autumn\My Documents\Visual Studio 2008\Projects\Coumadin Tracker\Coumadin Tracker\obj\Release\Coumadin Tracker.xml
+C:\Documents and Settings\Autumn\My Documents\Visual Studio 2008\Projects\Coumadin Tracker\Coumadin Tracker\obj\Release\Coumadin Tracker.pdb
+C:\Coumadin Tracker\Coumadin Tracker\bin\Release\Protivantage.exe.config
+C:\Coumadin Tracker\Coumadin Tracker\bin\Release\CoumadinTracker.sdf
+C:\Coumadin Tracker\Coumadin Tracker\bin\Release\Works.sdf
+C:\Coumadin Tracker\Coumadin Tracker\bin\Release\Protivantage.exe
+C:\Coumadin Tracker\Coumadin Tracker\bin\Release\Protivantage.pdb
+C:\Coumadin Tracker\Coumadin Tracker\bin\Release\Protivantage.xml
+C:\Coumadin Tracker\Coumadin Tracker\obj\Release\Coumadin_Tracker.AddRecords.resources
+C:\Coumadin Tracker\Coumadin Tracker\obj\Release\Coumadin_Tracker.AllscriptsUAI.resources
+C:\Coumadin Tracker\Coumadin Tracker\obj\Release\Coumadin_Tracker.FrmUserSettings.resources
+C:\Coumadin Tracker\Coumadin Tracker\obj\Release\Coumadin_Tracker.FrmSettings.resources
+C:\Coumadin Tracker\Coumadin Tracker\obj\Release\Coumadin_Tracker.FrmTrackerMain.resources
+C:\Coumadin Tracker\Coumadin Tracker\obj\Release\Coumadin_Tracker.GetAllscriptsPatient.resources
+C:\Coumadin Tracker\Coumadin Tracker\obj\Release\Coumadin_Tracker.Resources.resources
+C:\Coumadin Tracker\Coumadin Tracker\obj\Release\Protivantage.exe
+C:\Coumadin Tracker\Coumadin Tracker\obj\Release\Protivantage.xml
+C:\Coumadin Tracker\Coumadin Tracker\obj\Release\Protivantage.pdb
+C:\Coumadin Tracker\Coumadin Tracker\obj\Release\Coumadin Tracker.vbproj.GenerateResource.Cache
+C:\Coumadin Tracker\Coumadin Tracker\obj\Release\Coumadin Tracker.vbprojResolveAssemblyReference.cache
+C:\Coumadin Tracker v2.0\Coumadin Tracker\bin\Release\Protivantage.exe.config
+C:\Coumadin Tracker v2.0\Coumadin Tracker\obj\Release\Protivantage.exe
+C:\Coumadin Tracker v2.0\Coumadin Tracker\obj\Release\Protivantage.xml
+C:\Coumadin Tracker v2.0\Coumadin Tracker\obj\Release\Protivantage.pdb
+C:\Coumadin Tracker v2.0\Coumadin Tracker\bin\Release\Protivantage.exe
+C:\Coumadin Tracker v2.0\Coumadin Tracker\bin\Release\Protivantage.pdb
+C:\Coumadin Tracker v2.0\Coumadin Tracker\bin\Release\Protivantage.xml
+C:\Coumadin Tracker v2.0\Coumadin Tracker\obj\Release\Coumadin Tracker.vbprojResolveAssemblyReference.cache
+C:\Coumadin Tracker v2.0\Coumadin Tracker\obj\Release\Coumadin_Tracker.FrmCDS.resources
+C:\Coumadin Tracker v2.0\Coumadin Tracker\obj\Release\Coumadin_Tracker.FrmNoSSO.resources
+C:\Coumadin Tracker v2.0\Coumadin Tracker\obj\Release\Coumadin_Tracker.FrmTherapyDetailEdit.resources
+C:\Coumadin Tracker v2.0\Coumadin Tracker\obj\Release\Coumadin_Tracker.FrmUserSettings.resources
+C:\Coumadin Tracker v2.0\Coumadin Tracker\obj\Release\Coumadin_Tracker.FrmTrackerMain.resources
+C:\Coumadin Tracker v2.0\Coumadin Tracker\obj\Release\Coumadin_Tracker.Resources.resources
+C:\Coumadin Tracker v2.0\Coumadin Tracker\obj\Release\Coumadin Tracker.vbproj.GenerateResource.Cache

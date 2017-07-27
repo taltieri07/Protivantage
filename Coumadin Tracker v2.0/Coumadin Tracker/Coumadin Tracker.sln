@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Basic Express 2010
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Coumadin Tracker", "Coumadin Tracker.vbproj", "{2595BA1B-3EEA-4430-A486-283C3EF0807D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2595BA1B-3EEA-4430-A486-283C3EF0807D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2595BA1B-3EEA-4430-A486-283C3EF0807D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2595BA1B-3EEA-4430-A486-283C3EF0807D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2595BA1B-3EEA-4430-A486-283C3EF0807D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

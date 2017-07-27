@@ -1,0 +1,88 @@
+C:\Documents and Settings\Autumn\Local Settings\Application Data\Temporary Projects\Coumadin Tracker\bin\Debug\Coumadin Tracker.exe
+C:\Documents and Settings\Autumn\Local Settings\Application Data\Temporary Projects\Coumadin Tracker\bin\Debug\Coumadin Tracker.pdb
+C:\Documents and Settings\Autumn\Local Settings\Application Data\Temporary Projects\Coumadin Tracker\bin\Debug\Coumadin Tracker.xml
+C:\Documents and Settings\Autumn\Local Settings\Application Data\Temporary Projects\Coumadin Tracker\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Autumn\Local Settings\Application Data\Temporary Projects\Coumadin Tracker\obj\Debug\Coumadin_Tracker.Form1.resources
+C:\Documents and Settings\Autumn\Local Settings\Application Data\Temporary Projects\Coumadin Tracker\obj\Debug\Coumadin_Tracker.Resources.resources
+C:\Documents and Settings\Autumn\Local Settings\Application Data\Temporary Projects\Coumadin Tracker\obj\Debug\Coumadin Tracker.vbproj.GenerateResource.Cache
+C:\Documents and Settings\Autumn\Local Settings\Application Data\Temporary Projects\Coumadin Tracker\obj\Debug\Coumadin Tracker.exe
+C:\Documents and Settings\Autumn\Local Settings\Application Data\Temporary Projects\Coumadin Tracker\obj\Debug\Coumadin Tracker.xml
+C:\Documents and Settings\Autumn\Local Settings\Application Data\Temporary Projects\Coumadin Tracker\obj\Debug\Coumadin Tracker.pdb
+C:\Documents and Settings\Autumn\My Documents\Visual Studio 2008\Projects\Coumadin Tracker\Coumadin Tracker\bin\Debug\Coumadin Tracker.exe.config
+C:\Documents and Settings\Autumn\My Documents\Visual Studio 2008\Projects\Coumadin Tracker\Coumadin Tracker\obj\Debug\Coumadin Tracker.exe
+C:\Documents and Settings\Autumn\My Documents\Visual Studio 2008\Projects\Coumadin Tracker\Coumadin Tracker\obj\Debug\Coumadin Tracker.xml
+C:\Documents and Settings\Autumn\My Documents\Visual Studio 2008\Projects\Coumadin Tracker\Coumadin Tracker\obj\Debug\Coumadin Tracker.pdb
+C:\Documents and Settings\Autumn\My Documents\Visual Studio 2008\Projects\Coumadin Tracker\Coumadin Tracker\bin\Debug\Coumadin Tracker.exe
+C:\Documents and Settings\Autumn\My Documents\Visual Studio 2008\Projects\Coumadin Tracker\Coumadin Tracker\bin\Debug\Coumadin Tracker.pdb
+C:\Documents and Settings\Autumn\My Documents\Visual Studio 2008\Projects\Coumadin Tracker\Coumadin Tracker\bin\Debug\Coumadin Tracker.xml
+C:\Documents and Settings\Autumn\My Documents\Visual Studio 2008\Projects\Coumadin Tracker\Coumadin Tracker\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Autumn\My Documents\Visual Studio 2008\Projects\Coumadin Tracker\Coumadin Tracker\obj\Debug\Coumadin_Tracker.FrmTrackerMain.resources
+C:\Documents and Settings\Autumn\My Documents\Visual Studio 2008\Projects\Coumadin Tracker\Coumadin Tracker\obj\Debug\Coumadin_Tracker.Resources.resources
+C:\Documents and Settings\Autumn\My Documents\Visual Studio 2008\Projects\Coumadin Tracker\Coumadin Tracker\obj\Debug\Coumadin_Tracker.AllscriptsUAI.resources
+C:\Documents and Settings\Autumn\My Documents\Visual Studio 2008\Projects\Coumadin Tracker\Coumadin Tracker\obj\Debug\Coumadin_Tracker.AddRecords.resources
+C:\Documents and Settings\Autumn\My Documents\Visual Studio 2008\Projects\Coumadin Tracker\Coumadin Tracker\bin\Debug\CoumadinTracker.sdf
+C:\Documents and Settings\Autumn\My Documents\Visual Studio 2008\Projects\Coumadin Tracker\Coumadin Tracker\obj\Debug\GenerateResource.read.1.tlog
+C:\Documents and Settings\Autumn\My Documents\Visual Studio 2008\Projects\Coumadin Tracker\Coumadin Tracker\obj\Debug\GenerateResource.write.1.tlog
+C:\Documents and Settings\Autumn\My Documents\Visual Studio 2008\Projects\Coumadin Tracker\Coumadin Tracker\bin\Debug\Works.sdf
+E:\PC - Altieri Full backup 12-28-13\Autumn\My Documents\Visual Studio 2008\Projects\Coumadin Tracker\Coumadin Tracker\bin\Debug\Coumadin Tracker.exe.config
+E:\PC - Altieri Full backup 12-28-13\Autumn\My Documents\Visual Studio 2008\Projects\Coumadin Tracker\Coumadin Tracker\obj\Debug\Coumadin Tracker.exe
+E:\PC - Altieri Full backup 12-28-13\Autumn\My Documents\Visual Studio 2008\Projects\Coumadin Tracker\Coumadin Tracker\obj\Debug\Coumadin Tracker.xml
+E:\PC - Altieri Full backup 12-28-13\Autumn\My Documents\Visual Studio 2008\Projects\Coumadin Tracker\Coumadin Tracker\obj\Debug\Coumadin Tracker.pdb
+E:\PC - Altieri Full backup 12-28-13\Autumn\My Documents\Visual Studio 2008\Projects\Coumadin Tracker\Coumadin Tracker\bin\Debug\CoumadinTracker.sdf
+E:\PC - Altieri Full backup 12-28-13\Autumn\My Documents\Visual Studio 2008\Projects\Coumadin Tracker\Coumadin Tracker\bin\Debug\Works.sdf
+E:\PC - Altieri Full backup 12-28-13\Autumn\My Documents\Visual Studio 2008\Projects\Coumadin Tracker\Coumadin Tracker\bin\Debug\Coumadin Tracker.exe
+E:\PC - Altieri Full backup 12-28-13\Autumn\My Documents\Visual Studio 2008\Projects\Coumadin Tracker\Coumadin Tracker\bin\Debug\Coumadin Tracker.pdb
+E:\PC - Altieri Full backup 12-28-13\Autumn\My Documents\Visual Studio 2008\Projects\Coumadin Tracker\Coumadin Tracker\bin\Debug\Coumadin Tracker.xml
+E:\PC - Altieri Full backup 12-28-13\Autumn\My Documents\Visual Studio 2008\Projects\Coumadin Tracker\Coumadin Tracker\obj\Debug\ResolveAssemblyReference.cache
+E:\PC - Altieri Full backup 12-28-13\Autumn\My Documents\Visual Studio 2008\Projects\Coumadin Tracker\Coumadin Tracker\obj\Debug\Coumadin_Tracker.AddRecords.resources
+E:\PC - Altieri Full backup 12-28-13\Autumn\My Documents\Visual Studio 2008\Projects\Coumadin Tracker\Coumadin Tracker\obj\Debug\Coumadin_Tracker.AllscriptsUAI.resources
+E:\PC - Altieri Full backup 12-28-13\Autumn\My Documents\Visual Studio 2008\Projects\Coumadin Tracker\Coumadin Tracker\obj\Debug\Coumadin_Tracker.FrmTrackerMain.resources
+E:\PC - Altieri Full backup 12-28-13\Autumn\My Documents\Visual Studio 2008\Projects\Coumadin Tracker\Coumadin Tracker\obj\Debug\Coumadin_Tracker.Resources.resources
+E:\PC - Altieri Full backup 12-28-13\Autumn\My Documents\Visual Studio 2008\Projects\Coumadin Tracker\Coumadin Tracker\obj\Debug\GenerateResource.read.1.tlog
+E:\PC - Altieri Full backup 12-28-13\Autumn\My Documents\Visual Studio 2008\Projects\Coumadin Tracker\Coumadin Tracker\obj\Debug\GenerateResource.write.1.tlog
+C:\Documents and Settings\Autumn\My Documents\Coumadin Tracker\Coumadin Tracker\bin\Debug\CoumadinTracker.sdf
+C:\Documents and Settings\Autumn\My Documents\Coumadin Tracker\Coumadin Tracker\bin\Debug\Works.sdf
+C:\Documents and Settings\Autumn\My Documents\Coumadin Tracker\Coumadin Tracker\bin\Debug\Coumadin Tracker.exe.config
+C:\Documents and Settings\Autumn\My Documents\Coumadin Tracker\Coumadin Tracker\bin\Debug\Coumadin Tracker.exe
+C:\Documents and Settings\Autumn\My Documents\Coumadin Tracker\Coumadin Tracker\bin\Debug\Coumadin Tracker.pdb
+C:\Documents and Settings\Autumn\My Documents\Coumadin Tracker\Coumadin Tracker\bin\Debug\Coumadin Tracker.xml
+C:\Documents and Settings\Autumn\My Documents\Coumadin Tracker\Coumadin Tracker\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Autumn\My Documents\Coumadin Tracker\Coumadin Tracker\obj\Debug\Coumadin_Tracker.AddRecords.resources
+C:\Documents and Settings\Autumn\My Documents\Coumadin Tracker\Coumadin Tracker\obj\Debug\Coumadin_Tracker.AllscriptsUAI.resources
+C:\Documents and Settings\Autumn\My Documents\Coumadin Tracker\Coumadin Tracker\obj\Debug\Coumadin_Tracker.FrmTrackerMain.resources
+C:\Documents and Settings\Autumn\My Documents\Coumadin Tracker\Coumadin Tracker\obj\Debug\Coumadin_Tracker.Resources.resources
+C:\Documents and Settings\Autumn\My Documents\Coumadin Tracker\Coumadin Tracker\obj\Debug\GenerateResource.read.1.tlog
+C:\Documents and Settings\Autumn\My Documents\Coumadin Tracker\Coumadin Tracker\obj\Debug\GenerateResource.write.1.tlog
+C:\Documents and Settings\Autumn\My Documents\Coumadin Tracker\Coumadin Tracker\obj\Debug\Coumadin Tracker.exe
+C:\Documents and Settings\Autumn\My Documents\Coumadin Tracker\Coumadin Tracker\obj\Debug\Coumadin Tracker.xml
+C:\Documents and Settings\Autumn\My Documents\Coumadin Tracker\Coumadin Tracker\obj\Debug\Coumadin Tracker.pdb
+C:\Coumadin Tracker\Coumadin Tracker\obj\Debug\Coumadin_Tracker.FrmTrackerMain.resources
+C:\Coumadin Tracker\Coumadin Tracker\obj\Debug\Coumadin_Tracker.Resources.resources
+C:\Coumadin Tracker\Coumadin Tracker\obj\Debug\Coumadin_Tracker.FrmUserSettings.resources
+C:\Coumadin Tracker\Coumadin Tracker\bin\Debug\Protivantage.exe.config
+C:\Coumadin Tracker\Coumadin Tracker\bin\Debug\Protivantage.exe
+C:\Coumadin Tracker\Coumadin Tracker\bin\Debug\Protivantage.pdb
+C:\Coumadin Tracker\Coumadin Tracker\bin\Debug\Protivantage.xml
+C:\Coumadin Tracker\Coumadin Tracker\obj\Debug\Protivantage.exe
+C:\Coumadin Tracker\Coumadin Tracker\obj\Debug\Protivantage.xml
+C:\Coumadin Tracker\Coumadin Tracker\obj\Debug\Protivantage.pdb
+C:\Coumadin Tracker\Coumadin Tracker\obj\Debug\Coumadin Tracker.vbproj.GenerateResource.Cache
+C:\Coumadin Tracker\Coumadin Tracker\obj\Debug\Coumadin_Tracker.FrmTherapyDetailEdit.resources
+C:\Coumadin Tracker\Coumadin Tracker\obj\Debug\Coumadin Tracker.vbprojResolveAssemblyReference.cache
+C:\Coumadin Tracker\Coumadin Tracker\obj\Debug\Coumadin_Tracker.FrmNoSSO.resources
+C:\Coumadin Tracker v2.0\Coumadin Tracker\bin\Debug\Protivantage.exe.config
+C:\Coumadin Tracker v2.0\Coumadin Tracker\bin\Debug\Protivantage.exe
+C:\Coumadin Tracker v2.0\Coumadin Tracker\bin\Debug\Protivantage.pdb
+C:\Coumadin Tracker v2.0\Coumadin Tracker\bin\Debug\Protivantage.xml
+C:\Coumadin Tracker v2.0\Coumadin Tracker\obj\Debug\Coumadin Tracker.vbprojResolveAssemblyReference.cache
+C:\Coumadin Tracker v2.0\Coumadin Tracker\obj\Debug\Coumadin_Tracker.FrmCDS.resources
+C:\Coumadin Tracker v2.0\Coumadin Tracker\obj\Debug\Coumadin_Tracker.FrmNoSSO.resources
+C:\Coumadin Tracker v2.0\Coumadin Tracker\obj\Debug\Coumadin_Tracker.FrmTherapyDetailEdit.resources
+C:\Coumadin Tracker v2.0\Coumadin Tracker\obj\Debug\Coumadin_Tracker.FrmUserSettings.resources
+C:\Coumadin Tracker v2.0\Coumadin Tracker\obj\Debug\Coumadin_Tracker.FrmTrackerMain.resources
+C:\Coumadin Tracker v2.0\Coumadin Tracker\obj\Debug\Coumadin_Tracker.Resources.resources
+C:\Coumadin Tracker v2.0\Coumadin Tracker\obj\Debug\Coumadin Tracker.vbproj.GenerateResource.Cache
+C:\Coumadin Tracker v2.0\Coumadin Tracker\obj\Debug\Protivantage.exe
+C:\Coumadin Tracker v2.0\Coumadin Tracker\obj\Debug\Protivantage.xml
+C:\Coumadin Tracker v2.0\Coumadin Tracker\obj\Debug\Protivantage.pdb
+C:\Coumadin Tracker v2.0\Coumadin Tracker\obj\Debug\Coumadin_Tracker.FrmCDSRules.resources
