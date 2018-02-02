@@ -1519,6 +1519,14 @@ Public Class FrmCDS
             Exit Sub
         End If
 
+        If Me.txtNewWeeklyDose.Text = "" Or Me.txtNewWeeklyDose.Text Is Nothing Then
+            Me.txtNewWeeklyDose.Text = 0
+        End If
+
+        If Me.txtVariance.Text = "" Or Me.txtVariance.Text Is Nothing Then
+            Me.txtVariance.Text = 0
+        End If
+
         If Math.Abs(CDbl(Me.txtNewDoseCalculation.Text) - CDbl(Me.txtNewWeeklyDose.Text)) >= CDbl(Me.txtVariance.Text) Then
             Me.txtNewDoseCalculation.BackColor = Color.Red
             Me.txtNewWeeklyDose.BackColor = Color.Red
