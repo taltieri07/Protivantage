@@ -388,7 +388,62 @@ Public Class FrmCDS
 
         Dim HalfPillSize As Double = WholePillSize / 2
 
+        Dim ConnDose As SqlConnection
+        Dim MyCommand As SqlCommand               'reads the records from database	
+        Dim drDoseInfo As SqlDataReader         'stores the retrieved records
+        Dim SelectString As String                  'Sql Query
+        Dim ConnString As String                    'Connection String
+
+        Dim settings As ConnectionStringSettings = ConfigurationManager.ConnectionStrings("PVConnString")
+
         Me.txtDailyDoseNew.Text = ""
+
+        ' If found, return the connection string.
+        If Not settings Is Nothing Then
+            ConnString = settings.ConnectionString
+        End If
+
+        ConnDose = New SqlConnection(ConnString)     ' Creates connection
+        ConnDose.Open()
+
+        SelectString = "Select * FROM tblDoseScheduler WHERE Inactive = False ORDER BY Priority ASC;"
+        MyCommand = New SqlCommand(SelectString, ConnDose)
+        drDoseInfo = MyCommand.ExecuteReader
+
+        Dim ScheduleFound As Boolean = False
+
+        If drDoseInfo.HasRows Then
+            While drDoseInfo.Read()
+                If Math.Abs(WholePillSize * drDoseInfo("PillSizeMultiplier") - NewWeekly) <= Variance Then
+                    If Me.txtRuleUsed.Text < drDoseInfo("Priority") Then
+                        Me.txtSunNew.Text = drDoseInfo("SundayMultiplier")
+                        Me.txtMonNew.Text = drDoseInfo("MondayMultiplier")
+                        Me.txtTuesNew.Text = drDoseInfo("TuesdayMultiplier")
+                        Me.txtWedNew.Text = drDoseInfo("WednesdayMultiplier")
+                        Me.txtThursNew.Text = drDoseInfo("ThursdayMultiplier")
+                        Me.txtFriNew.Text = drDoseInfo("FridayMultiplier")
+                        Me.txtSatNew.Text = drDoseInfo("SaturdayMultiplier")
+                        Me.txtDifference.Text = WholePillSize * drDoseInfo("PillSizeMultiplier") - NewWeekly
+
+                        Me.txtRuleUsed = drDoseInfo("Priority")
+
+                        LightEmUp(Color.Lime)
+
+                        ScheduleFound = True
+                        Exit While
+                    End If
+                End If
+
+            End While
+
+        End If
+
+        drDoseInfo.Close()
+
+        Return ScheduleFound
+        '^^^^^^^^^^^^^^^^^^^^^^^6 Use data, get this working and remove the ifs below
+
+
 
         If Math.Abs(WholePillSize * 7 - NewWeekly) <= Variance Then
             If Me.txtRuleUsed.Text < 0 Then
