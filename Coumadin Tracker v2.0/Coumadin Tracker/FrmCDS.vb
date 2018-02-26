@@ -388,6 +388,7 @@ Public Class FrmCDS
 
         Dim HalfPillSize As Double = WholePillSize / 2
 
+
         Dim ConnDose As SqlConnection
         Dim MyCommand As SqlCommand               'reads the records from database	
         Dim drDoseInfo As SqlDataReader         'stores the retrieved records
