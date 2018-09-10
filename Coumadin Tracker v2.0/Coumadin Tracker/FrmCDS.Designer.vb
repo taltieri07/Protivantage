@@ -40,14 +40,6 @@ Partial Class FrmCDS
         Me.lblWed = New System.Windows.Forms.Label()
         Me.lblSat = New System.Windows.Forms.Label()
         Me.lblTotal = New System.Windows.Forms.Label()
-        Me.ShapeContainer1 = New Microsoft.VisualBasic.PowerPacks.ShapeContainer()
-        Me.RectangleShape3 = New Microsoft.VisualBasic.PowerPacks.RectangleShape()
-        Me.LineShape6 = New Microsoft.VisualBasic.PowerPacks.LineShape()
-        Me.LineShape5 = New Microsoft.VisualBasic.PowerPacks.LineShape()
-        Me.LineShape4 = New Microsoft.VisualBasic.PowerPacks.LineShape()
-        Me.LineShape3 = New Microsoft.VisualBasic.PowerPacks.LineShape()
-        Me.LineShape2 = New Microsoft.VisualBasic.PowerPacks.LineShape()
-        Me.LineShape1 = New Microsoft.VisualBasic.PowerPacks.LineShape()
         Me.lblExisting = New System.Windows.Forms.Label()
         Me.lblSuggested = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -114,16 +106,28 @@ Partial Class FrmCDS
         Me.txtRuleUsed = New System.Windows.Forms.TextBox()
         Me.txtPillRuleUsed = New System.Windows.Forms.TextBox()
         Me.txtNewInstructions = New System.Windows.Forms.TextBox()
-        Me.lblSig = New System.Windows.Forms.Label()
         Me.txtPillSizeUsed = New System.Windows.Forms.TextBox()
         Me.lblPillUsed = New System.Windows.Forms.Label()
+        Me.lblRange = New System.Windows.Forms.Label()
+        Me.txtRange = New System.Windows.Forms.TextBox()
+        Me.txtSkip = New System.Windows.Forms.TextBox()
+        Me.lblSkip = New System.Windows.Forms.Label()
+        Me.lblDoses = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.txtSkipDoses = New System.Windows.Forms.TextBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.btnTranslate = New System.Windows.Forms.Button()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Panel1.SuspendLayout()
+        Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label1
         '
         Me.Label1.AutoSize = True
         Me.Label1.BackColor = System.Drawing.Color.LightBlue
-        Me.Label1.Location = New System.Drawing.Point(652, 17)
+        Me.Label1.Location = New System.Drawing.Point(643, 9)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(86, 13)
         Me.Label1.TabIndex = 1
@@ -131,58 +135,58 @@ Partial Class FrmCDS
         '
         'txtSun
         '
-        Me.txtSun.Location = New System.Drawing.Point(162, 119)
+        Me.txtSun.Location = New System.Drawing.Point(162, 118)
         Me.txtSun.Name = "txtSun"
         Me.txtSun.Size = New System.Drawing.Size(69, 20)
         Me.txtSun.TabIndex = 2
         '
         'txtMon
         '
-        Me.txtMon.Location = New System.Drawing.Point(237, 119)
+        Me.txtMon.Location = New System.Drawing.Point(237, 118)
         Me.txtMon.Name = "txtMon"
         Me.txtMon.Size = New System.Drawing.Size(69, 20)
         Me.txtMon.TabIndex = 3
         '
         'txtTues
         '
-        Me.txtTues.Location = New System.Drawing.Point(312, 119)
+        Me.txtTues.Location = New System.Drawing.Point(312, 118)
         Me.txtTues.Name = "txtTues"
         Me.txtTues.Size = New System.Drawing.Size(69, 20)
         Me.txtTues.TabIndex = 4
         '
         'txtWed
         '
-        Me.txtWed.Location = New System.Drawing.Point(387, 119)
+        Me.txtWed.Location = New System.Drawing.Point(387, 118)
         Me.txtWed.Name = "txtWed"
         Me.txtWed.Size = New System.Drawing.Size(69, 20)
         Me.txtWed.TabIndex = 5
         '
         'txtThurs
         '
-        Me.txtThurs.Location = New System.Drawing.Point(463, 119)
+        Me.txtThurs.Location = New System.Drawing.Point(463, 118)
         Me.txtThurs.Name = "txtThurs"
         Me.txtThurs.Size = New System.Drawing.Size(69, 20)
         Me.txtThurs.TabIndex = 6
         '
         'txtFri
         '
-        Me.txtFri.Location = New System.Drawing.Point(538, 119)
+        Me.txtFri.Location = New System.Drawing.Point(538, 118)
         Me.txtFri.Name = "txtFri"
         Me.txtFri.Size = New System.Drawing.Size(69, 20)
         Me.txtFri.TabIndex = 7
         '
         'txtSat
         '
-        Me.txtSat.Location = New System.Drawing.Point(613, 119)
+        Me.txtSat.Location = New System.Drawing.Point(613, 118)
         Me.txtSat.Name = "txtSat"
         Me.txtSat.Size = New System.Drawing.Size(69, 20)
         Me.txtSat.TabIndex = 8
         '
         'txtTotalWeekly
         '
-        Me.txtTotalWeekly.Location = New System.Drawing.Point(711, 119)
+        Me.txtTotalWeekly.Location = New System.Drawing.Point(711, 118)
         Me.txtTotalWeekly.Name = "txtTotalWeekly"
-        Me.txtTotalWeekly.Size = New System.Drawing.Size(120, 20)
+        Me.txtTotalWeekly.Size = New System.Drawing.Size(136, 20)
         Me.txtTotalWeekly.TabIndex = 9
         '
         'lblSun
@@ -259,90 +263,11 @@ Partial Class FrmCDS
         '
         Me.lblTotal.AutoSize = True
         Me.lblTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTotal.Location = New System.Drawing.Point(713, 103)
+        Me.lblTotal.Location = New System.Drawing.Point(723, 103)
         Me.lblTotal.Name = "lblTotal"
         Me.lblTotal.Size = New System.Drawing.Size(115, 13)
         Me.lblTotal.TabIndex = 18
         Me.lblTotal.Text = "Total Weekly Dose"
-        '
-        'ShapeContainer1
-        '
-        Me.ShapeContainer1.Location = New System.Drawing.Point(0, 0)
-        Me.ShapeContainer1.Margin = New System.Windows.Forms.Padding(0)
-        Me.ShapeContainer1.Name = "ShapeContainer1"
-        Me.ShapeContainer1.Shapes.AddRange(New Microsoft.VisualBasic.PowerPacks.Shape() {Me.RectangleShape3, Me.LineShape6, Me.LineShape5, Me.LineShape4, Me.LineShape3, Me.LineShape2, Me.LineShape1})
-        Me.ShapeContainer1.Size = New System.Drawing.Size(873, 533)
-        Me.ShapeContainer1.TabIndex = 19
-        Me.ShapeContainer1.TabStop = False
-        '
-        'RectangleShape3
-        '
-        Me.RectangleShape3.BackColor = System.Drawing.Color.LightBlue
-        Me.RectangleShape3.BackStyle = Microsoft.VisualBasic.PowerPacks.BackStyle.Opaque
-        Me.RectangleShape3.FillColor = System.Drawing.Color.LightBlue
-        Me.RectangleShape3.Location = New System.Drawing.Point(9, 7)
-        Me.RectangleShape3.Name = "RectangleShape3"
-        Me.RectangleShape3.Size = New System.Drawing.Size(832, 59)
-        '
-        'LineShape6
-        '
-        Me.LineShape6.BorderColor = System.Drawing.Color.Indigo
-        Me.LineShape6.BorderWidth = 3
-        Me.LineShape6.Name = "LineShape6"
-        Me.LineShape6.X1 = 148
-        Me.LineShape6.X2 = 149
-        Me.LineShape6.Y1 = 379
-        Me.LineShape6.Y2 = 425
-        '
-        'LineShape5
-        '
-        Me.LineShape5.BorderColor = System.Drawing.Color.Indigo
-        Me.LineShape5.BorderWidth = 3
-        Me.LineShape5.Name = "LineShape5"
-        Me.LineShape5.X1 = 146
-        Me.LineShape5.X2 = 147
-        Me.LineShape5.Y1 = 104
-        Me.LineShape5.Y2 = 150
-        '
-        'LineShape4
-        '
-        Me.LineShape4.BorderColor = System.Drawing.Color.Indigo
-        Me.LineShape4.BorderWidth = 3
-        Me.LineShape4.Name = "LineShape4"
-        Me.LineShape4.X1 = 10
-        Me.LineShape4.X2 = 833
-        Me.LineShape4.Y1 = 289
-        Me.LineShape4.Y2 = 289
-        '
-        'LineShape3
-        '
-        Me.LineShape3.BorderColor = System.Drawing.Color.Indigo
-        Me.LineShape3.BorderWidth = 3
-        Me.LineShape3.Name = "LineShape3"
-        Me.LineShape3.X1 = 694
-        Me.LineShape3.X2 = 695
-        Me.LineShape3.Y1 = 379
-        Me.LineShape3.Y2 = 425
-        '
-        'LineShape2
-        '
-        Me.LineShape2.BorderColor = System.Drawing.Color.Indigo
-        Me.LineShape2.BorderWidth = 3
-        Me.LineShape2.Name = "LineShape2"
-        Me.LineShape2.X1 = 11
-        Me.LineShape2.X2 = 834
-        Me.LineShape2.Y1 = 163
-        Me.LineShape2.Y2 = 163
-        '
-        'LineShape1
-        '
-        Me.LineShape1.BorderColor = System.Drawing.Color.Indigo
-        Me.LineShape1.BorderWidth = 3
-        Me.LineShape1.Name = "LineShape1"
-        Me.LineShape1.X1 = 695
-        Me.LineShape1.X2 = 696
-        Me.LineShape1.Y1 = 103
-        Me.LineShape1.Y2 = 149
         '
         'lblExisting
         '
@@ -370,7 +295,7 @@ Partial Class FrmCDS
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(704, 378)
+        Me.Label2.Location = New System.Drawing.Point(715, 396)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(133, 13)
         Me.Label2.TabIndex = 38
@@ -380,124 +305,124 @@ Partial Class FrmCDS
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(631, 378)
+        Me.Label3.Location = New System.Drawing.Point(627, 396)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(26, 13)
+        Me.Label3.Size = New System.Drawing.Size(40, 13)
         Me.Label3.TabIndex = 37
-        Me.Label3.Text = "Sat"
+        Me.Label3.Text = "Day 7"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(405, 378)
+        Me.Label4.Location = New System.Drawing.Point(405, 396)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(33, 13)
+        Me.Label4.Size = New System.Drawing.Size(40, 13)
         Me.Label4.TabIndex = 36
-        Me.Label4.Text = "Wed"
+        Me.Label4.Text = "Day 4"
         '
         'Label5
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(476, 378)
+        Me.Label5.Location = New System.Drawing.Point(476, 396)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(39, 13)
+        Me.Label5.Size = New System.Drawing.Size(40, 13)
         Me.Label5.TabIndex = 35
-        Me.Label5.Text = "Thurs"
+        Me.Label5.Text = "Day 5"
         '
         'Label6
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(560, 378)
+        Me.Label6.Location = New System.Drawing.Point(553, 396)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(21, 13)
+        Me.Label6.Size = New System.Drawing.Size(40, 13)
         Me.Label6.TabIndex = 34
-        Me.Label6.Text = "Fri"
+        Me.Label6.Text = "Day 6"
         '
         'Label7
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(329, 378)
+        Me.Label7.Location = New System.Drawing.Point(329, 396)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(35, 13)
+        Me.Label7.Size = New System.Drawing.Size(40, 13)
         Me.Label7.TabIndex = 33
-        Me.Label7.Text = "Tues"
+        Me.Label7.Text = "Day 3"
         '
         'Label8
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(256, 378)
+        Me.Label8.Location = New System.Drawing.Point(256, 396)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(31, 13)
+        Me.Label8.Size = New System.Drawing.Size(40, 13)
         Me.Label8.TabIndex = 32
-        Me.Label8.Text = "Mon"
+        Me.Label8.Text = "Day 2"
         '
         'Label9
         '
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(178, 378)
+        Me.Label9.Location = New System.Drawing.Point(178, 396)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(29, 13)
+        Me.Label9.Size = New System.Drawing.Size(40, 13)
         Me.Label9.TabIndex = 31
-        Me.Label9.Text = "Sun"
+        Me.Label9.Text = "Day 1"
         '
         'txtNewWeeklyDose
         '
-        Me.txtNewWeeklyDose.Location = New System.Drawing.Point(711, 327)
+        Me.txtNewWeeklyDose.Location = New System.Drawing.Point(711, 326)
         Me.txtNewWeeklyDose.Name = "txtNewWeeklyDose"
-        Me.txtNewWeeklyDose.Size = New System.Drawing.Size(120, 20)
+        Me.txtNewWeeklyDose.Size = New System.Drawing.Size(136, 20)
         Me.txtNewWeeklyDose.TabIndex = 29
         '
         'txtSatNew
         '
-        Me.txtSatNew.Location = New System.Drawing.Point(613, 394)
+        Me.txtSatNew.Location = New System.Drawing.Point(613, 413)
         Me.txtSatNew.Name = "txtSatNew"
         Me.txtSatNew.Size = New System.Drawing.Size(69, 20)
         Me.txtSatNew.TabIndex = 28
         '
         'txtFriNew
         '
-        Me.txtFriNew.Location = New System.Drawing.Point(538, 394)
+        Me.txtFriNew.Location = New System.Drawing.Point(538, 413)
         Me.txtFriNew.Name = "txtFriNew"
         Me.txtFriNew.Size = New System.Drawing.Size(69, 20)
         Me.txtFriNew.TabIndex = 27
         '
         'txtThursNew
         '
-        Me.txtThursNew.Location = New System.Drawing.Point(463, 394)
+        Me.txtThursNew.Location = New System.Drawing.Point(463, 413)
         Me.txtThursNew.Name = "txtThursNew"
         Me.txtThursNew.Size = New System.Drawing.Size(69, 20)
         Me.txtThursNew.TabIndex = 26
         '
         'txtWedNew
         '
-        Me.txtWedNew.Location = New System.Drawing.Point(387, 394)
+        Me.txtWedNew.Location = New System.Drawing.Point(387, 413)
         Me.txtWedNew.Name = "txtWedNew"
         Me.txtWedNew.Size = New System.Drawing.Size(69, 20)
         Me.txtWedNew.TabIndex = 25
         '
         'txtTuesNew
         '
-        Me.txtTuesNew.Location = New System.Drawing.Point(312, 394)
+        Me.txtTuesNew.Location = New System.Drawing.Point(312, 413)
         Me.txtTuesNew.Name = "txtTuesNew"
         Me.txtTuesNew.Size = New System.Drawing.Size(69, 20)
         Me.txtTuesNew.TabIndex = 24
         '
         'txtMonNew
         '
-        Me.txtMonNew.Location = New System.Drawing.Point(237, 394)
+        Me.txtMonNew.Location = New System.Drawing.Point(237, 413)
         Me.txtMonNew.Name = "txtMonNew"
         Me.txtMonNew.Size = New System.Drawing.Size(69, 20)
         Me.txtMonNew.TabIndex = 23
         '
         'txtSunNew
         '
-        Me.txtSunNew.Location = New System.Drawing.Point(162, 394)
+        Me.txtSunNew.Location = New System.Drawing.Point(162, 413)
         Me.txtSunNew.Name = "txtSunNew"
         Me.txtSunNew.Size = New System.Drawing.Size(69, 20)
         Me.txtSunNew.TabIndex = 22
@@ -505,10 +430,10 @@ Partial Class FrmCDS
         'txtCriteria
         '
         Me.txtCriteria.BackColor = System.Drawing.Color.White
-        Me.txtCriteria.Location = New System.Drawing.Point(122, 205)
+        Me.txtCriteria.Location = New System.Drawing.Point(104, 35)
         Me.txtCriteria.Name = "txtCriteria"
         Me.txtCriteria.ReadOnly = True
-        Me.txtCriteria.Size = New System.Drawing.Size(327, 20)
+        Me.txtCriteria.Size = New System.Drawing.Size(396, 20)
         Me.txtCriteria.TabIndex = 39
         '
         'lblRule
@@ -516,7 +441,7 @@ Partial Class FrmCDS
         Me.lblRule.AutoSize = True
         Me.lblRule.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.5!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblRule.ForeColor = System.Drawing.Color.Indigo
-        Me.lblRule.Location = New System.Drawing.Point(21, 183)
+        Me.lblRule.Location = New System.Drawing.Point(17, 13)
         Me.lblRule.Name = "lblRule"
         Me.lblRule.Size = New System.Drawing.Size(103, 16)
         Me.lblRule.TabIndex = 40
@@ -525,7 +450,7 @@ Partial Class FrmCDS
         'lblCriteria
         '
         Me.lblCriteria.AutoSize = True
-        Me.lblCriteria.Location = New System.Drawing.Point(31, 208)
+        Me.lblCriteria.Location = New System.Drawing.Point(12, 38)
         Me.lblCriteria.Name = "lblCriteria"
         Me.lblCriteria.Size = New System.Drawing.Size(85, 13)
         Me.lblCriteria.TabIndex = 41
@@ -534,7 +459,7 @@ Partial Class FrmCDS
         'lblSuggestedChange
         '
         Me.lblSuggestedChange.AutoSize = True
-        Me.lblSuggestedChange.Location = New System.Drawing.Point(455, 208)
+        Me.lblSuggestedChange.Location = New System.Drawing.Point(505, 38)
         Me.lblSuggestedChange.Name = "lblSuggestedChange"
         Me.lblSuggestedChange.Size = New System.Drawing.Size(101, 13)
         Me.lblSuggestedChange.TabIndex = 42
@@ -543,16 +468,16 @@ Partial Class FrmCDS
         'txtSuggestedChange
         '
         Me.txtSuggestedChange.BackColor = System.Drawing.Color.White
-        Me.txtSuggestedChange.Location = New System.Drawing.Point(563, 205)
+        Me.txtSuggestedChange.Location = New System.Drawing.Point(609, 35)
         Me.txtSuggestedChange.Name = "txtSuggestedChange"
         Me.txtSuggestedChange.ReadOnly = True
-        Me.txtSuggestedChange.Size = New System.Drawing.Size(194, 20)
+        Me.txtSuggestedChange.Size = New System.Drawing.Size(169, 20)
         Me.txtSuggestedChange.TabIndex = 43
         '
         'lblBy
         '
         Me.lblBy.AutoSize = True
-        Me.lblBy.Location = New System.Drawing.Point(763, 208)
+        Me.lblBy.Location = New System.Drawing.Point(780, 38)
         Me.lblBy.Name = "lblBy"
         Me.lblBy.Size = New System.Drawing.Size(18, 13)
         Me.lblBy.TabIndex = 44
@@ -561,7 +486,7 @@ Partial Class FrmCDS
         'lblPercent
         '
         Me.lblPercent.AutoSize = True
-        Me.lblPercent.Location = New System.Drawing.Point(838, 208)
+        Me.lblPercent.Location = New System.Drawing.Point(848, 208)
         Me.lblPercent.Name = "lblPercent"
         Me.lblPercent.Size = New System.Drawing.Size(15, 13)
         Me.lblPercent.TabIndex = 46
@@ -569,25 +494,25 @@ Partial Class FrmCDS
         '
         'txtPercentageChange
         '
-        Me.txtPercentageChange.Location = New System.Drawing.Point(785, 205)
+        Me.txtPercentageChange.Location = New System.Drawing.Point(800, 35)
         Me.txtPercentageChange.Name = "txtPercentageChange"
-        Me.txtPercentageChange.Size = New System.Drawing.Size(46, 20)
+        Me.txtPercentageChange.Size = New System.Drawing.Size(42, 20)
         Me.txtPercentageChange.TabIndex = 45
         '
         'txtComment
         '
         Me.txtComment.BackColor = System.Drawing.Color.White
-        Me.txtComment.Location = New System.Drawing.Point(255, 231)
+        Me.txtComment.Location = New System.Drawing.Point(250, 61)
         Me.txtComment.Name = "txtComment"
         Me.txtComment.ReadOnly = True
-        Me.txtComment.Size = New System.Drawing.Size(576, 20)
+        Me.txtComment.Size = New System.Drawing.Size(592, 20)
         Me.txtComment.TabIndex = 47
         '
         'lblReason
         '
         Me.lblReason.AutoSize = True
         Me.lblReason.BackColor = System.Drawing.Color.LightBlue
-        Me.lblReason.Location = New System.Drawing.Point(29, 17)
+        Me.lblReason.Location = New System.Drawing.Point(21, 9)
         Me.lblReason.Name = "lblReason"
         Me.lblReason.Size = New System.Drawing.Size(101, 13)
         Me.lblReason.TabIndex = 49
@@ -597,18 +522,18 @@ Partial Class FrmCDS
         '
         Me.lblAdditionalReason.AutoSize = True
         Me.lblAdditionalReason.BackColor = System.Drawing.Color.LightBlue
-        Me.lblAdditionalReason.Location = New System.Drawing.Point(315, 17)
+        Me.lblAdditionalReason.Location = New System.Drawing.Point(328, 9)
         Me.lblAdditionalReason.Name = "lblAdditionalReason"
-        Me.lblAdditionalReason.Size = New System.Drawing.Size(150, 13)
+        Me.lblAdditionalReason.Size = New System.Drawing.Size(127, 13)
         Me.lblAdditionalReason.TabIndex = 51
-        Me.lblAdditionalReason.Text = "Additional Reason for Therapy"
+        Me.lblAdditionalReason.Text = "Add'l Reason for Therapy"
         '
         'LblNoSatisfaction
         '
         Me.LblNoSatisfaction.AutoSize = True
         Me.LblNoSatisfaction.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.75!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblNoSatisfaction.ForeColor = System.Drawing.Color.Red
-        Me.LblNoSatisfaction.Location = New System.Drawing.Point(131, 181)
+        Me.LblNoSatisfaction.Location = New System.Drawing.Point(127, 12)
         Me.LblNoSatisfaction.Name = "LblNoSatisfaction"
         Me.LblNoSatisfaction.Size = New System.Drawing.Size(418, 15)
         Me.LblNoSatisfaction.TabIndex = 52
@@ -618,10 +543,10 @@ Partial Class FrmCDS
         'txtRecentINR
         '
         Me.txtRecentINR.BackColor = System.Drawing.Color.White
-        Me.txtRecentINR.Location = New System.Drawing.Point(142, 39)
+        Me.txtRecentINR.Location = New System.Drawing.Point(133, 31)
         Me.txtRecentINR.Name = "txtRecentINR"
         Me.txtRecentINR.ReadOnly = True
-        Me.txtRecentINR.Size = New System.Drawing.Size(86, 20)
+        Me.txtRecentINR.Size = New System.Drawing.Size(45, 20)
         Me.txtRecentINR.TabIndex = 53
         '
         'Label12
@@ -630,7 +555,7 @@ Partial Class FrmCDS
         Me.Label12.BackColor = System.Drawing.Color.LightBlue
         Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label12.ForeColor = System.Drawing.Color.DarkRed
-        Me.Label12.Location = New System.Drawing.Point(31, 42)
+        Me.Label12.Location = New System.Drawing.Point(22, 34)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(105, 13)
         Me.Label12.TabIndex = 54
@@ -638,9 +563,9 @@ Partial Class FrmCDS
         '
         'btnApply
         '
-        Me.btnApply.Location = New System.Drawing.Point(711, 297)
+        Me.btnApply.Location = New System.Drawing.Point(711, 298)
         Me.btnApply.Name = "btnApply"
-        Me.btnApply.Size = New System.Drawing.Size(120, 21)
+        Me.btnApply.Size = New System.Drawing.Size(136, 21)
         Me.btnApply.TabIndex = 10
         Me.btnApply.Text = "&Apply Selected Rule"
         Me.btnApply.UseVisualStyleBackColor = True
@@ -651,7 +576,7 @@ Partial Class FrmCDS
         Me.Label13.BackColor = System.Drawing.Color.LightBlue
         Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label13.ForeColor = System.Drawing.Color.DarkRed
-        Me.Label13.Location = New System.Drawing.Point(263, 42)
+        Me.Label13.Location = New System.Drawing.Point(344, 34)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(118, 13)
         Me.Label13.TabIndex = 57
@@ -660,17 +585,17 @@ Partial Class FrmCDS
         'txtCurInstructions
         '
         Me.txtCurInstructions.BackColor = System.Drawing.Color.White
-        Me.txtCurInstructions.Location = New System.Drawing.Point(387, 39)
+        Me.txtCurInstructions.Location = New System.Drawing.Point(462, 31)
         Me.txtCurInstructions.Name = "txtCurInstructions"
         Me.txtCurInstructions.ReadOnly = True
-        Me.txtCurInstructions.Size = New System.Drawing.Size(444, 20)
+        Me.txtCurInstructions.Size = New System.Drawing.Size(360, 20)
         Me.txtCurInstructions.TabIndex = 56
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(711, 501)
+        Me.btnCancel.Location = New System.Drawing.Point(711, 517)
         Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(120, 21)
+        Me.btnCancel.Size = New System.Drawing.Size(137, 21)
         Me.btnCancel.TabIndex = 58
         Me.btnCancel.Text = "&Cancel"
         Me.btnCancel.UseVisualStyleBackColor = True
@@ -679,9 +604,9 @@ Partial Class FrmCDS
         '
         Me.btnUseSchedule.Image = CType(resources.GetObject("btnUseSchedule.Image"), System.Drawing.Image)
         Me.btnUseSchedule.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnUseSchedule.Location = New System.Drawing.Point(672, 432)
+        Me.btnUseSchedule.Location = New System.Drawing.Point(672, 448)
         Me.btnUseSchedule.Name = "btnUseSchedule"
-        Me.btnUseSchedule.Size = New System.Drawing.Size(159, 21)
+        Me.btnUseSchedule.Size = New System.Drawing.Size(175, 21)
         Me.btnUseSchedule.TabIndex = 59
         Me.btnUseSchedule.Text = "&Use Displayed Instructions"
         Me.btnUseSchedule.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -690,7 +615,7 @@ Partial Class FrmCDS
         'BtnIncrement
         '
         Me.BtnIncrement.Image = CType(resources.GetObject("BtnIncrement.Image"), System.Drawing.Image)
-        Me.BtnIncrement.Location = New System.Drawing.Point(806, 257)
+        Me.BtnIncrement.Location = New System.Drawing.Point(817, 85)
         Me.BtnIncrement.Name = "BtnIncrement"
         Me.BtnIncrement.Size = New System.Drawing.Size(25, 19)
         Me.BtnIncrement.TabIndex = 60
@@ -700,7 +625,7 @@ Partial Class FrmCDS
         'btnDecrement
         '
         Me.btnDecrement.Image = CType(resources.GetObject("btnDecrement.Image"), System.Drawing.Image)
-        Me.btnDecrement.Location = New System.Drawing.Point(715, 257)
+        Me.btnDecrement.Location = New System.Drawing.Point(725, 85)
         Me.btnDecrement.Name = "btnDecrement"
         Me.btnDecrement.Size = New System.Drawing.Size(25, 19)
         Me.btnDecrement.TabIndex = 61
@@ -712,7 +637,7 @@ Partial Class FrmCDS
         Me.lblRuleCount.AutoSize = True
         Me.lblRuleCount.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblRuleCount.ForeColor = System.Drawing.Color.Indigo
-        Me.lblRuleCount.Location = New System.Drawing.Point(763, 260)
+        Me.lblRuleCount.Location = New System.Drawing.Point(773, 89)
         Me.lblRuleCount.Name = "lblRuleCount"
         Me.lblRuleCount.Size = New System.Drawing.Size(18, 13)
         Me.lblRuleCount.TabIndex = 62
@@ -731,7 +656,7 @@ Partial Class FrmCDS
         '
         'txtDailyDose
         '
-        Me.txtDailyDose.Location = New System.Drawing.Point(31, 119)
+        Me.txtDailyDose.Location = New System.Drawing.Point(31, 118)
         Me.txtDailyDose.Name = "txtDailyDose"
         Me.txtDailyDose.Size = New System.Drawing.Size(99, 20)
         Me.txtDailyDose.TabIndex = 1
@@ -760,7 +685,7 @@ Partial Class FrmCDS
         '
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(45, 378)
+        Me.Label14.Location = New System.Drawing.Point(45, 396)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(68, 13)
         Me.Label14.TabIndex = 68
@@ -768,16 +693,16 @@ Partial Class FrmCDS
         '
         'txtDailyDoseNew
         '
-        Me.txtDailyDoseNew.Location = New System.Drawing.Point(31, 394)
+        Me.txtDailyDoseNew.Location = New System.Drawing.Point(31, 413)
         Me.txtDailyDoseNew.Name = "txtDailyDoseNew"
         Me.txtDailyDoseNew.Size = New System.Drawing.Size(99, 20)
         Me.txtDailyDoseNew.TabIndex = 67
         '
         'btnViewRules
         '
-        Me.btnViewRules.Location = New System.Drawing.Point(744, 175)
+        Me.btnViewRules.Location = New System.Drawing.Point(739, 5)
         Me.btnViewRules.Name = "btnViewRules"
-        Me.btnViewRules.Size = New System.Drawing.Size(87, 21)
+        Me.btnViewRules.Size = New System.Drawing.Size(102, 21)
         Me.btnViewRules.TabIndex = 71
         Me.btnViewRules.Text = "&View Rules"
         Me.btnViewRules.UseVisualStyleBackColor = True
@@ -785,16 +710,16 @@ Partial Class FrmCDS
         'txtReason
         '
         Me.txtReason.BackColor = System.Drawing.Color.White
-        Me.txtReason.Location = New System.Drawing.Point(142, 15)
+        Me.txtReason.Location = New System.Drawing.Point(133, 6)
         Me.txtReason.Name = "txtReason"
         Me.txtReason.ReadOnly = True
-        Me.txtReason.Size = New System.Drawing.Size(168, 20)
+        Me.txtReason.Size = New System.Drawing.Size(190, 20)
         Me.txtReason.TabIndex = 72
         '
         'txtAdditionalReason
         '
         Me.txtAdditionalReason.BackColor = System.Drawing.Color.White
-        Me.txtAdditionalReason.Location = New System.Drawing.Point(471, 14)
+        Me.txtAdditionalReason.Location = New System.Drawing.Point(462, 6)
         Me.txtAdditionalReason.Name = "txtAdditionalReason"
         Me.txtAdditionalReason.ReadOnly = True
         Me.txtAdditionalReason.Size = New System.Drawing.Size(164, 20)
@@ -803,7 +728,7 @@ Partial Class FrmCDS
         'txtPillSize
         '
         Me.txtPillSize.BackColor = System.Drawing.Color.White
-        Me.txtPillSize.Location = New System.Drawing.Point(744, 14)
+        Me.txtPillSize.Location = New System.Drawing.Point(735, 6)
         Me.txtPillSize.Name = "txtPillSize"
         Me.txtPillSize.ReadOnly = True
         Me.txtPillSize.Size = New System.Drawing.Size(87, 20)
@@ -811,9 +736,9 @@ Partial Class FrmCDS
         '
         'txtRuleIndex
         '
-        Me.txtRuleIndex.Location = New System.Drawing.Point(674, 176)
+        Me.txtRuleIndex.Location = New System.Drawing.Point(553, 12)
         Me.txtRuleIndex.Name = "txtRuleIndex"
-        Me.txtRuleIndex.Size = New System.Drawing.Size(33, 20)
+        Me.txtRuleIndex.Size = New System.Drawing.Size(15, 20)
         Me.txtRuleIndex.TabIndex = 75
         Me.txtRuleIndex.Visible = False
         '
@@ -823,7 +748,7 @@ Partial Class FrmCDS
         Me.txtCurrentCount.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtCurrentCount.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtCurrentCount.ForeColor = System.Drawing.Color.Indigo
-        Me.txtCurrentCount.Location = New System.Drawing.Point(741, 260)
+        Me.txtCurrentCount.Location = New System.Drawing.Point(751, 89)
         Me.txtCurrentCount.Name = "txtCurrentCount"
         Me.txtCurrentCount.Size = New System.Drawing.Size(19, 13)
         Me.txtCurrentCount.TabIndex = 76
@@ -835,7 +760,7 @@ Partial Class FrmCDS
         Me.txtMaxCount.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtMaxCount.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtMaxCount.ForeColor = System.Drawing.Color.Indigo
-        Me.txtMaxCount.Location = New System.Drawing.Point(786, 260)
+        Me.txtMaxCount.Location = New System.Drawing.Point(797, 89)
         Me.txtMaxCount.Name = "txtMaxCount"
         Me.txtMaxCount.Size = New System.Drawing.Size(19, 13)
         Me.txtMaxCount.TabIndex = 77
@@ -854,10 +779,10 @@ Partial Class FrmCDS
         'txtNewDoseCalculation
         '
         Me.txtNewDoseCalculation.BackColor = System.Drawing.Color.White
-        Me.txtNewDoseCalculation.Location = New System.Drawing.Point(711, 394)
+        Me.txtNewDoseCalculation.Location = New System.Drawing.Point(711, 413)
         Me.txtNewDoseCalculation.Name = "txtNewDoseCalculation"
         Me.txtNewDoseCalculation.ReadOnly = True
-        Me.txtNewDoseCalculation.Size = New System.Drawing.Size(120, 20)
+        Me.txtNewDoseCalculation.Size = New System.Drawing.Size(137, 20)
         Me.txtNewDoseCalculation.TabIndex = 79
         '
         'lblTarget
@@ -883,16 +808,16 @@ Partial Class FrmCDS
         'txtVariance
         '
         Me.txtVariance.BackColor = System.Drawing.Color.White
-        Me.txtVariance.Location = New System.Drawing.Point(122, 231)
+        Me.txtVariance.Location = New System.Drawing.Point(104, 61)
         Me.txtVariance.Name = "txtVariance"
         Me.txtVariance.ReadOnly = True
-        Me.txtVariance.Size = New System.Drawing.Size(57, 20)
+        Me.txtVariance.Size = New System.Drawing.Size(71, 20)
         Me.txtVariance.TabIndex = 83
         '
         'lblVariance
         '
         Me.lblVariance.AutoSize = True
-        Me.lblVariance.Location = New System.Drawing.Point(21, 234)
+        Me.lblVariance.Location = New System.Drawing.Point(8, 64)
         Me.lblVariance.Name = "lblVariance"
         Me.lblVariance.Size = New System.Drawing.Size(92, 13)
         Me.lblVariance.TabIndex = 82
@@ -904,7 +829,7 @@ Partial Class FrmCDS
         Me.txtDifference.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtDifference.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtDifference.ForeColor = System.Drawing.Color.Red
-        Me.txtDifference.Location = New System.Drawing.Point(495, 355)
+        Me.txtDifference.Location = New System.Drawing.Point(512, 354)
         Me.txtDifference.Name = "txtDifference"
         Me.txtDifference.Size = New System.Drawing.Size(334, 14)
         Me.txtDifference.TabIndex = 85
@@ -913,7 +838,7 @@ Partial Class FrmCDS
         'lblComment
         '
         Me.lblComment.AutoSize = True
-        Me.lblComment.Location = New System.Drawing.Point(190, 234)
+        Me.lblComment.Location = New System.Drawing.Point(185, 64)
         Me.lblComment.Name = "lblComment"
         Me.lblComment.Size = New System.Drawing.Size(59, 13)
         Me.lblComment.TabIndex = 86
@@ -923,24 +848,24 @@ Partial Class FrmCDS
         '
         Me.lblDisclaimer.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.5!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblDisclaimer.ForeColor = System.Drawing.Color.Red
-        Me.lblDisclaimer.Location = New System.Drawing.Point(29, 464)
+        Me.lblDisclaimer.Location = New System.Drawing.Point(29, 480)
         Me.lblDisclaimer.Name = "lblDisclaimer"
-        Me.lblDisclaimer.Size = New System.Drawing.Size(610, 63)
+        Me.lblDisclaimer.Size = New System.Drawing.Size(610, 64)
         Me.lblDisclaimer.TabIndex = 87
         Me.lblDisclaimer.Text = resources.GetString("lblDisclaimer.Text")
         '
         'btnFindAnother
         '
-        Me.btnFindAnother.Location = New System.Drawing.Point(672, 474)
+        Me.btnFindAnother.Location = New System.Drawing.Point(672, 489)
         Me.btnFindAnother.Name = "btnFindAnother"
-        Me.btnFindAnother.Size = New System.Drawing.Size(159, 21)
+        Me.btnFindAnother.Size = New System.Drawing.Size(175, 21)
         Me.btnFindAnother.TabIndex = 12
         Me.btnFindAnother.Text = "&Find Another Dosing Schedule"
         Me.btnFindAnother.UseVisualStyleBackColor = True
         '
         'txtRuleUsed
         '
-        Me.txtRuleUsed.Location = New System.Drawing.Point(69, 327)
+        Me.txtRuleUsed.Location = New System.Drawing.Point(69, 326)
         Me.txtRuleUsed.Name = "txtRuleUsed"
         Me.txtRuleUsed.Size = New System.Drawing.Size(29, 20)
         Me.txtRuleUsed.TabIndex = 89
@@ -948,7 +873,7 @@ Partial Class FrmCDS
         '
         'txtPillRuleUsed
         '
-        Me.txtPillRuleUsed.Location = New System.Drawing.Point(20, 327)
+        Me.txtPillRuleUsed.Location = New System.Drawing.Point(20, 326)
         Me.txtPillRuleUsed.Name = "txtPillRuleUsed"
         Me.txtPillRuleUsed.Size = New System.Drawing.Size(29, 20)
         Me.txtPillRuleUsed.TabIndex = 90
@@ -956,20 +881,10 @@ Partial Class FrmCDS
         '
         'txtNewInstructions
         '
-        Me.txtNewInstructions.Location = New System.Drawing.Point(237, 433)
+        Me.txtNewInstructions.Location = New System.Drawing.Point(180, 448)
         Me.txtNewInstructions.Name = "txtNewInstructions"
-        Me.txtNewInstructions.Size = New System.Drawing.Size(420, 20)
+        Me.txtNewInstructions.Size = New System.Drawing.Size(477, 20)
         Me.txtNewInstructions.TabIndex = 91
-        '
-        'lblSig
-        '
-        Me.lblSig.AutoSize = True
-        Me.lblSig.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSig.Location = New System.Drawing.Point(29, 436)
-        Me.lblSig.Name = "lblSig"
-        Me.lblSig.Size = New System.Drawing.Size(194, 13)
-        Me.lblSig.TabIndex = 92
-        Me.lblSig.Text = "Translate to English Instructions:"
         '
         'txtPillSizeUsed
         '
@@ -984,69 +899,184 @@ Partial Class FrmCDS
         '
         Me.lblPillUsed.AutoSize = True
         Me.lblPillUsed.BackColor = System.Drawing.SystemColors.Control
-        Me.lblPillUsed.Location = New System.Drawing.Point(19, 301)
+        Me.lblPillUsed.Location = New System.Drawing.Point(19, 300)
         Me.lblPillUsed.Name = "lblPillUsed"
         Me.lblPillUsed.Size = New System.Drawing.Size(137, 13)
         Me.lblPillUsed.TabIndex = 93
         Me.lblPillUsed.Text = "Pill Size Used for Schedule:"
         '
+        'lblRange
+        '
+        Me.lblRange.AutoSize = True
+        Me.lblRange.BackColor = System.Drawing.Color.LightBlue
+        Me.lblRange.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblRange.ForeColor = System.Drawing.Color.DarkRed
+        Me.lblRange.Location = New System.Drawing.Point(195, 34)
+        Me.lblRange.Name = "lblRange"
+        Me.lblRange.Size = New System.Drawing.Size(44, 13)
+        Me.lblRange.TabIndex = 96
+        Me.lblRange.Text = "Range"
+        '
+        'txtRange
+        '
+        Me.txtRange.BackColor = System.Drawing.Color.White
+        Me.txtRange.Location = New System.Drawing.Point(241, 31)
+        Me.txtRange.Name = "txtRange"
+        Me.txtRange.ReadOnly = True
+        Me.txtRange.Size = New System.Drawing.Size(82, 20)
+        Me.txtRange.TabIndex = 95
+        '
+        'txtSkip
+        '
+        Me.txtSkip.BackColor = System.Drawing.Color.White
+        Me.txtSkip.Location = New System.Drawing.Point(608, 11)
+        Me.txtSkip.Name = "txtSkip"
+        Me.txtSkip.ReadOnly = True
+        Me.txtSkip.Size = New System.Drawing.Size(17, 20)
+        Me.txtSkip.TabIndex = 98
+        '
+        'lblSkip
+        '
+        Me.lblSkip.AutoSize = True
+        Me.lblSkip.Location = New System.Drawing.Point(579, 12)
+        Me.lblSkip.Name = "lblSkip"
+        Me.lblSkip.Size = New System.Drawing.Size(28, 13)
+        Me.lblSkip.TabIndex = 97
+        Me.lblSkip.Text = "Skip"
+        '
+        'lblDoses
+        '
+        Me.lblDoses.AutoSize = True
+        Me.lblDoses.Location = New System.Drawing.Point(631, 12)
+        Me.lblDoses.Name = "lblDoses"
+        Me.lblDoses.Size = New System.Drawing.Size(43, 13)
+        Me.lblDoses.TabIndex = 99
+        Me.lblDoses.Text = "Dose(s)"
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(215, 376)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(105, 13)
+        Me.Label10.TabIndex = 102
+        Me.Label10.Text = "Dose(s), followed by:"
+        '
+        'txtSkipDoses
+        '
+        Me.txtSkipDoses.BackColor = System.Drawing.Color.White
+        Me.txtSkipDoses.Location = New System.Drawing.Point(192, 374)
+        Me.txtSkipDoses.Name = "txtSkipDoses"
+        Me.txtSkipDoses.Size = New System.Drawing.Size(17, 20)
+        Me.txtSkipDoses.TabIndex = 101
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(163, 376)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(28, 13)
+        Me.Label11.TabIndex = 100
+        Me.Label11.Text = "Skip"
+        '
+        'btnTranslate
+        '
+        Me.btnTranslate.Image = CType(resources.GetObject("btnTranslate.Image"), System.Drawing.Image)
+        Me.btnTranslate.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnTranslate.Location = New System.Drawing.Point(31, 447)
+        Me.btnTranslate.Name = "btnTranslate"
+        Me.btnTranslate.Size = New System.Drawing.Size(133, 21)
+        Me.btnTranslate.TabIndex = 103
+        Me.btnTranslate.Text = "&Translate Instructions"
+        Me.btnTranslate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnTranslate.UseVisualStyleBackColor = True
+        '
+        'Panel1
+        '
+        Me.Panel1.BackColor = System.Drawing.Color.LightBlue
+        Me.Panel1.Controls.Add(Me.lblRange)
+        Me.Panel1.Controls.Add(Me.txtRange)
+        Me.Panel1.Controls.Add(Me.txtPillSize)
+        Me.Panel1.Controls.Add(Me.txtAdditionalReason)
+        Me.Panel1.Controls.Add(Me.txtReason)
+        Me.Panel1.Controls.Add(Me.Label13)
+        Me.Panel1.Controls.Add(Me.txtCurInstructions)
+        Me.Panel1.Controls.Add(Me.Label12)
+        Me.Panel1.Controls.Add(Me.txtRecentINR)
+        Me.Panel1.Controls.Add(Me.lblAdditionalReason)
+        Me.Panel1.Controls.Add(Me.lblReason)
+        Me.Panel1.Controls.Add(Me.Label1)
+        Me.Panel1.Location = New System.Drawing.Point(9, 9)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(2)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(842, 58)
+        Me.Panel1.TabIndex = 104
+        '
+        'Panel2
+        '
+        Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel2.Controls.Add(Me.lblDoses)
+        Me.Panel2.Controls.Add(Me.txtSkip)
+        Me.Panel2.Controls.Add(Me.lblSkip)
+        Me.Panel2.Controls.Add(Me.lblComment)
+        Me.Panel2.Controls.Add(Me.txtVariance)
+        Me.Panel2.Controls.Add(Me.lblVariance)
+        Me.Panel2.Controls.Add(Me.txtMaxCount)
+        Me.Panel2.Controls.Add(Me.txtCurrentCount)
+        Me.Panel2.Controls.Add(Me.txtRuleIndex)
+        Me.Panel2.Controls.Add(Me.btnViewRules)
+        Me.Panel2.Controls.Add(Me.lblRuleCount)
+        Me.Panel2.Controls.Add(Me.btnDecrement)
+        Me.Panel2.Controls.Add(Me.BtnIncrement)
+        Me.Panel2.Controls.Add(Me.LblNoSatisfaction)
+        Me.Panel2.Controls.Add(Me.txtComment)
+        Me.Panel2.Controls.Add(Me.txtPercentageChange)
+        Me.Panel2.Controls.Add(Me.lblBy)
+        Me.Panel2.Controls.Add(Me.txtSuggestedChange)
+        Me.Panel2.Controls.Add(Me.lblSuggestedChange)
+        Me.Panel2.Controls.Add(Me.lblCriteria)
+        Me.Panel2.Controls.Add(Me.lblRule)
+        Me.Panel2.Controls.Add(Me.txtCriteria)
+        Me.Panel2.ForeColor = System.Drawing.Color.Black
+        Me.Panel2.Location = New System.Drawing.Point(5, 170)
+        Me.Panel2.Margin = New System.Windows.Forms.Padding(2)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(859, 114)
+        Me.Panel2.TabIndex = 105
+        '
         'FrmCDS
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(873, 533)
+        Me.ClientSize = New System.Drawing.Size(868, 554)
         Me.ControlBox = False
+        Me.Controls.Add(Me.Panel2)
+        Me.Controls.Add(Me.btnTranslate)
+        Me.Controls.Add(Me.Label10)
+        Me.Controls.Add(Me.txtSkipDoses)
+        Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.txtPillSizeUsed)
         Me.Controls.Add(Me.lblPillUsed)
-        Me.Controls.Add(Me.lblSig)
         Me.Controls.Add(Me.txtNewInstructions)
         Me.Controls.Add(Me.txtPillRuleUsed)
         Me.Controls.Add(Me.txtRuleUsed)
         Me.Controls.Add(Me.btnFindAnother)
         Me.Controls.Add(Me.lblDisclaimer)
-        Me.Controls.Add(Me.lblComment)
         Me.Controls.Add(Me.txtDifference)
-        Me.Controls.Add(Me.txtVariance)
-        Me.Controls.Add(Me.lblVariance)
         Me.Controls.Add(Me.btnBuildSchedule)
         Me.Controls.Add(Me.lblTarget)
         Me.Controls.Add(Me.txtNewDoseCalculation)
         Me.Controls.Add(Me.chkAllowSplit)
-        Me.Controls.Add(Me.txtMaxCount)
-        Me.Controls.Add(Me.txtCurrentCount)
-        Me.Controls.Add(Me.txtRuleIndex)
-        Me.Controls.Add(Me.txtPillSize)
-        Me.Controls.Add(Me.txtAdditionalReason)
-        Me.Controls.Add(Me.txtReason)
-        Me.Controls.Add(Me.btnViewRules)
         Me.Controls.Add(Me.Label14)
         Me.Controls.Add(Me.txtDailyDoseNew)
         Me.Controls.Add(Me.lblVaries)
         Me.Controls.Add(Me.lblIfSame)
         Me.Controls.Add(Me.lblDailyDose)
         Me.Controls.Add(Me.txtDailyDose)
-        Me.Controls.Add(Me.lblRuleCount)
-        Me.Controls.Add(Me.btnDecrement)
-        Me.Controls.Add(Me.BtnIncrement)
         Me.Controls.Add(Me.btnUseSchedule)
         Me.Controls.Add(Me.btnCancel)
-        Me.Controls.Add(Me.Label13)
-        Me.Controls.Add(Me.txtCurInstructions)
         Me.Controls.Add(Me.btnApply)
-        Me.Controls.Add(Me.Label12)
-        Me.Controls.Add(Me.txtRecentINR)
-        Me.Controls.Add(Me.LblNoSatisfaction)
-        Me.Controls.Add(Me.lblAdditionalReason)
-        Me.Controls.Add(Me.lblReason)
-        Me.Controls.Add(Me.txtComment)
         Me.Controls.Add(Me.lblPercent)
-        Me.Controls.Add(Me.txtPercentageChange)
-        Me.Controls.Add(Me.lblBy)
-        Me.Controls.Add(Me.txtSuggestedChange)
-        Me.Controls.Add(Me.lblSuggestedChange)
-        Me.Controls.Add(Me.lblCriteria)
-        Me.Controls.Add(Me.lblRule)
-        Me.Controls.Add(Me.txtCriteria)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label4)
@@ -1081,13 +1111,16 @@ Partial Class FrmCDS
         Me.Controls.Add(Me.txtTues)
         Me.Controls.Add(Me.txtMon)
         Me.Controls.Add(Me.txtSun)
-        Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.ShapeContainer1)
+        Me.Controls.Add(Me.Panel1)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "FrmCDS"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Clinical Decision Support"
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1109,10 +1142,6 @@ Partial Class FrmCDS
     Friend WithEvents lblWed As System.Windows.Forms.Label
     Friend WithEvents lblSat As System.Windows.Forms.Label
     Friend WithEvents lblTotal As System.Windows.Forms.Label
-    Friend WithEvents ShapeContainer1 As Microsoft.VisualBasic.PowerPacks.ShapeContainer
-    Friend WithEvents LineShape1 As Microsoft.VisualBasic.PowerPacks.LineShape
-    Friend WithEvents LineShape3 As Microsoft.VisualBasic.PowerPacks.LineShape
-    Friend WithEvents LineShape2 As Microsoft.VisualBasic.PowerPacks.LineShape
     Friend WithEvents lblExisting As System.Windows.Forms.Label
     Friend WithEvents lblSuggested As System.Windows.Forms.Label
     Friend WithEvents Label2 As System.Windows.Forms.Label
@@ -1134,7 +1163,6 @@ Partial Class FrmCDS
     Friend WithEvents txtCriteria As System.Windows.Forms.TextBox
     Friend WithEvents lblRule As System.Windows.Forms.Label
     Friend WithEvents lblCriteria As System.Windows.Forms.Label
-    Friend WithEvents LineShape4 As Microsoft.VisualBasic.PowerPacks.LineShape
     Friend WithEvents lblSuggestedChange As System.Windows.Forms.Label
     Friend WithEvents txtSuggestedChange As System.Windows.Forms.TextBox
     Friend WithEvents lblBy As System.Windows.Forms.Label
@@ -1154,8 +1182,6 @@ Partial Class FrmCDS
     Friend WithEvents BtnIncrement As System.Windows.Forms.Button
     Friend WithEvents btnDecrement As System.Windows.Forms.Button
     Friend WithEvents lblRuleCount As System.Windows.Forms.Label
-    Friend WithEvents LineShape6 As Microsoft.VisualBasic.PowerPacks.LineShape
-    Friend WithEvents LineShape5 As Microsoft.VisualBasic.PowerPacks.LineShape
     Friend WithEvents lblDailyDose As System.Windows.Forms.Label
     Friend WithEvents txtDailyDose As System.Windows.Forms.TextBox
     Friend WithEvents lblIfSame As System.Windows.Forms.Label
@@ -1166,7 +1192,6 @@ Partial Class FrmCDS
     Friend WithEvents txtReason As System.Windows.Forms.TextBox
     Friend WithEvents txtAdditionalReason As System.Windows.Forms.TextBox
     Friend WithEvents txtPillSize As System.Windows.Forms.TextBox
-    Friend WithEvents RectangleShape3 As Microsoft.VisualBasic.PowerPacks.RectangleShape
     Friend WithEvents txtRuleIndex As System.Windows.Forms.TextBox
     Friend WithEvents txtCurrentCount As System.Windows.Forms.TextBox
     Friend WithEvents txtMaxCount As System.Windows.Forms.TextBox
@@ -1183,7 +1208,17 @@ Partial Class FrmCDS
     Friend WithEvents txtRuleUsed As System.Windows.Forms.TextBox
     Friend WithEvents txtPillRuleUsed As System.Windows.Forms.TextBox
     Friend WithEvents txtNewInstructions As System.Windows.Forms.TextBox
-    Friend WithEvents lblSig As System.Windows.Forms.Label
     Friend WithEvents txtPillSizeUsed As System.Windows.Forms.TextBox
     Friend WithEvents lblPillUsed As System.Windows.Forms.Label
+    Friend WithEvents lblRange As System.Windows.Forms.Label
+    Friend WithEvents txtRange As System.Windows.Forms.TextBox
+    Friend WithEvents txtSkip As System.Windows.Forms.TextBox
+    Friend WithEvents lblSkip As System.Windows.Forms.Label
+    Friend WithEvents lblDoses As System.Windows.Forms.Label
+    Friend WithEvents Label10 As System.Windows.Forms.Label
+    Friend WithEvents txtSkipDoses As System.Windows.Forms.TextBox
+    Friend WithEvents Label11 As System.Windows.Forms.Label
+    Friend WithEvents btnTranslate As System.Windows.Forms.Button
+    Friend WithEvents Panel1 As System.Windows.Forms.Panel
+    Friend WithEvents Panel2 As System.Windows.Forms.Panel
 End Class

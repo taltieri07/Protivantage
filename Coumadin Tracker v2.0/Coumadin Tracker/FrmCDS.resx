@@ -117,89 +117,47 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="LineShape6.Bounds" type="System.Drawing.Rectangle, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>148, 379, 1, 46</value>
-  </metadata>
-  <metadata name="LineShape6.Location" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>148, 379</value>
-  </metadata>
-  <metadata name="LineShape6.Size" type="System.Drawing.Size, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1, 46</value>
-  </metadata>
-  <metadata name="LineShape5.Bounds" type="System.Drawing.Rectangle, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>146, 104, 1, 46</value>
-  </metadata>
-  <metadata name="LineShape5.Location" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>146, 104</value>
-  </metadata>
-  <metadata name="LineShape5.Size" type="System.Drawing.Size, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1, 46</value>
-  </metadata>
-  <metadata name="LineShape4.Bounds" type="System.Drawing.Rectangle, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>10, 289, 823, 0</value>
-  </metadata>
-  <metadata name="LineShape4.Location" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>10, 289</value>
-  </metadata>
-  <metadata name="LineShape4.Size" type="System.Drawing.Size, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>823, 0</value>
-  </metadata>
-  <metadata name="LineShape3.Bounds" type="System.Drawing.Rectangle, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>694, 379, 1, 46</value>
-  </metadata>
-  <metadata name="LineShape3.Location" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>694, 379</value>
-  </metadata>
-  <metadata name="LineShape3.Size" type="System.Drawing.Size, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1, 46</value>
-  </metadata>
-  <metadata name="LineShape2.Bounds" type="System.Drawing.Rectangle, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>11, 163, 823, 0</value>
-  </metadata>
-  <metadata name="LineShape2.Location" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>11, 163</value>
-  </metadata>
-  <metadata name="LineShape2.Size" type="System.Drawing.Size, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>823, 0</value>
-  </metadata>
-  <metadata name="LineShape1.Bounds" type="System.Drawing.Rectangle, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>695, 103, 1, 46</value>
-  </metadata>
-  <metadata name="LineShape1.Location" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>695, 103</value>
-  </metadata>
-  <metadata name="LineShape1.Size" type="System.Drawing.Size, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1, 46</value>
-  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnUseSchedule.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAC2SURBVDhPrZPBDcMgDEUzGuLOWlwzQjcoyzAAGyS9cHV5
-        FCSTqJEaauknyP7/2xCyiMgUPg8VOWdTEArkAHKm0WqcDAphTSmJ916cc2KtrWBNjlrhPBp9NKAQYxyE
-        R1CDQ6PBgNFwvxJ3wGmTGG0QGFETwzPIvr3qW+cBXDTaYOh+JQZw0QwGvdjF39B5/zeY3cL0Ic59xnaR
-        1tsXqQcF3BlRG7Em1zpXMXEyIBit4Lef6T5keQP5F3vXRdJ+TwAAAABJRU5ErkJggg==
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        EwAACxMBAJqcGAAAAQtJREFUOE+NU0FuwjAQ9KES7WMqxAt8jUS8G6Tc+xJaJJ5QED3wFoR4BAhekl5S
+        dpxVFOIN6UijKN6ZiXftuD6IaBZC8UPEtzynXzAEuobAu/l8MVVZirIs34iKvfDvCWuEe//xqrYGMEvh
+        ZBgGSMeHEFkc+3JCtKRmmlkCUEQra11Zx5k0A0sFYl5671+sWodb2QHfjMIndjcewBeHY+oVvmJvA+hp
+        qyQAfavWRFcrrGQGdO0ttiFjLYj3LAG8s4u8+scMvh2OQl7qtBhD1ta6smbm99jX0FE+o4RvohnAtcT1
+        tIQW87w4ZFk2UXsDhOhOzHaU8jPxJjF3oTPZ4pLIswIxbQys7bmFc3djZ253tumYCgAAAABJRU5ErkJg
+        gg==
 </value>
   </data>
   <data name="BtnIncrement.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAC9SURBVDhPrZNNDoMgEEY9GnHPtdh6hC7qulyGA3CDthu2
-        Ux7FhB81qXSST8nMN49RcRKRIX0vRYQQVJSNkkbkVLal6ADRsHjvxRgjWmuZ5zmJNTlq0XPL9hpAwTlX
-        NbaihoeNKgCjQT9r3oQnT6JKgGXE1mwfVl7Pd7qXebz0lIDD3fcgeOmpAFsR85FKyP8BR4+w3teuee8R
-        hl/i2GfMB2m5fJC2oACdEUsQa3J559RMdACC0aJ++5muS6YPWvJ7tqsd79wAAAAASUVORK5CYII=
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        vAAADrwBlbxySQAAAL1JREFUOE+tk00OgyAQRj0acc+12HqELuq6XIYDcIO2G7ZTHsWEHzWpdJJPycw3
+        j1FxEpEhfS9FhBBUlI2SRuRUtqXoANGweO/FGCNaa5nnOYk1OWrRc8v2GkDBOVc1tqKGh40qAKNBP2ve
+        hCdPokqAZcTWbB9WXs93upd5vPSUgMPd9yB46akAWxHzkUrI/wFHj7De16557xGGX+LYZ8wHabl8kLag
+        AJ0RSxBrcnnn1Ex0AILRon77ma5Lpg9a8nu2qx3v3AAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="btnDecrement.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAC2SURBVDhPrZPBDcMgDEUzGuLOWlwzQjcoyzAAGyS9cHV5
-        FCSTqJEaauknyP7/2xCyiMgUPg8VOWdTEArkAHKm0WqcDAphTSmJ916cc2KtrWBNjlrhPBp9NKAQYxyE
-        R1CDQ6PBgNFwvxJ3wGmTGG0QGFETwzPIvr3qW+cBXDTaYOh+JQZw0QwGvdjF39B5/zeY3cL0Ic59xnaR
-        1tsXqQcF3BlRG7Em1zpXMXEyIBit4Lef6T5keQP5F3vXRdJ+TwAAAABJRU5ErkJggg==
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        vAAADrwBlbxySQAAALZJREFUOE+tk8ENwyAMRTMa4s5aXDNCNyjLMAAbJL1wdXkUJJOokRpq6SfI/v/b
+        ELKIyBQ+DxU5Z1MQCuQAcqbRapwMCmFNKYn3XpxzYq2tYE2OWuE8Gn00oBBjHIRHUINDo8GA0XC/EnfA
+        aZMYbRAYURPDM8i+vepb5wFcNNpg6H4lBnDRDAa92MXf0Hn/N5jdwvQhzn3GdpHW2xepBwXcGVEbsSbX
+        OlcxcTIgGK3gt5/pPmR5A/kXe9dF0n5PAAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="lblDisclaimer.Text" xml:space="preserve">
     <value>The targeted weekly dose is derived using dosing rules provided by your organization.  The subsequent schedule is an algorithm's attempt at getting as close to the targeted weekly dose as possible.  This is not a substitute for sound clinical judgment.  The clinician is responsible for approving the patient's total weekly dose and schedule for the week. </value>
+  </data>
+  <data name="btnTranslate.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        EwAACxMBAJqcGAAAAPlJREFUOE+lk0EOgkAMRWenHsYYT8CWRKbFhL1X8Q5idOFZjPEQGjkJbtB+phKE
+        ggt/8kJo+8tMZ3BdEdHS+/RIxEWS0BN4Tw/v+bBarRda1leWZTOi9CS8RqjQPIo2U7UFwSyJq2EYgC5f
+        TST468s9sCU109Iq+CCFWysuVPVMwsDMghp8ZKTJXlbAhZFoqJcpspvw3eGY2kGtN2U0Kf9vgEvSCX6h
+        XnML4r0hcegm2gyZA7xzOAp5qfrJwLA5rZh5rssbP0oLaZzXZgjXEtfTKrRIkvQcx/FE7UFooisZ3I4g
+        PxPnPXNbOpM9Lok8S4BpY2DNnhs59wZbiWtwC3vqcgAAAABJRU5ErkJggg==
+</value>
   </data>
 </root>

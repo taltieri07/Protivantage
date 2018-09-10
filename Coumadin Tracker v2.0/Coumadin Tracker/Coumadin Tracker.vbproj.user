@@ -16,7 +16,7 @@
     <ErrorReportUrlHistory />
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <StartArguments>/AppGroup:Touchworks /sso:abc123 /pid:39 /uid:20 /uname:jmedici /encid:5566 /orgMRN:888877776666 /entMRN:11112222</StartArguments>
+    <StartArguments>/AppGroup:TouchWorks /sso:A5D1B265-A87D-4A6F-96AA-DD96FD3566D4 /encid:208785 /uid:10518</StartArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
     <StartArguments>

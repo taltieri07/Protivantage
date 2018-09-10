@@ -26,7 +26,6 @@ Module StartingPoint
 
         End If
 
-
         Dim ColonLocation As Integer
 
         ColonLocation = InStr(Params(1), ":", CompareMethod.Text)
