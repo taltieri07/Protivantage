@@ -46,9 +46,9 @@ Public Class FrmCDS
                 Me.txtPillSize.Text = drThpInfo("PillSizeAtHome")
             End If
 
-            'If Not IsDBNull(drThpInfo("INRRange")) Then
-            'Me.cmbINRRange.Text = drThpInfo("INRRange")
-            'End If
+            If Not IsDBNull(drThpInfo("INRRange")) Then
+                Me.txtRange.Text = drThpInfo("INRRange")
+            End If
 
             If Not IsDBNull(drThpInfo("CurrentDosageInstructions")) Then
                 Me.txtCurInstructions.Text = drThpInfo("CurrentDosageInstructions")
@@ -119,8 +119,9 @@ Public Class FrmCDS
         Dim SelectStringCDS As String
         Dim CDSDataTable As New DataTable
 
-        SelectStringCDS = "Select * FROM tblDosingAlgorithm WHERE ReasonForTherapy = '[any]' or ReasonForTherapy = '' or " & _
-           "ReasonForTherapy is NULL or ReasonForTherapy = '" & Me.txtReason.Text & "' or ReasonForTherapy = '" & Me.txtAdditionalReason.Text & "' ORDER BY Priority ASC;"
+        SelectStringCDS = "Select * FROM tblDosingAlgorithm WHERE (ReasonForTherapy = '[any]' or ReasonForTherapy = '' or " & _
+           "ReasonForTherapy is NULL or ReasonForTherapy = '" & Me.txtReason.Text & "' or ReasonForTherapy = '" & Me.txtAdditionalReason.Text & _
+           "') and (TargetInrRange = '[any]' or TargetInrRange = '' or TargetInrRange is NULL or RTRIM(LTRIM(TargetInrRange)) = '" & Trim(Me.txtRange.Text) & "') ORDER BY Priority ASC;"
 
         Using ConnCDSInfo As New SqlConnection(ConnString)
 
@@ -215,7 +216,6 @@ Public Class FrmCDS
 
 
 
-
         If SatisfiedCount = 0 Then
 
             Me.LblNoSatisfaction.Visible = True
@@ -259,11 +259,31 @@ Public Class FrmCDS
             RFT = CDSDataTable.Rows(Me.txtRuleIndex.Text).Item("ReasonForTherapy")
         End If
 
-        Me.txtCriteria.Text = "Reason for Therapy = " & RFT & " and INR " & CDSDataTable.Rows(Me.txtRuleIndex.Text).Item("INRLowerLimit") & " and " & CDSDataTable.Rows(Me.txtRuleIndex.Text).Item("INRUpperLimit")
+        Dim Target As String
+
+        If CDSDataTable.Rows(Me.txtRuleIndex.Text).Item("TargetInrRange") Is Nothing Or CDSDataTable.Rows(Me.txtRuleIndex.Text).Item("TargetInrRange") = "" Then
+            Target = "[any]"
+        Else
+            Target = CDSDataTable.Rows(Me.txtRuleIndex.Text).Item("TargetInrRange")
+        End If
+
+        If CDSDataTable.Rows(Me.txtRuleIndex.Text).Item("NotificationOnly") = True Then
+            Me.btnApply.Enabled = False
+        Else
+            Me.btnApply.Enabled = True
+        End If
+
+        Me.txtCriteria.Text = "Target = " & Target & " and Reason for Therapy = " & RFT & " and INR " & CDSDataTable.Rows(Me.txtRuleIndex.Text).Item("INRLowerLimit") & " and " & CDSDataTable.Rows(Me.txtRuleIndex.Text).Item("INRUpperLimit")
         Me.txtSuggestedChange.Text = CDSDataTable.Rows(Me.txtRuleIndex.Text).Item("IncDec")
         Me.txtPercentageChange.Text = CDSDataTable.Rows(Me.txtRuleIndex.Text).Item("PercentageChange")
         Me.txtVariance.Text = CDSDataTable.Rows(Me.txtRuleIndex.Text).Item("VarianceAllowed")
         Me.txtComment.Text = CDSDataTable.Rows(Me.txtRuleIndex.Text).Item("Comment")
+
+        If CDSDataTable.Rows(Me.txtRuleIndex.Text).Item("DoseSkip") Is Nothing Then
+            Me.txtSkip.Text = 0
+        Else
+            Me.txtSkip.Text = CDSDataTable.Rows(Me.txtRuleIndex.Text).Item("DoseSkip")
+        End If
 
         '*** Check for CDS Rules ^^^^
 
@@ -331,6 +351,7 @@ Public Class FrmCDS
 
         Me.txtTotalWeekly.Text = CDbl(Me.txtSun.Text) + CDbl(Me.txtMon.Text) + CDbl(Me.txtTues.Text) + CDbl(Me.txtWed.Text) + CDbl(Me.txtThurs.Text) + CDbl(Me.txtFri.Text) + CDbl(Me.txtSat.Text)
         Me.txtDailyDose.Text = ""
+        Me.txtNewInstructions.Text = ""
 
     End Sub
 
@@ -382,531 +403,597 @@ Public Class FrmCDS
             Me.txtNewDoseCalculation.BackColor = Color.Lime
         End If
 
+        Me.txtNewInstructions.Text = ""
+
     End Sub
 
-    Private Function ParseWeeklySchedule(ByVal WholePillSize As Double, ByVal NewWeekly As Double, ByVal Variance As Double) As Boolean
+    Private Function ParseWeeklySchedule(ByVal WholePillSize As Double, ByVal NewWeekly As Double, ByVal Variance As Double, sender As System.Object, e As System.EventArgs) As Boolean
 
         Dim HalfPillSize As Double = WholePillSize / 2
 
+
+        Dim ConnDose As SqlConnection
+        Dim MyCommand As SqlCommand               'reads the records from database	
+        Dim drDoseInfo As SqlDataReader         'stores the retrieved records
+        Dim SelectString As String                  'Sql Query
+        Dim ConnString As String                    'Connection String
+
+        Dim settings As ConnectionStringSettings = ConfigurationManager.ConnectionStrings("PVConnString")
+
         Me.txtDailyDoseNew.Text = ""
 
-        If Math.Abs(WholePillSize * 7 - NewWeekly) <= Variance Then
-            If Me.txtRuleUsed.Text < 0 Then
-                Me.txtSunNew.Text = WholePillSize
-                Me.txtMonNew.Text = WholePillSize
-                Me.txtTuesNew.Text = WholePillSize
-                Me.txtWedNew.Text = WholePillSize
-                Me.txtThursNew.Text = WholePillSize
-                Me.txtFriNew.Text = WholePillSize
-                Me.txtSatNew.Text = WholePillSize
-                Me.txtDifference.Text = WholePillSize * 7 - NewWeekly
-
-                Me.txtRuleUsed.Text = 0
-
-                LightEmUp(Color.Lime)
-
-                Return True
-            End If
-        ElseIf Math.Abs(WholePillSize * 14 - NewWeekly) <= Variance Then
-            If Me.txtRuleUsed.Text < 1 Then
-                Me.txtSunNew.Text = WholePillSize * 2
-                Me.txtMonNew.Text = WholePillSize * 2
-                Me.txtTuesNew.Text = WholePillSize * 2
-                Me.txtWedNew.Text = WholePillSize * 2
-                Me.txtThursNew.Text = WholePillSize * 2
-                Me.txtFriNew.Text = WholePillSize * 2
-                Me.txtSatNew.Text = WholePillSize * 2
-                Me.txtDifference.Text = WholePillSize * 14 - NewWeekly
-
-                Me.txtRuleUsed.Text = 1
-
-                LightEmUp(Color.Lime)
-
-                Return True
-            End If
-        ElseIf Math.Abs(WholePillSize * 21 - NewWeekly) <= Variance Then
-            If Me.txtRuleUsed.Text < 2 Then
-                Me.txtSunNew.Text = WholePillSize * 3
-                Me.txtMonNew.Text = WholePillSize * 3
-                Me.txtTuesNew.Text = WholePillSize * 3
-                Me.txtWedNew.Text = WholePillSize * 3
-                Me.txtThursNew.Text = WholePillSize * 3
-                Me.txtFriNew.Text = WholePillSize * 3
-                Me.txtSatNew.Text = WholePillSize * 3
-                Me.txtDifference.Text = WholePillSize * 21 - NewWeekly
-
-                Me.txtRuleUsed.Text = 2
-
-                LightEmUp(Color.Lime)
-
-                Return True
-            End If
-        ElseIf Math.Abs(WholePillSize * 28 - NewWeekly) <= Variance Then
-            If Me.txtRuleUsed.Text < 3 Then
-                Me.txtSunNew.Text = WholePillSize * 4
-                Me.txtMonNew.Text = WholePillSize * 4
-                Me.txtTuesNew.Text = WholePillSize * 4
-                Me.txtWedNew.Text = WholePillSize * 4
-                Me.txtThursNew.Text = WholePillSize * 4
-                Me.txtFriNew.Text = WholePillSize * 4
-                Me.txtSatNew.Text = WholePillSize * 4
-                Me.txtDifference.Text = WholePillSize * 28 - NewWeekly
-
-                Me.txtRuleUsed.Text = 3
-
-                LightEmUp(Color.Lime)
-
-                Return True
-            End If
-        ElseIf Math.Abs(WholePillSize * 3.5 - NewWeekly) <= Variance Then
-            If Me.txtRuleUsed.Text < 4 Then
-                If Me.chkAllowSplit.Checked Then
-                    Me.txtSunNew.Text = HalfPillSize
-                    Me.txtMonNew.Text = HalfPillSize
-                    Me.txtTuesNew.Text = HalfPillSize
-                    Me.txtWedNew.Text = HalfPillSize
-                    Me.txtThursNew.Text = HalfPillSize
-                    Me.txtFriNew.Text = HalfPillSize
-                    Me.txtSatNew.Text = HalfPillSize
-                    Me.txtDifference.Text = WholePillSize * 3.5 - NewWeekly
-
-                    Me.txtRuleUsed.Text = 4
-
-                    LightEmUp(Color.Lime)
-
-                    Return True
-                End If
-            End If
-        ElseIf Math.Abs(WholePillSize * 10.5 - NewWeekly) <= Variance Then
-            If Me.txtRuleUsed.Text < 5 Then
-                If Me.chkAllowSplit.Checked Then
-                    Me.txtSunNew.Text = WholePillSize * 1.5
-                    Me.txtMonNew.Text = WholePillSize * 1.5
-                    Me.txtTuesNew.Text = WholePillSize * 1.5
-                    Me.txtWedNew.Text = WholePillSize * 1.5
-                    Me.txtThursNew.Text = WholePillSize * 1.5
-                    Me.txtFriNew.Text = WholePillSize * 1.5
-                    Me.txtSatNew.Text = WholePillSize * 1.5
-                    Me.txtDifference.Text = WholePillSize * 10.5 - NewWeekly
-
-                    Me.txtRuleUsed.Text = 5
-
-                    LightEmUp(Color.Lime)
-
-                    Return True
-                End If
-            End If
-        ElseIf Math.Abs(WholePillSize * 17.5 - NewWeekly) <= Variance Then
-            If Me.txtRuleUsed.Text < 6 Then
-                If Me.chkAllowSplit.Checked Then
-                    Me.txtSunNew.Text = WholePillSize * 2.5
-                    Me.txtMonNew.Text = WholePillSize * 2.5
-                    Me.txtTuesNew.Text = WholePillSize * 2.5
-                    Me.txtWedNew.Text = WholePillSize * 2.5
-                    Me.txtThursNew.Text = WholePillSize * 2.5
-                    Me.txtFriNew.Text = WholePillSize * 2.5
-                    Me.txtSatNew.Text = WholePillSize * 2.5
-                    Me.txtDifference.Text = WholePillSize * 17.5 - NewWeekly
-
-                    Me.txtRuleUsed.Text = 6
-
-                    LightEmUp(Color.Lime)
-
-                    Return True
-                End If
-            End If
-        ElseIf Math.Abs(WholePillSize * 24.5 - NewWeekly) <= Variance Then
-            If Me.txtRuleUsed.Text < 7 Then
-                If Me.chkAllowSplit.Checked Then
-                    Me.txtSunNew.Text = WholePillSize * 3.5
-                    Me.txtMonNew.Text = WholePillSize * 3.5
-                    Me.txtTuesNew.Text = WholePillSize * 3.5
-                    Me.txtWedNew.Text = WholePillSize * 3.5
-                    Me.txtThursNew.Text = WholePillSize * 3.5
-                    Me.txtFriNew.Text = WholePillSize * 3.5
-                    Me.txtSatNew.Text = WholePillSize * 3.5
-                    Me.txtDifference.Text = WholePillSize * 24.5 - NewWeekly
-
-                    Me.txtRuleUsed.Text = 7
-
-                    LightEmUp(Color.Lime)
-
-                    Return True
-                End If
-            End If
-        ElseIf Math.Abs(WholePillSize * 5.5 - NewWeekly) <= Variance Then
-            If Me.txtRuleUsed.Text < 8 Then
-                If Me.chkAllowSplit.Checked Then
-                    Me.txtSunNew.Text = WholePillSize
-                    Me.txtMonNew.Text = HalfPillSize
-                    Me.txtTuesNew.Text = WholePillSize
-                    Me.txtWedNew.Text = HalfPillSize
-                    Me.txtThursNew.Text = WholePillSize
-                    Me.txtFriNew.Text = HalfPillSize
-                    Me.txtSatNew.Text = WholePillSize
-                    Me.txtDifference.Text = WholePillSize * 5.5 - NewWeekly
-
-                    Me.txtRuleUsed.Text = 8
-
-                    LightEmUp(Color.Lime)
-
-                    Return True
-                End If
-            End If
-        ElseIf Math.Abs(WholePillSize * 8.5 - NewWeekly) <= Variance Then
-            If Me.txtRuleUsed.Text < 9 Then
-                If Me.chkAllowSplit.Checked Then
-                    Me.txtSunNew.Text = WholePillSize
-                    Me.txtMonNew.Text = WholePillSize * 1.5
-                    Me.txtTuesNew.Text = WholePillSize
-                    Me.txtWedNew.Text = WholePillSize * 1.5
-                    Me.txtThursNew.Text = WholePillSize
-                    Me.txtFriNew.Text = WholePillSize * 1.5
-                    Me.txtSatNew.Text = WholePillSize
-                    Me.txtDifference.Text = WholePillSize * 8.5 - NewWeekly
-
-                    Me.txtRuleUsed.Text = 9
-
-                    LightEmUp(Color.Lime)
-
-                    Return True
-                End If
-            End If
-        ElseIf Math.Abs(WholePillSize * 12.5 - NewWeekly) <= Variance Then
-            If Me.txtRuleUsed.Text < 10 Then
-                If Me.chkAllowSplit.Checked Then
-                    Me.txtSunNew.Text = WholePillSize * 2
-                    Me.txtMonNew.Text = WholePillSize * 1.5
-                    Me.txtTuesNew.Text = WholePillSize * 2
-                    Me.txtWedNew.Text = WholePillSize * 1.5
-                    Me.txtThursNew.Text = WholePillSize * 2
-                    Me.txtFriNew.Text = WholePillSize * 1.5
-                    Me.txtSatNew.Text = WholePillSize * 2
-                    Me.txtDifference.Text = WholePillSize * 12.5 - NewWeekly
-
-                    Me.txtRuleUsed.Text = 10
-
-                    LightEmUp(Color.Lime)
-
-                    Return True
-                End If
-            End If
-        ElseIf Math.Abs(WholePillSize * 15.5 - NewWeekly) <= Variance Then
-            If Me.txtRuleUsed.Text < 11 Then
-                If Me.chkAllowSplit.Checked Then
-                    Me.txtSunNew.Text = WholePillSize * 2
-                    Me.txtMonNew.Text = WholePillSize * 2.5
-                    Me.txtTuesNew.Text = WholePillSize * 2
-                    Me.txtWedNew.Text = WholePillSize * 2.5
-                    Me.txtThursNew.Text = WholePillSize * 2
-                    Me.txtFriNew.Text = WholePillSize * 2.5
-                    Me.txtSatNew.Text = WholePillSize * 2
-                    Me.txtDifference.Text = WholePillSize * 15.5 - NewWeekly
-
-                    Me.txtRuleUsed.Text = 11
-
-                    LightEmUp(Color.Lime)
-
-                    Return True
-                End If
-            End If
-        ElseIf Math.Abs(WholePillSize * 19.5 - NewWeekly) <= Variance Then
-            If Me.txtRuleUsed.Text < 12 Then
-                If Me.chkAllowSplit.Checked Then
-                    Me.txtSunNew.Text = WholePillSize * 3
-                    Me.txtMonNew.Text = WholePillSize * 2.5
-                    Me.txtTuesNew.Text = WholePillSize * 3
-                    Me.txtWedNew.Text = WholePillSize * 2.5
-                    Me.txtThursNew.Text = WholePillSize * 3
-                    Me.txtFriNew.Text = WholePillSize * 2.5
-                    Me.txtSatNew.Text = WholePillSize * 3
-                    Me.txtDifference.Text = WholePillSize * 19.5 - NewWeekly
-
-                    Me.txtRuleUsed.Text = 12
-
-                    LightEmUp(Color.Lime)
-
-                    Return True
-                End If
-            End If
-        ElseIf Math.Abs(WholePillSize * 22.5 - NewWeekly) <= Variance Then
-            If Me.txtRuleUsed.Text < 13 Then
-                If Me.chkAllowSplit.Checked Then
-                    Me.txtSunNew.Text = WholePillSize * 3
-                    Me.txtMonNew.Text = WholePillSize * 3.5
-                    Me.txtTuesNew.Text = WholePillSize * 3
-                    Me.txtWedNew.Text = WholePillSize * 3.5
-                    Me.txtThursNew.Text = WholePillSize * 3
-                    Me.txtFriNew.Text = WholePillSize * 3.5
-                    Me.txtSatNew.Text = WholePillSize * 3
-                    Me.txtDifference.Text = WholePillSize * 22.5 - NewWeekly
-
-                    Me.txtRuleUsed.Text = 13
-
-                    LightEmUp(Color.Lime)
-
-                    Return True
-                End If
-            End If
-        ElseIf Math.Abs(WholePillSize * 26.5 - NewWeekly) <= Variance Then
-            If Me.txtRuleUsed.Text < 14 Then
-                If Me.chkAllowSplit.Checked Then
-                    Me.txtSunNew.Text = WholePillSize * 4
-                    Me.txtMonNew.Text = WholePillSize * 3.5
-                    Me.txtTuesNew.Text = WholePillSize * 4
-                    Me.txtWedNew.Text = WholePillSize * 3.5
-                    Me.txtThursNew.Text = WholePillSize * 4
-                    Me.txtFriNew.Text = WholePillSize * 3.5
-                    Me.txtSatNew.Text = WholePillSize * 4
-                    Me.txtDifference.Text = WholePillSize * 26.5 - NewWeekly
-
-                    Me.txtRuleUsed.Text = 14
-
-                    LightEmUp(Color.Lime)
-
-                    Return True
-                End If
-            End If
-        ElseIf Math.Abs(WholePillSize * 5 - NewWeekly) <= Variance Then
-            If Me.txtRuleUsed.Text < 15 Then
-                If Me.chkAllowSplit.Checked Then
-                    Me.txtSunNew.Text = HalfPillSize
-                    Me.txtMonNew.Text = WholePillSize
-                    Me.txtTuesNew.Text = HalfPillSize
-                    Me.txtWedNew.Text = WholePillSize
-                    Me.txtThursNew.Text = HalfPillSize
-                    Me.txtFriNew.Text = WholePillSize
-                    Me.txtSatNew.Text = HalfPillSize
-                    Me.txtDifference.Text = WholePillSize * 5 - NewWeekly
-
-                    Me.txtRuleUsed.Text = 15
-
-                    LightEmUp(Color.Lime)
-
-                    Return True
-                End If
-            End If
-        ElseIf Math.Abs(WholePillSize * 9 - NewWeekly) <= Variance Then
-            If Me.txtRuleUsed.Text < 16 Then
-                If Me.chkAllowSplit.Checked Then
-                    Me.txtSunNew.Text = WholePillSize * 1.5
-                    Me.txtMonNew.Text = WholePillSize
-                    Me.txtTuesNew.Text = WholePillSize * 1.5
-                    Me.txtWedNew.Text = WholePillSize
-                    Me.txtThursNew.Text = WholePillSize * 1.5
-                    Me.txtFriNew.Text = WholePillSize
-                    Me.txtSatNew.Text = WholePillSize * 1.5
-                    Me.txtDifference.Text = WholePillSize * 9 - NewWeekly
-
-                    Me.txtRuleUsed.Text = 16
-
-                    LightEmUp(Color.Lime)
-
-                    Return True
-                End If
-            End If
-        ElseIf Math.Abs(WholePillSize * 12 - NewWeekly) <= Variance Then
-            If Me.txtRuleUsed.Text < 17 Then
-                If Me.chkAllowSplit.Checked Then
-                    Me.txtSunNew.Text = WholePillSize * 1.5
-                    Me.txtMonNew.Text = WholePillSize * 2
-                    Me.txtTuesNew.Text = WholePillSize * 1.5
-                    Me.txtWedNew.Text = WholePillSize * 2
-                    Me.txtThursNew.Text = WholePillSize * 1.5
-                    Me.txtFriNew.Text = WholePillSize * 2
-                    Me.txtSatNew.Text = WholePillSize * 1.5
-                    Me.txtDifference.Text = WholePillSize * 12 - NewWeekly
-
-                    Me.txtRuleUsed.Text = 17
-
-                    LightEmUp(Color.Lime)
-
-                    Return True
-                End If
-            End If
-        ElseIf Math.Abs(WholePillSize * 16 - NewWeekly) <= Variance Then
-            If Me.txtRuleUsed.Text < 18 Then
-                If Me.chkAllowSplit.Checked Then
-                    Me.txtSunNew.Text = WholePillSize * 2.5
-                    Me.txtMonNew.Text = WholePillSize * 2
-                    Me.txtTuesNew.Text = WholePillSize * 2.5
-                    Me.txtWedNew.Text = WholePillSize * 2
-                    Me.txtThursNew.Text = WholePillSize * 2.5
-                    Me.txtFriNew.Text = WholePillSize * 2
-                    Me.txtSatNew.Text = WholePillSize * 2.5
-                    Me.txtDifference.Text = WholePillSize * 16 - NewWeekly
-
-                    Me.txtRuleUsed.Text = 18
-
-                    LightEmUp(Color.Lime)
-
-                    Return True
-                End If
-            End If
-        ElseIf Math.Abs(WholePillSize * 19 - NewWeekly) <= Variance Then
-            If Me.txtRuleUsed.Text < 19 Then
-                If Me.chkAllowSplit.Checked Then
-                    Me.txtSunNew.Text = WholePillSize * 2.5
-                    Me.txtMonNew.Text = WholePillSize * 3
-                    Me.txtTuesNew.Text = WholePillSize * 2.5
-                    Me.txtWedNew.Text = WholePillSize * 3
-                    Me.txtThursNew.Text = WholePillSize * 2.5
-                    Me.txtFriNew.Text = WholePillSize * 3
-                    Me.txtSatNew.Text = WholePillSize * 2.5
-                    Me.txtDifference.Text = WholePillSize * 19 - NewWeekly
-
-                    Me.txtRuleUsed.Text = 19
-
-                    LightEmUp(Color.Lime)
-
-                    Return True
-                End If
-            End If
-        ElseIf Math.Abs(WholePillSize * 23 - NewWeekly) <= Variance Then
-            If Me.txtRuleUsed.Text < 20 Then
-                If Me.chkAllowSplit.Checked Then
-                    Me.txtSunNew.Text = WholePillSize * 3.5
-                    Me.txtMonNew.Text = WholePillSize * 3
-                    Me.txtTuesNew.Text = WholePillSize * 3.5
-                    Me.txtWedNew.Text = WholePillSize * 3
-                    Me.txtThursNew.Text = WholePillSize * 3.5
-                    Me.txtFriNew.Text = WholePillSize * 3
-                    Me.txtSatNew.Text = WholePillSize * 3.5
-                    Me.txtDifference.Text = WholePillSize * 23 - NewWeekly
-
-                    Me.txtRuleUsed.Text = 20
-
-                    LightEmUp(Color.Lime)
-
-                    Return True
-                End If
-            End If
-        ElseIf Math.Abs(WholePillSize * 26 - NewWeekly) <= Variance Then
-            If Me.txtRuleUsed.Text < 21 Then
-                If Me.chkAllowSplit.Checked Then
-                    Me.txtSunNew.Text = WholePillSize * 3.5
-                    Me.txtMonNew.Text = WholePillSize * 4
-                    Me.txtTuesNew.Text = WholePillSize * 3.5
-                    Me.txtWedNew.Text = WholePillSize * 4
-                    Me.txtThursNew.Text = WholePillSize * 3.5
-                    Me.txtFriNew.Text = WholePillSize * 4
-                    Me.txtSatNew.Text = WholePillSize * 3.5
-                    Me.txtDifference.Text = WholePillSize * 26 - NewWeekly
-
-                    Me.txtRuleUsed.Text = 21
-
-                    LightEmUp(Color.Lime)
-
-                    Return True
-                End If
-            End If
-        ElseIf Math.Abs(WholePillSize * 11 - NewWeekly) <= Variance Then
-            If Me.txtRuleUsed.Text < 22 Then
-                Me.txtSunNew.Text = WholePillSize * 2
-                Me.txtMonNew.Text = WholePillSize
-                Me.txtTuesNew.Text = WholePillSize * 2
-                Me.txtWedNew.Text = WholePillSize
-                Me.txtThursNew.Text = WholePillSize * 2
-                Me.txtFriNew.Text = WholePillSize
-                Me.txtSatNew.Text = WholePillSize * 2
-                Me.txtDifference.Text = WholePillSize * 11 - NewWeekly
-
-                Me.txtRuleUsed.Text = 22
-
-                LightEmUp(Color.Lime)
-
-                Return True
-            End If
-        ElseIf Math.Abs(WholePillSize * 18 - NewWeekly) <= Variance Then
-            If Me.txtRuleUsed.Text < 23 Then
-                Me.txtSunNew.Text = WholePillSize * 3
-                Me.txtMonNew.Text = WholePillSize * 2
-                Me.txtTuesNew.Text = WholePillSize * 3
-                Me.txtWedNew.Text = WholePillSize * 2
-                Me.txtThursNew.Text = WholePillSize * 3
-                Me.txtFriNew.Text = WholePillSize * 2
-                Me.txtSatNew.Text = WholePillSize * 3
-                Me.txtDifference.Text = WholePillSize * 18 - NewWeekly
-
-                Me.txtRuleUsed.Text = 23
-
-                LightEmUp(Color.Lime)
-
-                Return True
-            End If
-        ElseIf Math.Abs(WholePillSize * 25 - NewWeekly) <= Variance Then
-            If Me.txtRuleUsed.Text < 24 Then
-                Me.txtSunNew.Text = WholePillSize * 4
-                Me.txtMonNew.Text = WholePillSize * 3
-                Me.txtTuesNew.Text = WholePillSize * 4
-                Me.txtWedNew.Text = WholePillSize * 3
-                Me.txtThursNew.Text = WholePillSize * 4
-                Me.txtFriNew.Text = WholePillSize * 3
-                Me.txtSatNew.Text = WholePillSize * 4
-                Me.txtDifference.Text = WholePillSize * 25 - NewWeekly
-
-                Me.txtRuleUsed.Text = 24
-
-                LightEmUp(Color.Lime)
-
-                Return True
-            End If
-        ElseIf Math.Abs(WholePillSize * 10 - NewWeekly) <= Variance Then
-            If Me.txtRuleUsed.Text < 25 Then
-                Me.txtSunNew.Text = WholePillSize
-                Me.txtMonNew.Text = WholePillSize * 2
-                Me.txtTuesNew.Text = WholePillSize
-                Me.txtWedNew.Text = WholePillSize * 2
-                Me.txtThursNew.Text = WholePillSize
-                Me.txtFriNew.Text = WholePillSize * 2
-                Me.txtSatNew.Text = WholePillSize
-                Me.txtDifference.Text = WholePillSize * 10 - NewWeekly
-
-                Me.txtRuleUsed.Text = 25
-
-                LightEmUp(Color.Lime)
-
-                Return True
-            End If
-        ElseIf Math.Abs(WholePillSize * 17 - NewWeekly) <= Variance Then
-            If Me.txtRuleUsed.Text < 26 Then
-                Me.txtSunNew.Text = WholePillSize * 2
-                Me.txtMonNew.Text = WholePillSize * 3
-                Me.txtTuesNew.Text = WholePillSize * 2
-                Me.txtWedNew.Text = WholePillSize * 3
-                Me.txtThursNew.Text = WholePillSize * 2
-                Me.txtFriNew.Text = WholePillSize * 3
-                Me.txtSatNew.Text = WholePillSize * 2
-                Me.txtDifference.Text = WholePillSize * 17 - NewWeekly
-
-                Me.txtRuleUsed.Text = 26
-
-                LightEmUp(Color.Lime)
-
-                Return True
-            End If
-        ElseIf Math.Abs(WholePillSize * 24 - NewWeekly) <= Variance Then
-            If Me.txtRuleUsed.Text < 27 Then
-                Me.txtSunNew.Text = WholePillSize * 3
-                Me.txtMonNew.Text = WholePillSize * 4
-                Me.txtTuesNew.Text = WholePillSize * 3
-                Me.txtWedNew.Text = WholePillSize * 4
-                Me.txtThursNew.Text = WholePillSize * 3
-                Me.txtFriNew.Text = WholePillSize * 4
-                Me.txtSatNew.Text = WholePillSize * 3
-                Me.txtDifference.Text = WholePillSize * 24 - NewWeekly
-
-                Me.txtRuleUsed.Text = 27
-
-                LightEmUp(Color.Lime)
-
-                Return True
-            End If
+        ' If found, return the connection string.
+        If Not settings Is Nothing Then
+            ConnString = settings.ConnectionString
+        End If
+
+        ConnDose = New SqlConnection(ConnString)     ' Creates connection
+        ConnDose.Open()
+
+        If Me.chkAllowSplit.Checked Then
+            SelectString = "Select * FROM tblDoseScheduler WHERE Inactive = 'False' ORDER BY Priority ASC;"
         Else
+            SelectString = "Select * FROM tblDoseScheduler WHERE RequiresSplit = 'False' and Inactive = 'False' ORDER BY Priority ASC;"
+        End If
 
-            Return False
+        MyCommand = New SqlCommand(SelectString, ConnDose)
+        drDoseInfo = MyCommand.ExecuteReader
+
+        Dim ScheduleFound As Boolean = False
+
+        If drDoseInfo.HasRows Then
+            While drDoseInfo.Read()
+                If Math.Abs(WholePillSize * drDoseInfo("PillSizeMultiplier") - NewWeekly) <= Variance Then
+                    If Me.txtRuleUsed.Text < drDoseInfo("Priority") Then
+                        Me.txtSunNew.Text = drDoseInfo("SundayMultiplier") * WholePillSize
+                        Me.txtMonNew.Text = drDoseInfo("MondayMultiplier") * WholePillSize
+                        Me.txtTuesNew.Text = drDoseInfo("TuesdayMultiplier") * WholePillSize
+                        Me.txtWedNew.Text = drDoseInfo("WednesdayMultiplier") * WholePillSize
+                        Me.txtThursNew.Text = drDoseInfo("ThursdayMultiplier") * WholePillSize
+                        Me.txtFriNew.Text = drDoseInfo("FridayMultiplier") * WholePillSize
+                        Me.txtSatNew.Text = drDoseInfo("SaturdayMultiplier") * WholePillSize
+                        Me.txtDifference.Text = WholePillSize * drDoseInfo("PillSizeMultiplier") - NewWeekly
+                        Me.txtSkipDoses.Text = Me.txtSkip.Text
+
+                        Me.txtRuleUsed.Text = drDoseInfo("Priority")
+
+                        Me.btnTranslate_Click(sender, e)
+
+                        LightEmUp(Color.Lime)
+
+                        ScheduleFound = True
+                        Exit While
+                    End If
+                End If
+
+            End While
 
         End If
+
+        drDoseInfo.Close()
+
+        Return ScheduleFound
+        '^^^^^^^^^^^^^^^^^^^^^^^ Use data, get this working and remove the ifs below
+
+
+
+        'If Math.Abs(WholePillSize * 7 - NewWeekly) <= Variance Then
+        '    If Me.txtRuleUsed.Text < 0 Then
+        '        Me.txtSunNew.Text = WholePillSize
+        '        Me.txtMonNew.Text = WholePillSize
+        '        Me.txtTuesNew.Text = WholePillSize
+        '        Me.txtWedNew.Text = WholePillSize
+        '        Me.txtThursNew.Text = WholePillSize
+        '        Me.txtFriNew.Text = WholePillSize
+        '        Me.txtSatNew.Text = WholePillSize
+        '        Me.txtDifference.Text = WholePillSize * 7 - NewWeekly
+
+        '        Me.txtRuleUsed.Text = 0
+
+        '        LightEmUp(Color.Lime)
+
+        '        Return True
+        '    End If
+        'ElseIf Math.Abs(WholePillSize * 14 - NewWeekly) <= Variance Then
+        '    If Me.txtRuleUsed.Text < 1 Then
+        '        Me.txtSunNew.Text = WholePillSize * 2
+        '        Me.txtMonNew.Text = WholePillSize * 2
+        '        Me.txtTuesNew.Text = WholePillSize * 2
+        '        Me.txtWedNew.Text = WholePillSize * 2
+        '        Me.txtThursNew.Text = WholePillSize * 2
+        '        Me.txtFriNew.Text = WholePillSize * 2
+        '        Me.txtSatNew.Text = WholePillSize * 2
+        '        Me.txtDifference.Text = WholePillSize * 14 - NewWeekly
+
+        '        Me.txtRuleUsed.Text = 1
+
+        '        LightEmUp(Color.Lime)
+
+        '        Return True
+        '    End If
+        'ElseIf Math.Abs(WholePillSize * 21 - NewWeekly) <= Variance Then
+        '    If Me.txtRuleUsed.Text < 2 Then
+        '        Me.txtSunNew.Text = WholePillSize * 3
+        '        Me.txtMonNew.Text = WholePillSize * 3
+        '        Me.txtTuesNew.Text = WholePillSize * 3
+        '        Me.txtWedNew.Text = WholePillSize * 3
+        '        Me.txtThursNew.Text = WholePillSize * 3
+        '        Me.txtFriNew.Text = WholePillSize * 3
+        '        Me.txtSatNew.Text = WholePillSize * 3
+        '        Me.txtDifference.Text = WholePillSize * 21 - NewWeekly
+
+        '        Me.txtRuleUsed.Text = 2
+
+        '        LightEmUp(Color.Lime)
+
+        '        Return True
+        '    End If
+        'ElseIf Math.Abs(WholePillSize * 28 - NewWeekly) <= Variance Then
+        '    If Me.txtRuleUsed.Text < 3 Then
+        '        Me.txtSunNew.Text = WholePillSize * 4
+        '        Me.txtMonNew.Text = WholePillSize * 4
+        '        Me.txtTuesNew.Text = WholePillSize * 4
+        '        Me.txtWedNew.Text = WholePillSize * 4
+        '        Me.txtThursNew.Text = WholePillSize * 4
+        '        Me.txtFriNew.Text = WholePillSize * 4
+        '        Me.txtSatNew.Text = WholePillSize * 4
+        '        Me.txtDifference.Text = WholePillSize * 28 - NewWeekly
+
+        '        Me.txtRuleUsed.Text = 3
+
+        '        LightEmUp(Color.Lime)
+
+        '        Return True
+        '    End If
+        'ElseIf Math.Abs(WholePillSize * 3.5 - NewWeekly) <= Variance Then
+        '    If Me.txtRuleUsed.Text < 4 Then
+        '        If Me.chkAllowSplit.Checked Then
+        '            Me.txtSunNew.Text = HalfPillSize
+        '            Me.txtMonNew.Text = HalfPillSize
+        '            Me.txtTuesNew.Text = HalfPillSize
+        '            Me.txtWedNew.Text = HalfPillSize
+        '            Me.txtThursNew.Text = HalfPillSize
+        '            Me.txtFriNew.Text = HalfPillSize
+        '            Me.txtSatNew.Text = HalfPillSize
+        '            Me.txtDifference.Text = WholePillSize * 3.5 - NewWeekly
+
+        '            Me.txtRuleUsed.Text = 4
+
+        '            LightEmUp(Color.Lime)
+
+        '            Return True
+        '        End If
+        '    End If
+        'ElseIf Math.Abs(WholePillSize * 10.5 - NewWeekly) <= Variance Then
+        '    If Me.txtRuleUsed.Text < 5 Then
+        '        If Me.chkAllowSplit.Checked Then
+        '            Me.txtSunNew.Text = WholePillSize * 1.5
+        '            Me.txtMonNew.Text = WholePillSize * 1.5
+        '            Me.txtTuesNew.Text = WholePillSize * 1.5
+        '            Me.txtWedNew.Text = WholePillSize * 1.5
+        '            Me.txtThursNew.Text = WholePillSize * 1.5
+        '            Me.txtFriNew.Text = WholePillSize * 1.5
+        '            Me.txtSatNew.Text = WholePillSize * 1.5
+        '            Me.txtDifference.Text = WholePillSize * 10.5 - NewWeekly
+
+        '            Me.txtRuleUsed.Text = 5
+
+        '            LightEmUp(Color.Lime)
+
+        '            Return True
+        '        End If
+        '    End If
+        'ElseIf Math.Abs(WholePillSize * 17.5 - NewWeekly) <= Variance Then
+        '    If Me.txtRuleUsed.Text < 6 Then
+        '        If Me.chkAllowSplit.Checked Then
+        '            Me.txtSunNew.Text = WholePillSize * 2.5
+        '            Me.txtMonNew.Text = WholePillSize * 2.5
+        '            Me.txtTuesNew.Text = WholePillSize * 2.5
+        '            Me.txtWedNew.Text = WholePillSize * 2.5
+        '            Me.txtThursNew.Text = WholePillSize * 2.5
+        '            Me.txtFriNew.Text = WholePillSize * 2.5
+        '            Me.txtSatNew.Text = WholePillSize * 2.5
+        '            Me.txtDifference.Text = WholePillSize * 17.5 - NewWeekly
+
+        '            Me.txtRuleUsed.Text = 6
+
+        '            LightEmUp(Color.Lime)
+
+        '            Return True
+        '        End If
+        '    End If
+        'ElseIf Math.Abs(WholePillSize * 24.5 - NewWeekly) <= Variance Then
+        '    If Me.txtRuleUsed.Text < 7 Then
+        '        If Me.chkAllowSplit.Checked Then
+        '            Me.txtSunNew.Text = WholePillSize * 3.5
+        '            Me.txtMonNew.Text = WholePillSize * 3.5
+        '            Me.txtTuesNew.Text = WholePillSize * 3.5
+        '            Me.txtWedNew.Text = WholePillSize * 3.5
+        '            Me.txtThursNew.Text = WholePillSize * 3.5
+        '            Me.txtFriNew.Text = WholePillSize * 3.5
+        '            Me.txtSatNew.Text = WholePillSize * 3.5
+        '            Me.txtDifference.Text = WholePillSize * 24.5 - NewWeekly
+
+        '            Me.txtRuleUsed.Text = 7
+
+        '            LightEmUp(Color.Lime)
+
+        '            Return True
+        '        End If
+        '    End If
+        'ElseIf Math.Abs(WholePillSize * 5.5 - NewWeekly) <= Variance Then
+        '    If Me.txtRuleUsed.Text < 8 Then
+        '        If Me.chkAllowSplit.Checked Then
+        '            Me.txtSunNew.Text = WholePillSize
+        '            Me.txtMonNew.Text = HalfPillSize
+        '            Me.txtTuesNew.Text = WholePillSize
+        '            Me.txtWedNew.Text = HalfPillSize
+        '            Me.txtThursNew.Text = WholePillSize
+        '            Me.txtFriNew.Text = HalfPillSize
+        '            Me.txtSatNew.Text = WholePillSize
+        '            Me.txtDifference.Text = WholePillSize * 5.5 - NewWeekly
+
+        '            Me.txtRuleUsed.Text = 8
+
+        '            LightEmUp(Color.Lime)
+
+        '            Return True
+        '        End If
+        '    End If
+        'ElseIf Math.Abs(WholePillSize * 8.5 - NewWeekly) <= Variance Then
+        '    If Me.txtRuleUsed.Text < 9 Then
+        '        If Me.chkAllowSplit.Checked Then
+        '            Me.txtSunNew.Text = WholePillSize
+        '            Me.txtMonNew.Text = WholePillSize * 1.5
+        '            Me.txtTuesNew.Text = WholePillSize
+        '            Me.txtWedNew.Text = WholePillSize * 1.5
+        '            Me.txtThursNew.Text = WholePillSize
+        '            Me.txtFriNew.Text = WholePillSize * 1.5
+        '            Me.txtSatNew.Text = WholePillSize
+        '            Me.txtDifference.Text = WholePillSize * 8.5 - NewWeekly
+
+        '            Me.txtRuleUsed.Text = 9
+
+        '            LightEmUp(Color.Lime)
+
+        '            Return True
+        '        End If
+        '    End If
+        'ElseIf Math.Abs(WholePillSize * 12.5 - NewWeekly) <= Variance Then
+        '    If Me.txtRuleUsed.Text < 10 Then
+        '        If Me.chkAllowSplit.Checked Then
+        '            Me.txtSunNew.Text = WholePillSize * 2
+        '            Me.txtMonNew.Text = WholePillSize * 1.5
+        '            Me.txtTuesNew.Text = WholePillSize * 2
+        '            Me.txtWedNew.Text = WholePillSize * 1.5
+        '            Me.txtThursNew.Text = WholePillSize * 2
+        '            Me.txtFriNew.Text = WholePillSize * 1.5
+        '            Me.txtSatNew.Text = WholePillSize * 2
+        '            Me.txtDifference.Text = WholePillSize * 12.5 - NewWeekly
+
+        '            Me.txtRuleUsed.Text = 10
+
+        '            LightEmUp(Color.Lime)
+
+        '            Return True
+        '        End If
+        '    End If
+        'ElseIf Math.Abs(WholePillSize * 15.5 - NewWeekly) <= Variance Then
+        '    If Me.txtRuleUsed.Text < 11 Then
+        '        If Me.chkAllowSplit.Checked Then
+        '            Me.txtSunNew.Text = WholePillSize * 2
+        '            Me.txtMonNew.Text = WholePillSize * 2.5
+        '            Me.txtTuesNew.Text = WholePillSize * 2
+        '            Me.txtWedNew.Text = WholePillSize * 2.5
+        '            Me.txtThursNew.Text = WholePillSize * 2
+        '            Me.txtFriNew.Text = WholePillSize * 2.5
+        '            Me.txtSatNew.Text = WholePillSize * 2
+        '            Me.txtDifference.Text = WholePillSize * 15.5 - NewWeekly
+
+        '            Me.txtRuleUsed.Text = 11
+
+        '            LightEmUp(Color.Lime)
+
+        '            Return True
+        '        End If
+        '    End If
+        'ElseIf Math.Abs(WholePillSize * 19.5 - NewWeekly) <= Variance Then
+        '    If Me.txtRuleUsed.Text < 12 Then
+        '        If Me.chkAllowSplit.Checked Then
+        '            Me.txtSunNew.Text = WholePillSize * 3
+        '            Me.txtMonNew.Text = WholePillSize * 2.5
+        '            Me.txtTuesNew.Text = WholePillSize * 3
+        '            Me.txtWedNew.Text = WholePillSize * 2.5
+        '            Me.txtThursNew.Text = WholePillSize * 3
+        '            Me.txtFriNew.Text = WholePillSize * 2.5
+        '            Me.txtSatNew.Text = WholePillSize * 3
+        '            Me.txtDifference.Text = WholePillSize * 19.5 - NewWeekly
+
+        '            Me.txtRuleUsed.Text = 12
+
+        '            LightEmUp(Color.Lime)
+
+        '            Return True
+        '        End If
+        '    End If
+        'ElseIf Math.Abs(WholePillSize * 22.5 - NewWeekly) <= Variance Then
+        '    If Me.txtRuleUsed.Text < 13 Then
+        '        If Me.chkAllowSplit.Checked Then
+        '            Me.txtSunNew.Text = WholePillSize * 3
+        '            Me.txtMonNew.Text = WholePillSize * 3.5
+        '            Me.txtTuesNew.Text = WholePillSize * 3
+        '            Me.txtWedNew.Text = WholePillSize * 3.5
+        '            Me.txtThursNew.Text = WholePillSize * 3
+        '            Me.txtFriNew.Text = WholePillSize * 3.5
+        '            Me.txtSatNew.Text = WholePillSize * 3
+        '            Me.txtDifference.Text = WholePillSize * 22.5 - NewWeekly
+
+        '            Me.txtRuleUsed.Text = 13
+
+        '            LightEmUp(Color.Lime)
+
+        '            Return True
+        '        End If
+        '    End If
+        'ElseIf Math.Abs(WholePillSize * 26.5 - NewWeekly) <= Variance Then
+        '    If Me.txtRuleUsed.Text < 14 Then
+        '        If Me.chkAllowSplit.Checked Then
+        '            Me.txtSunNew.Text = WholePillSize * 4
+        '            Me.txtMonNew.Text = WholePillSize * 3.5
+        '            Me.txtTuesNew.Text = WholePillSize * 4
+        '            Me.txtWedNew.Text = WholePillSize * 3.5
+        '            Me.txtThursNew.Text = WholePillSize * 4
+        '            Me.txtFriNew.Text = WholePillSize * 3.5
+        '            Me.txtSatNew.Text = WholePillSize * 4
+        '            Me.txtDifference.Text = WholePillSize * 26.5 - NewWeekly
+
+        '            Me.txtRuleUsed.Text = 14
+
+        '            LightEmUp(Color.Lime)
+
+        '            Return True
+        '        End If
+        '    End If
+        'ElseIf Math.Abs(WholePillSize * 5 - NewWeekly) <= Variance Then
+        '    If Me.txtRuleUsed.Text < 15 Then
+        '        If Me.chkAllowSplit.Checked Then
+        '            Me.txtSunNew.Text = HalfPillSize
+        '            Me.txtMonNew.Text = WholePillSize
+        '            Me.txtTuesNew.Text = HalfPillSize
+        '            Me.txtWedNew.Text = WholePillSize
+        '            Me.txtThursNew.Text = HalfPillSize
+        '            Me.txtFriNew.Text = WholePillSize
+        '            Me.txtSatNew.Text = HalfPillSize
+        '            Me.txtDifference.Text = WholePillSize * 5 - NewWeekly
+
+        '            Me.txtRuleUsed.Text = 15
+
+        '            LightEmUp(Color.Lime)
+
+        '            Return True
+        '        End If
+        '    End If
+        'ElseIf Math.Abs(WholePillSize * 9 - NewWeekly) <= Variance Then
+        '    If Me.txtRuleUsed.Text < 16 Then
+        '        If Me.chkAllowSplit.Checked Then
+        '            Me.txtSunNew.Text = WholePillSize * 1.5
+        '            Me.txtMonNew.Text = WholePillSize
+        '            Me.txtTuesNew.Text = WholePillSize * 1.5
+        '            Me.txtWedNew.Text = WholePillSize
+        '            Me.txtThursNew.Text = WholePillSize * 1.5
+        '            Me.txtFriNew.Text = WholePillSize
+        '            Me.txtSatNew.Text = WholePillSize * 1.5
+        '            Me.txtDifference.Text = WholePillSize * 9 - NewWeekly
+
+        '            Me.txtRuleUsed.Text = 16
+
+        '            LightEmUp(Color.Lime)
+
+        '            Return True
+        '        End If
+        '    End If
+        'ElseIf Math.Abs(WholePillSize * 12 - NewWeekly) <= Variance Then
+        '    If Me.txtRuleUsed.Text < 17 Then
+        '        If Me.chkAllowSplit.Checked Then
+        '            Me.txtSunNew.Text = WholePillSize * 1.5
+        '            Me.txtMonNew.Text = WholePillSize * 2
+        '            Me.txtTuesNew.Text = WholePillSize * 1.5
+        '            Me.txtWedNew.Text = WholePillSize * 2
+        '            Me.txtThursNew.Text = WholePillSize * 1.5
+        '            Me.txtFriNew.Text = WholePillSize * 2
+        '            Me.txtSatNew.Text = WholePillSize * 1.5
+        '            Me.txtDifference.Text = WholePillSize * 12 - NewWeekly
+
+        '            Me.txtRuleUsed.Text = 17
+
+        '            LightEmUp(Color.Lime)
+
+        '            Return True
+        '        End If
+        '    End If
+        'ElseIf Math.Abs(WholePillSize * 16 - NewWeekly) <= Variance Then
+        '    If Me.txtRuleUsed.Text < 18 Then
+        '        If Me.chkAllowSplit.Checked Then
+        '            Me.txtSunNew.Text = WholePillSize * 2.5
+        '            Me.txtMonNew.Text = WholePillSize * 2
+        '            Me.txtTuesNew.Text = WholePillSize * 2.5
+        '            Me.txtWedNew.Text = WholePillSize * 2
+        '            Me.txtThursNew.Text = WholePillSize * 2.5
+        '            Me.txtFriNew.Text = WholePillSize * 2
+        '            Me.txtSatNew.Text = WholePillSize * 2.5
+        '            Me.txtDifference.Text = WholePillSize * 16 - NewWeekly
+
+        '            Me.txtRuleUsed.Text = 18
+
+        '            LightEmUp(Color.Lime)
+
+        '            Return True
+        '        End If
+        '    End If
+        'ElseIf Math.Abs(WholePillSize * 19 - NewWeekly) <= Variance Then
+        '    If Me.txtRuleUsed.Text < 19 Then
+        '        If Me.chkAllowSplit.Checked Then
+        '            Me.txtSunNew.Text = WholePillSize * 2.5
+        '            Me.txtMonNew.Text = WholePillSize * 3
+        '            Me.txtTuesNew.Text = WholePillSize * 2.5
+        '            Me.txtWedNew.Text = WholePillSize * 3
+        '            Me.txtThursNew.Text = WholePillSize * 2.5
+        '            Me.txtFriNew.Text = WholePillSize * 3
+        '            Me.txtSatNew.Text = WholePillSize * 2.5
+        '            Me.txtDifference.Text = WholePillSize * 19 - NewWeekly
+
+        '            Me.txtRuleUsed.Text = 19
+
+        '            LightEmUp(Color.Lime)
+
+        '            Return True
+        '        End If
+        '    End If
+        'ElseIf Math.Abs(WholePillSize * 23 - NewWeekly) <= Variance Then
+        '    If Me.txtRuleUsed.Text < 20 Then
+        '        If Me.chkAllowSplit.Checked Then
+        '            Me.txtSunNew.Text = WholePillSize * 3.5
+        '            Me.txtMonNew.Text = WholePillSize * 3
+        '            Me.txtTuesNew.Text = WholePillSize * 3.5
+        '            Me.txtWedNew.Text = WholePillSize * 3
+        '            Me.txtThursNew.Text = WholePillSize * 3.5
+        '            Me.txtFriNew.Text = WholePillSize * 3
+        '            Me.txtSatNew.Text = WholePillSize * 3.5
+        '            Me.txtDifference.Text = WholePillSize * 23 - NewWeekly
+
+        '            Me.txtRuleUsed.Text = 20
+
+        '            LightEmUp(Color.Lime)
+
+        '            Return True
+        '        End If
+        '    End If
+        'ElseIf Math.Abs(WholePillSize * 26 - NewWeekly) <= Variance Then
+        '    If Me.txtRuleUsed.Text < 21 Then
+        '        If Me.chkAllowSplit.Checked Then
+        '            Me.txtSunNew.Text = WholePillSize * 3.5
+        '            Me.txtMonNew.Text = WholePillSize * 4
+        '            Me.txtTuesNew.Text = WholePillSize * 3.5
+        '            Me.txtWedNew.Text = WholePillSize * 4
+        '            Me.txtThursNew.Text = WholePillSize * 3.5
+        '            Me.txtFriNew.Text = WholePillSize * 4
+        '            Me.txtSatNew.Text = WholePillSize * 3.5
+        '            Me.txtDifference.Text = WholePillSize * 26 - NewWeekly
+
+        '            Me.txtRuleUsed.Text = 21
+
+        '            LightEmUp(Color.Lime)
+
+        '            Return True
+        '        End If
+        '    End If
+        'ElseIf Math.Abs(WholePillSize * 11 - NewWeekly) <= Variance Then
+        '    If Me.txtRuleUsed.Text < 22 Then
+        '        Me.txtSunNew.Text = WholePillSize * 2
+        '        Me.txtMonNew.Text = WholePillSize
+        '        Me.txtTuesNew.Text = WholePillSize * 2
+        '        Me.txtWedNew.Text = WholePillSize
+        '        Me.txtThursNew.Text = WholePillSize * 2
+        '        Me.txtFriNew.Text = WholePillSize
+        '        Me.txtSatNew.Text = WholePillSize * 2
+        '        Me.txtDifference.Text = WholePillSize * 11 - NewWeekly
+
+        '        Me.txtRuleUsed.Text = 22
+
+        '        LightEmUp(Color.Lime)
+
+        '        Return True
+        '    End If
+        'ElseIf Math.Abs(WholePillSize * 18 - NewWeekly) <= Variance Then
+        '    If Me.txtRuleUsed.Text < 23 Then
+        '        Me.txtSunNew.Text = WholePillSize * 3
+        '        Me.txtMonNew.Text = WholePillSize * 2
+        '        Me.txtTuesNew.Text = WholePillSize * 3
+        '        Me.txtWedNew.Text = WholePillSize * 2
+        '        Me.txtThursNew.Text = WholePillSize * 3
+        '        Me.txtFriNew.Text = WholePillSize * 2
+        '        Me.txtSatNew.Text = WholePillSize * 3
+        '        Me.txtDifference.Text = WholePillSize * 18 - NewWeekly
+
+        '        Me.txtRuleUsed.Text = 23
+
+        '        LightEmUp(Color.Lime)
+
+        '        Return True
+        '    End If
+        'ElseIf Math.Abs(WholePillSize * 25 - NewWeekly) <= Variance Then
+        '    If Me.txtRuleUsed.Text < 24 Then
+        '        Me.txtSunNew.Text = WholePillSize * 4
+        '        Me.txtMonNew.Text = WholePillSize * 3
+        '        Me.txtTuesNew.Text = WholePillSize * 4
+        '        Me.txtWedNew.Text = WholePillSize * 3
+        '        Me.txtThursNew.Text = WholePillSize * 4
+        '        Me.txtFriNew.Text = WholePillSize * 3
+        '        Me.txtSatNew.Text = WholePillSize * 4
+        '        Me.txtDifference.Text = WholePillSize * 25 - NewWeekly
+
+        '        Me.txtRuleUsed.Text = 24
+
+        '        LightEmUp(Color.Lime)
+
+        '        Return True
+        '    End If
+        'ElseIf Math.Abs(WholePillSize * 10 - NewWeekly) <= Variance Then
+        '    If Me.txtRuleUsed.Text < 25 Then
+        '        Me.txtSunNew.Text = WholePillSize
+        '        Me.txtMonNew.Text = WholePillSize * 2
+        '        Me.txtTuesNew.Text = WholePillSize
+        '        Me.txtWedNew.Text = WholePillSize * 2
+        '        Me.txtThursNew.Text = WholePillSize
+        '        Me.txtFriNew.Text = WholePillSize * 2
+        '        Me.txtSatNew.Text = WholePillSize
+        '        Me.txtDifference.Text = WholePillSize * 10 - NewWeekly
+
+        '        Me.txtRuleUsed.Text = 25
+
+        '        LightEmUp(Color.Lime)
+
+        '        Return True
+        '    End If
+        'ElseIf Math.Abs(WholePillSize * 17 - NewWeekly) <= Variance Then
+        '    If Me.txtRuleUsed.Text < 26 Then
+        '        Me.txtSunNew.Text = WholePillSize * 2
+        '        Me.txtMonNew.Text = WholePillSize * 3
+        '        Me.txtTuesNew.Text = WholePillSize * 2
+        '        Me.txtWedNew.Text = WholePillSize * 3
+        '        Me.txtThursNew.Text = WholePillSize * 2
+        '        Me.txtFriNew.Text = WholePillSize * 3
+        '        Me.txtSatNew.Text = WholePillSize * 2
+        '        Me.txtDifference.Text = WholePillSize * 17 - NewWeekly
+
+        '        Me.txtRuleUsed.Text = 26
+
+        '        LightEmUp(Color.Lime)
+
+        '        Return True
+        '    End If
+        'ElseIf Math.Abs(WholePillSize * 24 - NewWeekly) <= Variance Then
+        '    If Me.txtRuleUsed.Text < 27 Then
+        '        Me.txtSunNew.Text = WholePillSize * 3
+        '        Me.txtMonNew.Text = WholePillSize * 4
+        '        Me.txtTuesNew.Text = WholePillSize * 3
+        '        Me.txtWedNew.Text = WholePillSize * 4
+        '        Me.txtThursNew.Text = WholePillSize * 3
+        '        Me.txtFriNew.Text = WholePillSize * 4
+        '        Me.txtSatNew.Text = WholePillSize * 3
+        '        Me.txtDifference.Text = WholePillSize * 24 - NewWeekly
+
+        '        Me.txtRuleUsed.Text = 27
+
+        '        LightEmUp(Color.Lime)
+
+        '        Return True
+        '    End If
+        'Else
+
+        '    Return False
+
+        'End If
 
     End Function
 
@@ -958,9 +1045,11 @@ Public Class FrmCDS
         Me.txtThursNew.Text = ""
         Me.txtFriNew.Text = ""
         Me.txtSatNew.Text = ""
+        Me.txtNewInstructions.Text = ""
         Me.txtNewDoseCalculation.Text = ""
         Me.txtPillSizeUsed.Text = ""
         LightEmUp(Color.White)
+
         Me.txtNewWeeklyDose.BackColor = Color.Lime
         Me.txtDifference.Visible = False
 
@@ -1045,8 +1134,9 @@ Public Class FrmCDS
         Dim SelectStringCDS As String
         Dim CDSDataTable As New DataTable
 
-        SelectStringCDS = "Select * FROM tblDosingAlgorithm WHERE ReasonForTherapy = '[any]' or ReasonForTherapy = '' or " & _
-           "ReasonForTherapy is NULL or ReasonForTherapy = '" & Me.txtReason.Text & "' ORDER BY Priority ASC;"
+        SelectStringCDS = "Select * FROM tblDosingAlgorithm WHERE (ReasonForTherapy = '[any]' or ReasonForTherapy = '' or " & _
+           "ReasonForTherapy is NULL or ReasonForTherapy = '" & Me.txtReason.Text & "' or ReasonForTherapy = '" & Me.txtAdditionalReason.Text & _
+           "') and (TargetInrRange = '[any]' or TargetInrRange = '' or TargetInrRange is NULL or RTRIM(LTRIM(TargetInrRange)) = '" & Trim(Me.txtRange.Text) & "') ORDER BY Priority ASC;"
 
         Using ConnCDSInfo As New SqlConnection(ConnString)
 
@@ -1142,11 +1232,31 @@ Public Class FrmCDS
                     RFT = CDSDataTable.Rows(Me.txtRuleIndex.Text).Item("ReasonForTherapy")
                 End If
 
-                Me.txtCriteria.Text = "Reason for Therapy = " & RFT & " and INR " & CDSDataTable.Rows(Me.txtRuleIndex.Text).Item("INRLowerLimit") & " and " & CDSDataTable.Rows(Me.txtRuleIndex.Text).Item("INRUpperLimit")
+                Dim Target As String
+
+                If CDSDataTable.Rows(Me.txtRuleIndex.Text).Item("TargetInrRange") Is Nothing Or CDSDataTable.Rows(Me.txtRuleIndex.Text).Item("TargetInrRange") = "" Then
+                    Target = "[any]"
+                Else
+                    Target = CDSDataTable.Rows(Me.txtRuleIndex.Text).Item("TargetInrRange")
+                End If
+
+                If CDSDataTable.Rows(Me.txtRuleIndex.Text).Item("NotificationOnly") = True Then
+                    Me.btnApply.Enabled = False
+                Else
+                    Me.btnApply.Enabled = True
+                End If
+
+                Me.txtCriteria.Text = "Target = " & Target & " and Reason for Therapy = " & RFT & " and INR " & CDSDataTable.Rows(Me.txtRuleIndex.Text).Item("INRLowerLimit") & " and " & CDSDataTable.Rows(Me.txtRuleIndex.Text).Item("INRUpperLimit")
                 Me.txtSuggestedChange.Text = CDSDataTable.Rows(Me.txtRuleIndex.Text).Item("IncDec")
                 Me.txtPercentageChange.Text = CDSDataTable.Rows(Me.txtRuleIndex.Text).Item("PercentageChange")
                 Me.txtVariance.Text = CDSDataTable.Rows(Me.txtRuleIndex.Text).Item("VarianceAllowed")
                 Me.txtComment.Text = CDSDataTable.Rows(Me.txtRuleIndex.Text).Item("Comment")
+
+                If CDSDataTable.Rows(Me.txtRuleIndex.Text).Item("DoseSkip") Is Nothing Then
+                    Me.txtSkip.Text = 0
+                Else
+                    Me.txtSkip.Text = CDSDataTable.Rows(Me.txtRuleIndex.Text).Item("DoseSkip")
+                End If
 
                 Me.txtCurrentCount.Text += 1
                 Me.btnDecrement.Enabled = True
@@ -1181,8 +1291,10 @@ Public Class FrmCDS
         Dim SelectStringCDS As String
         Dim CDSDataTable As New DataTable
 
-        SelectStringCDS = "Select * FROM tblDosingAlgorithm WHERE ReasonForTherapy = '[any]' or ReasonForTherapy = '' or " & _
-           "ReasonForTherapy is NULL or ReasonForTherapy = '" & Me.txtReason.Text & "' ORDER BY Priority ASC;"
+        SelectStringCDS = "Select * FROM tblDosingAlgorithm WHERE (ReasonForTherapy = '[any]' or ReasonForTherapy = '' or " & _
+           "ReasonForTherapy is NULL or ReasonForTherapy = '" & Me.txtReason.Text & "' or ReasonForTherapy = '" & Me.txtAdditionalReason.Text & _
+           "') and (TargetInrRange = '[any]' or TargetInrRange = '' or TargetInrRange is NULL or RTRIM(LTRIM(TargetInrRange)) = '" & Trim(Me.txtRange.Text) & "') ORDER BY Priority ASC;"
+
 
         Using ConnCDSInfo As New SqlConnection(ConnString)
 
@@ -1278,11 +1390,31 @@ Public Class FrmCDS
                     RFT = CDSDataTable.Rows(Me.txtRuleIndex.Text).Item("ReasonForTherapy")
                 End If
 
-                Me.txtCriteria.Text = "Reason for Therapy = " & RFT & " and INR " & CDSDataTable.Rows(Me.txtRuleIndex.Text).Item("INRLowerLimit") & " and " & CDSDataTable.Rows(Me.txtRuleIndex.Text).Item("INRUpperLimit")
+                Dim Target As String
+
+                If CDSDataTable.Rows(Me.txtRuleIndex.Text).Item("TargetInrRange") Is Nothing Or CDSDataTable.Rows(Me.txtRuleIndex.Text).Item("TargetInrRange") = "" Then
+                    Target = "[any]"
+                Else
+                    Target = CDSDataTable.Rows(Me.txtRuleIndex.Text).Item("TargetInrRange")
+                End If
+
+                If CDSDataTable.Rows(Me.txtRuleIndex.Text).Item("NotificationOnly") = True Then
+                    Me.btnApply.Enabled = False
+                Else
+                    Me.btnApply.Enabled = True
+                End If
+
+                Me.txtCriteria.Text = "Target = " & Target & " and Reason for Therapy = " & RFT & " and INR " & CDSDataTable.Rows(Me.txtRuleIndex.Text).Item("INRLowerLimit") & " and " & CDSDataTable.Rows(Me.txtRuleIndex.Text).Item("INRUpperLimit")
                 Me.txtSuggestedChange.Text = CDSDataTable.Rows(Me.txtRuleIndex.Text).Item("IncDec")
                 Me.txtPercentageChange.Text = CDSDataTable.Rows(Me.txtRuleIndex.Text).Item("PercentageChange")
                 Me.txtVariance.Text = CDSDataTable.Rows(Me.txtRuleIndex.Text).Item("VarianceAllowed")
                 Me.txtComment.Text = CDSDataTable.Rows(Me.txtRuleIndex.Text).Item("Comment")
+
+                If CDSDataTable.Rows(Me.txtRuleIndex.Text).Item("DoseSkip") Is Nothing Then
+                    Me.txtSkip.Text = 0
+                Else
+                    Me.txtSkip.Text = CDSDataTable.Rows(Me.txtRuleIndex.Text).Item("DoseSkip")
+                End If
 
                 Me.txtCurrentCount.Text -= 1
                 Me.BtnIncrement.Enabled = True
@@ -1325,9 +1457,9 @@ Public Class FrmCDS
 
         Dim WholePillSize As Double = Me.txtPillSize.Text.Split(" ")(0)
 
-        If Not ParseWeeklySchedule(WholePillSize, Me.txtNewWeeklyDose.Text, Me.txtVariance.Text) Then
+        If Not ParseWeeklySchedule(WholePillSize, Me.txtNewWeeklyDose.Text, Me.txtVariance.Text, sender, e) Then
 
-         
+
             LightEmUp(Color.White)
 
             Me.txtDailyDoseNew.Text = ""
@@ -1347,7 +1479,7 @@ Public Class FrmCDS
 
                 If Me.txtPillRuleUsed.Text <= 1 Then
                     If WholePillSize <> 10 Then
-                        If ParseWeeklySchedule(10, Me.txtNewWeeklyDose.Text, Me.txtVariance.Text) Then
+                        If ParseWeeklySchedule(10, Me.txtNewWeeklyDose.Text, Me.txtVariance.Text, sender, e) Then
                             Me.txtPillRuleUsed.Text = 1
                             Me.txtPillSizeUsed.Text = "10 mg"
                             Exit Sub
@@ -1357,7 +1489,7 @@ Public Class FrmCDS
 
                 If Me.txtPillRuleUsed.Text <= 2 Then
                     If WholePillSize <> 7.5 Then
-                        If ParseWeeklySchedule(7.5, Me.txtNewWeeklyDose.Text, Me.txtVariance.Text) Then
+                        If ParseWeeklySchedule(7.5, Me.txtNewWeeklyDose.Text, Me.txtVariance.Text, sender, e) Then
                             Me.txtPillRuleUsed.Text = 2
                             Me.txtPillSizeUsed.Text = "7.5 mg"
                             Exit Sub
@@ -1367,7 +1499,7 @@ Public Class FrmCDS
 
                 If Me.txtPillRuleUsed.Text <= 3 Then
                     If WholePillSize <> 5 Then
-                        If ParseWeeklySchedule(5, Me.txtNewWeeklyDose.Text, Me.txtVariance.Text) Then
+                        If ParseWeeklySchedule(5, Me.txtNewWeeklyDose.Text, Me.txtVariance.Text, sender, e) Then
                             Me.txtPillRuleUsed.Text = 3
                             Me.txtPillSizeUsed.Text = "5 mg"
                             Exit Sub
@@ -1377,7 +1509,7 @@ Public Class FrmCDS
 
                 If Me.txtPillRuleUsed.Text <= 4 Then
                     If WholePillSize <> 4 Then
-                        If ParseWeeklySchedule(4, Me.txtNewWeeklyDose.Text, Me.txtVariance.Text) Then
+                        If ParseWeeklySchedule(4, Me.txtNewWeeklyDose.Text, Me.txtVariance.Text, sender, e) Then
                             Me.txtPillRuleUsed.Text = 4
                             Me.txtPillSizeUsed.Text = "4 mg"
                             Exit Sub
@@ -1387,7 +1519,7 @@ Public Class FrmCDS
 
                 If Me.txtPillRuleUsed.Text <= 5 Then
                     If WholePillSize <> 3 Then
-                        If ParseWeeklySchedule(3, Me.txtNewWeeklyDose.Text, Me.txtVariance.Text) Then
+                        If ParseWeeklySchedule(3, Me.txtNewWeeklyDose.Text, Me.txtVariance.Text, sender, e) Then
                             Me.txtPillRuleUsed.Text = 5
                             Me.txtPillSizeUsed.Text = "3 mg"
                             Exit Sub
@@ -1397,7 +1529,7 @@ Public Class FrmCDS
 
                 If Me.txtPillRuleUsed.Text <= 6 Then
                     If WholePillSize <> 2.5 Then
-                        If ParseWeeklySchedule(2.5, Me.txtNewWeeklyDose.Text, Me.txtVariance.Text) Then
+                        If ParseWeeklySchedule(2.5, Me.txtNewWeeklyDose.Text, Me.txtVariance.Text, sender, e) Then
                             Me.txtPillRuleUsed.Text = 6
                             Me.txtPillSizeUsed.Text = "2.5 mg"
                             Exit Sub
@@ -1407,7 +1539,7 @@ Public Class FrmCDS
 
                 If Me.txtPillRuleUsed.Text <= 7 Then
                     If WholePillSize <> 2 Then
-                        If ParseWeeklySchedule(2, Me.txtNewWeeklyDose.Text, Me.txtVariance.Text) Then
+                        If ParseWeeklySchedule(2, Me.txtNewWeeklyDose.Text, Me.txtVariance.Text, sender, e) Then
                             Me.txtPillRuleUsed.Text = 7
                             Me.txtPillSizeUsed.Text = "2 mg"
                             Exit Sub
@@ -1417,7 +1549,7 @@ Public Class FrmCDS
 
                 If Me.txtPillRuleUsed.Text <= 8 Then
                     If WholePillSize <> 1 Then
-                        If ParseWeeklySchedule(1, Me.txtNewWeeklyDose.Text, Me.txtVariance.Text) Then
+                        If ParseWeeklySchedule(1, Me.txtNewWeeklyDose.Text, Me.txtVariance.Text, sender, e) Then
                             Me.txtPillRuleUsed.Text = 8
                             Me.txtPillSizeUsed.Text = "1 mg"
                             Exit Sub
@@ -1483,6 +1615,7 @@ Public Class FrmCDS
             Me.txtDifference.Text = "Variance from Recommended Dose: " & Format(Convert.ToDouble(Me.txtDifference.Text), "F3")
         End If
 
+        Me.txtNewInstructions.Text = ""
 
     End Sub
 
@@ -1504,6 +1637,7 @@ Public Class FrmCDS
         Me.txtPillSizeUsed.Text = ""
         Me.txtDifference.Text = ""
         Me.txtDifference.Visible = False
+        Me.txtNewInstructions.Text = ""
         LightEmUp(Color.White)
 
     End Sub
@@ -1519,7 +1653,15 @@ Public Class FrmCDS
             Exit Sub
         End If
 
-        If Math.Abs(CDbl(Me.txtNewDoseCalculation.Text) - CDbl(Me.txtNewWeeklyDose.Text)) >= CDbl(Me.txtVariance.Text) Then
+        If Me.txtNewWeeklyDose.Text = "" Or Me.txtNewWeeklyDose.Text Is Nothing Then
+            Me.txtNewWeeklyDose.Text = 0
+        End If
+
+        If Me.txtVariance.Text = "" Or Me.txtVariance.Text Is Nothing Then
+            Me.txtVariance.Text = 0
+        End If
+
+        If Math.Abs(CDbl(Me.txtNewDoseCalculation.Text) - CDbl(Me.txtNewWeeklyDose.Text)) > CDbl(Me.txtVariance.Text) Then
             Me.txtNewDoseCalculation.BackColor = Color.Red
             Me.txtNewWeeklyDose.BackColor = Color.Red
         Else
@@ -1542,7 +1684,7 @@ Public Class FrmCDS
 
         'indicates patient's pill size was used to create current schedule
         If Me.txtPillRuleUsed.Text <= 0 Then
-            If ParseWeeklySchedule(WholePillSize, Me.txtNewWeeklyDose.Text, Me.txtVariance.Text) Then
+            If ParseWeeklySchedule(WholePillSize, Me.txtNewWeeklyDose.Text, Me.txtVariance.Text, sender, e) Then
                 Me.txtPillRuleUsed.Text = 0
                 Me.txtPillSizeUsed.Text = Me.txtPillSize.Text
                 Exit Sub
@@ -1556,7 +1698,7 @@ Public Class FrmCDS
 
             If Me.txtPillRuleUsed.Text <= 1 Then
                 If WholePillSize <> 10 Then
-                    If ParseWeeklySchedule(10, Me.txtNewWeeklyDose.Text, Me.txtVariance.Text) Then
+                    If ParseWeeklySchedule(10, Me.txtNewWeeklyDose.Text, Me.txtVariance.Text, sender, e) Then
                         Me.txtPillRuleUsed.Text = 1
                         Me.txtPillSizeUsed.Text = "10 mg"
                         Exit Sub
@@ -1566,7 +1708,7 @@ Public Class FrmCDS
 
             If Me.txtPillRuleUsed.Text <= 2 Then
                 If WholePillSize <> 7.5 Then
-                    If ParseWeeklySchedule(7.5, Me.txtNewWeeklyDose.Text, Me.txtVariance.Text) Then
+                    If ParseWeeklySchedule(7.5, Me.txtNewWeeklyDose.Text, Me.txtVariance.Text, sender, e) Then
                         Me.txtPillRuleUsed.Text = 2
                         Me.txtPillSizeUsed.Text = "7.5 mg"
                         Exit Sub
@@ -1576,7 +1718,7 @@ Public Class FrmCDS
 
             If Me.txtPillRuleUsed.Text <= 3 Then
                 If WholePillSize <> 5 Then
-                    If ParseWeeklySchedule(5, Me.txtNewWeeklyDose.Text, Me.txtVariance.Text) Then
+                    If ParseWeeklySchedule(5, Me.txtNewWeeklyDose.Text, Me.txtVariance.Text, sender, e) Then
                         Me.txtPillRuleUsed.Text = 3
                         Me.txtPillSizeUsed.Text = "5 mg"
                         Exit Sub
@@ -1586,7 +1728,7 @@ Public Class FrmCDS
 
             If Me.txtPillRuleUsed.Text <= 4 Then
                 If WholePillSize <> 4 Then
-                    If ParseWeeklySchedule(4, Me.txtNewWeeklyDose.Text, Me.txtVariance.Text) Then
+                    If ParseWeeklySchedule(4, Me.txtNewWeeklyDose.Text, Me.txtVariance.Text, sender, e) Then
                         Me.txtPillRuleUsed.Text = 4
                         Me.txtPillSizeUsed.Text = "4 mg"
                         Exit Sub
@@ -1596,7 +1738,7 @@ Public Class FrmCDS
 
             If Me.txtPillRuleUsed.Text <= 5 Then
                 If WholePillSize <> 3 Then
-                    If ParseWeeklySchedule(3, Me.txtNewWeeklyDose.Text, Me.txtVariance.Text) Then
+                    If ParseWeeklySchedule(3, Me.txtNewWeeklyDose.Text, Me.txtVariance.Text, sender, e) Then
                         Me.txtPillRuleUsed.Text = 5
                         Me.txtPillSizeUsed.Text = "3 mg"
                         Exit Sub
@@ -1606,7 +1748,7 @@ Public Class FrmCDS
 
             If Me.txtPillRuleUsed.Text <= 6 Then
                 If WholePillSize <> 2.5 Then
-                    If ParseWeeklySchedule(2.5, Me.txtNewWeeklyDose.Text, Me.txtVariance.Text) Then
+                    If ParseWeeklySchedule(2.5, Me.txtNewWeeklyDose.Text, Me.txtVariance.Text, sender, e) Then
                         Me.txtPillRuleUsed.Text = 6
                         Me.txtPillSizeUsed.Text = "2.5 mg"
                         Exit Sub
@@ -1616,7 +1758,7 @@ Public Class FrmCDS
 
             If Me.txtPillRuleUsed.Text <= 7 Then
                 If WholePillSize <> 2 Then
-                    If ParseWeeklySchedule(2, Me.txtNewWeeklyDose.Text, Me.txtVariance.Text) Then
+                    If ParseWeeklySchedule(2, Me.txtNewWeeklyDose.Text, Me.txtVariance.Text, sender, e) Then
                         Me.txtPillRuleUsed.Text = 7
                         Me.txtPillSizeUsed.Text = "2 mg"
                         Exit Sub
@@ -1626,7 +1768,7 @@ Public Class FrmCDS
 
             If Me.txtPillRuleUsed.Text <= 8 Then
                 If WholePillSize <> 1 Then
-                    If ParseWeeklySchedule(1, Me.txtNewWeeklyDose.Text, Me.txtVariance.Text) Then
+                    If ParseWeeklySchedule(1, Me.txtNewWeeklyDose.Text, Me.txtVariance.Text, sender, e) Then
                         Me.txtPillRuleUsed.Text = 8
                         Me.txtPillSizeUsed.Text = "1 mg"
                         Exit Sub
@@ -1657,5 +1799,143 @@ Public Class FrmCDS
 
     End Sub
 
- 
+    Private Function isNotValid(phrase As String) As Boolean
+        If phrase IsNot Nothing And IsNumeric(phrase) Then
+            Return False
+        End If
+
+        Return True
+
+    End Function
+
+    Private Function areDaysEqual(day1 As String, day2 As String, day3 As String, day4 As String, day5 As String, day6 As String, day7 As String) As Boolean
+        If day1 = day2 And day2 = day3 And day3 = day4 And day4 = day5 And day5 = day6 And day6 = day7 Then
+            Return True
+        End If
+
+        Return False
+
+    End Function
+
+    Private Function areDaysAlternating(day1 As String, day2 As String, day3 As String, day4 As String, day5 As String, day6 As String, day7 As String) As Boolean
+        If day1 <> day2 And day1 = day3 And day1 = day5 And day1 = day7 And day2 = day4 And day2 = day6 Then
+            Return True
+        End If
+
+        Return False
+
+    End Function
+
+    Private Sub btnTranslate_Click(sender As System.Object, e As System.EventArgs) Handles btnTranslate.Click
+        Dim newInstructions As String
+        Dim day1 = Me.txtSunNew.Text
+        Dim day2 = Me.txtMonNew.Text
+        Dim day3 = Me.txtTuesNew.Text
+        Dim day4 = Me.txtWedNew.Text
+        Dim day5 = Me.txtThursNew.Text
+        Dim day6 = Me.txtFriNew.Text
+        Dim day7 = Me.txtSatNew.Text
+
+        If isNotValid(day1) Or isNotValid(day2) Or isNotValid(day3) Or isNotValid(day4) Or isNotValid(day5) Or isNotValid(day6) Or isNotValid(day7) Then
+            MsgBox("Unable to translate to English instructions.  Please make sure all seven days are filled in with numeric values.", vbOK, "Unable to translate.")
+            Exit Sub
+        End If
+
+        If IsNumeric(Me.txtSkipDoses.Text) And Me.txtSkipDoses.Text <> "0" Then
+            newInstructions = "Skip " & Me.txtSkipDoses.Text & " dose(s), then: "
+        End If
+
+        If areDaysEqual(day1, day2, day3, day4, day5, day6, day7) Then
+            newInstructions = newInstructions + "Take " + day1 + " mg daily"
+        ElseIf areDaysAlternating(day1, day2, day3, day4, day5, day6, day7) Then
+            newInstructions = newInstructions + "Alternate taking " + day1 + " mg and " + day2 + " mg daily"
+        Else
+            newInstructions = newInstructions + "Day 1: " + day1 + " mg.  Day 2: " + day2 + " mg.  Day 3: " + day3 + " mg.  Day 4: " + day4 + " mg.  Day 5: " + day5 + " mg.  Day 6: " + day6 + " mg.  Day 7: " + day7 + " mg."
+        End If
+
+        If newInstructions IsNot Nothing Then
+            Me.txtNewInstructions.Text = newInstructions
+        End If
+
+
+
+    End Sub
+
+
+    Private Sub txtSkipDoses_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtSkipDoses.TextChanged
+
+        Dim day1 = Me.txtSunNew.Text
+        Dim day2 = Me.txtMonNew.Text
+        Dim day3 = Me.txtTuesNew.Text
+        Dim day4 = Me.txtWedNew.Text
+        Dim day5 = Me.txtThursNew.Text
+        Dim day6 = Me.txtFriNew.Text
+        Dim day7 = Me.txtSatNew.Text
+
+        If isNotValid(day1) Or isNotValid(day2) Or isNotValid(day3) Or isNotValid(day4) Or isNotValid(day5) Or isNotValid(day6) Or isNotValid(day7) Then
+            Me.txtNewInstructions.Text = ""
+        Else
+            Me.btnTranslate_Click(sender, e)
+        End If
+
+    End Sub
+
+    Private Sub txtTuesNew_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtTuesNew.TextChanged
+
+        If isNotValid(Me.txtTuesNew.Text) Then
+            Me.txtTuesNew.Text = 0
+        End If
+
+    End Sub
+
+    Private Sub txtSunNew_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtSunNew.TextChanged
+
+        If isNotValid(Me.txtSunNew.Text) Then
+            Me.txtSunNew.Text = 0
+        End If
+
+    End Sub
+
+    Private Sub txtMonNew_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtMonNew.TextChanged
+
+        If isNotValid(Me.txtMonNew.Text) Then
+            Me.txtMonNew.Text = 0
+        End If
+
+    End Sub
+
+
+    Private Sub txtWedNew_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtWedNew.TextChanged
+
+        If isNotValid(Me.txtWedNew.Text) Then
+            Me.txtWedNew.Text = 0
+        End If
+
+    End Sub
+
+
+    Private Sub txtThursNew_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtThursNew.TextChanged
+
+        If isNotValid(Me.txtThursNew.Text) Then
+            Me.txtThursNew.Text = 0
+        End If
+
+    End Sub
+
+    Private Sub txtFriNew_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtFriNew.TextChanged
+
+        If isNotValid(Me.txtFriNew.Text) Then
+            Me.txtFriNew.Text = 0
+        End If
+
+    End Sub
+
+    Private Sub txtSatNew_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtSatNew.TextChanged
+
+        If isNotValid(Me.txtSatNew.Text) Then
+            Me.txtSatNew.Text = 0
+        End If
+
+    End Sub
+
 End Class

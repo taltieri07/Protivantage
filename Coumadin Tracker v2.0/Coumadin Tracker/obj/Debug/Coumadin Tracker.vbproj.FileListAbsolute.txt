@@ -86,3 +86,18 @@ C:\Coumadin Tracker v2.0\Coumadin Tracker\obj\Debug\Protivantage.exe
 C:\Coumadin Tracker v2.0\Coumadin Tracker\obj\Debug\Protivantage.xml
 C:\Coumadin Tracker v2.0\Coumadin Tracker\obj\Debug\Protivantage.pdb
 C:\Coumadin Tracker v2.0\Coumadin Tracker\obj\Debug\Coumadin_Tracker.FrmCDSRules.resources
+C:\dev\src\git\Protivantage\Protivantage\Coumadin Tracker v2.0\Coumadin Tracker\bin\Debug\Protivantage.exe.config
+C:\dev\src\git\Protivantage\Protivantage\Coumadin Tracker v2.0\Coumadin Tracker\bin\Debug\Protivantage.exe
+C:\dev\src\git\Protivantage\Protivantage\Coumadin Tracker v2.0\Coumadin Tracker\bin\Debug\Protivantage.pdb
+C:\dev\src\git\Protivantage\Protivantage\Coumadin Tracker v2.0\Coumadin Tracker\bin\Debug\Protivantage.xml
+C:\dev\src\git\Protivantage\Protivantage\Coumadin Tracker v2.0\Coumadin Tracker\obj\Debug\Coumadin_Tracker.FrmCDS.resources
+C:\dev\src\git\Protivantage\Protivantage\Coumadin Tracker v2.0\Coumadin Tracker\obj\Debug\Coumadin_Tracker.FrmCDSRules.resources
+C:\dev\src\git\Protivantage\Protivantage\Coumadin Tracker v2.0\Coumadin Tracker\obj\Debug\Coumadin_Tracker.FrmNoSSO.resources
+C:\dev\src\git\Protivantage\Protivantage\Coumadin Tracker v2.0\Coumadin Tracker\obj\Debug\Coumadin_Tracker.FrmTherapyDetailEdit.resources
+C:\dev\src\git\Protivantage\Protivantage\Coumadin Tracker v2.0\Coumadin Tracker\obj\Debug\Coumadin_Tracker.FrmUserSettings.resources
+C:\dev\src\git\Protivantage\Protivantage\Coumadin Tracker v2.0\Coumadin Tracker\obj\Debug\Coumadin_Tracker.FrmTrackerMain.resources
+C:\dev\src\git\Protivantage\Protivantage\Coumadin Tracker v2.0\Coumadin Tracker\obj\Debug\Coumadin_Tracker.Resources.resources
+C:\dev\src\git\Protivantage\Protivantage\Coumadin Tracker v2.0\Coumadin Tracker\obj\Debug\Coumadin Tracker.vbproj.GenerateResource.Cache
+C:\dev\src\git\Protivantage\Protivantage\Coumadin Tracker v2.0\Coumadin Tracker\obj\Debug\Protivantage.exe
+C:\dev\src\git\Protivantage\Protivantage\Coumadin Tracker v2.0\Coumadin Tracker\obj\Debug\Protivantage.xml
+C:\dev\src\git\Protivantage\Protivantage\Coumadin Tracker v2.0\Coumadin Tracker\obj\Debug\Protivantage.pdb

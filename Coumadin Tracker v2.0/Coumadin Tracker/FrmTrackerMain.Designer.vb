@@ -36,7 +36,6 @@ Partial Class FrmTrackerMain
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtInstructions = New System.Windows.Forms.TextBox()
         Me.Btn8Wk = New System.Windows.Forms.Button()
-        Me.Btn6Wk = New System.Windows.Forms.Button()
         Me.BtnSameDose = New System.Windows.Forms.Button()
         Me.txtCurDosageInstructions = New System.Windows.Forms.TextBox()
         Me.txtPrevious = New System.Windows.Forms.Label()
@@ -116,6 +115,7 @@ Partial Class FrmTrackerMain
         Me.InactivityTimer = New System.Windows.Forms.Timer(Me.components)
         Me.lblDaysAway = New System.Windows.Forms.Label()
         Me.btnCDS = New System.Windows.Forms.Button()
+        Me.Btn12Wk = New System.Windows.Forms.Button()
         CType(Me.txtNotifyInterval, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -229,23 +229,12 @@ Partial Class FrmTrackerMain
         '
         Me.Btn8Wk.BackColor = System.Drawing.SystemColors.InactiveCaption
         Me.Btn8Wk.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
-        Me.Btn8Wk.Location = New System.Drawing.Point(206, 335)
+        Me.Btn8Wk.Location = New System.Drawing.Point(166, 335)
         Me.Btn8Wk.Name = "Btn8Wk"
         Me.Btn8Wk.Size = New System.Drawing.Size(36, 21)
-        Me.Btn8Wk.TabIndex = 7
+        Me.Btn8Wk.TabIndex = 6
         Me.Btn8Wk.Text = "+&8W"
         Me.Btn8Wk.UseVisualStyleBackColor = False
-        '
-        'Btn6Wk
-        '
-        Me.Btn6Wk.BackColor = System.Drawing.SystemColors.InactiveCaption
-        Me.Btn6Wk.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
-        Me.Btn6Wk.Location = New System.Drawing.Point(167, 335)
-        Me.Btn6Wk.Name = "Btn6Wk"
-        Me.Btn6Wk.Size = New System.Drawing.Size(36, 21)
-        Me.Btn6Wk.TabIndex = 6
-        Me.Btn6Wk.Text = "+&6W"
-        Me.Btn6Wk.UseVisualStyleBackColor = False
         '
         'BtnSameDose
         '
@@ -933,10 +922,10 @@ Partial Class FrmTrackerMain
         '
         Me.txtMyInterval1.BackColor = System.Drawing.SystemColors.Control
         Me.txtMyInterval1.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtMyInterval1.Font = New System.Drawing.Font("Bernard MT Condensed", 9.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtMyInterval1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtMyInterval1.Location = New System.Drawing.Point(96, 366)
         Me.txtMyInterval1.Name = "txtMyInterval1"
-        Me.txtMyInterval1.Size = New System.Drawing.Size(18, 15)
+        Me.txtMyInterval1.Size = New System.Drawing.Size(18, 14)
         Me.txtMyInterval1.TabIndex = 52
         Me.txtMyInterval1.TabStop = False
         Me.txtMyInterval1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -945,29 +934,29 @@ Partial Class FrmTrackerMain
         '
         Me.txtMyInterval2.BackColor = System.Drawing.SystemColors.Control
         Me.txtMyInterval2.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtMyInterval2.Font = New System.Drawing.Font("Bernard MT Condensed", 9.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtMyInterval2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtMyInterval2.Location = New System.Drawing.Point(212, 366)
         Me.txtMyInterval2.Name = "txtMyInterval2"
-        Me.txtMyInterval2.Size = New System.Drawing.Size(18, 15)
+        Me.txtMyInterval2.Size = New System.Drawing.Size(18, 14)
         Me.txtMyInterval2.TabIndex = 53
         Me.txtMyInterval2.TabStop = False
         Me.txtMyInterval2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label18
         '
-        Me.Label18.Font = New System.Drawing.Font("Bernard MT Condensed", 9.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label18.Location = New System.Drawing.Point(114, 366)
         Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(9, 13)
+        Me.Label18.Size = New System.Drawing.Size(11, 13)
         Me.Label18.TabIndex = 54
         Me.Label18.Text = "d"
         '
         'Label19
         '
-        Me.Label19.Font = New System.Drawing.Font("Bernard MT Condensed", 9.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label19.Location = New System.Drawing.Point(230, 366)
         Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(9, 13)
+        Me.Label19.Size = New System.Drawing.Size(12, 13)
         Me.Label19.TabIndex = 55
         Me.Label19.Text = "d"
         '
@@ -1009,7 +998,7 @@ Partial Class FrmTrackerMain
         '
         'lblDaysAway
         '
-        Me.lblDaysAway.Font = New System.Drawing.Font("Agency FB", 10.0!)
+        Me.lblDaysAway.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
         Me.lblDaysAway.Location = New System.Drawing.Point(182, 310)
         Me.lblDaysAway.Name = "lblDaysAway"
         Me.lblDaysAway.Size = New System.Drawing.Size(79, 20)
@@ -1028,12 +1017,24 @@ Partial Class FrmTrackerMain
         Me.btnCDS.Text = "C&DS"
         Me.btnCDS.UseVisualStyleBackColor = False
         '
+        'Btn12Wk
+        '
+        Me.Btn12Wk.BackColor = System.Drawing.SystemColors.InactiveCaption
+        Me.Btn12Wk.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
+        Me.Btn12Wk.Location = New System.Drawing.Point(206, 335)
+        Me.Btn12Wk.Name = "Btn12Wk"
+        Me.Btn12Wk.Size = New System.Drawing.Size(38, 21)
+        Me.Btn12Wk.TabIndex = 7
+        Me.Btn12Wk.Text = "+12&W"
+        Me.Btn12Wk.UseVisualStyleBackColor = False
+        '
         'FrmTrackerMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1046, 595)
         Me.ControlBox = False
+        Me.Controls.Add(Me.Btn12Wk)
         Me.Controls.Add(Me.btnCDS)
         Me.Controls.Add(Me.lblDaysAway)
         Me.Controls.Add(Me.lnkEditDetails)
@@ -1073,7 +1074,6 @@ Partial Class FrmTrackerMain
         Me.Controls.Add(Me.txtPrevious)
         Me.Controls.Add(Me.BtnSameDose)
         Me.Controls.Add(Me.Btn8Wk)
-        Me.Controls.Add(Me.Btn6Wk)
         Me.Controls.Add(Me.txtInstructions)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Btn4Wk)
@@ -1115,7 +1115,6 @@ Partial Class FrmTrackerMain
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents txtInstructions As System.Windows.Forms.TextBox
     Friend WithEvents Btn8Wk As System.Windows.Forms.Button
-    Friend WithEvents Btn6Wk As System.Windows.Forms.Button
     Friend WithEvents BtnSameDose As System.Windows.Forms.Button
     Friend WithEvents txtCurDosageInstructions As System.Windows.Forms.TextBox
     Friend WithEvents txtPrevious As System.Windows.Forms.Label
@@ -1195,5 +1194,6 @@ Partial Class FrmTrackerMain
     Friend WithEvents txtMaskedSSN As System.Windows.Forms.MaskedTextBox
     Friend WithEvents lblDaysAway As System.Windows.Forms.Label
     Friend WithEvents btnCDS As System.Windows.Forms.Button
+    Friend WithEvents Btn12Wk As System.Windows.Forms.Button
 
 End Class

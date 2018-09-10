@@ -37,11 +37,12 @@ Partial Class FrmCDSRules
         Me.RuleDatagrid.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders
         Me.RuleDatagrid.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
         Me.RuleDatagrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.RuleDatagrid.Location = New System.Drawing.Point(21, 35)
+        Me.RuleDatagrid.Location = New System.Drawing.Point(28, 43)
+        Me.RuleDatagrid.Margin = New System.Windows.Forms.Padding(4)
         Me.RuleDatagrid.Name = "RuleDatagrid"
         Me.RuleDatagrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
         Me.RuleDatagrid.ShowEditingIcon = False
-        Me.RuleDatagrid.Size = New System.Drawing.Size(951, 225)
+        Me.RuleDatagrid.Size = New System.Drawing.Size(1563, 277)
         Me.RuleDatagrid.TabIndex = 124
         '
         'lblExisting
@@ -49,30 +50,33 @@ Partial Class FrmCDSRules
         Me.lblExisting.AutoSize = True
         Me.lblExisting.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblExisting.ForeColor = System.Drawing.Color.Indigo
-        Me.lblExisting.Location = New System.Drawing.Point(14, 11)
+        Me.lblExisting.Location = New System.Drawing.Point(19, 14)
+        Me.lblExisting.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblExisting.Name = "lblExisting"
-        Me.lblExisting.Size = New System.Drawing.Size(120, 18)
+        Me.lblExisting.Size = New System.Drawing.Size(144, 22)
         Me.lblExisting.TabIndex = 123
         Me.lblExisting.Text = "Existing Rules:"
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(855, 284)
+        Me.btnClose.Location = New System.Drawing.Point(1435, 342)
+        Me.btnClose.Margin = New System.Windows.Forms.Padding(4)
         Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(117, 23)
+        Me.btnClose.Size = New System.Drawing.Size(156, 28)
         Me.btnClose.TabIndex = 125
         Me.btnClose.Text = "&Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
         'FrmCDSRules
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(990, 319)
+        Me.ClientSize = New System.Drawing.Size(1617, 393)
         Me.ControlBox = False
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.RuleDatagrid)
         Me.Controls.Add(Me.lblExisting)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "FrmCDSRules"

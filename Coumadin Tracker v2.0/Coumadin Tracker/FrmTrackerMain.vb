@@ -1,6 +1,7 @@
 ﻿Imports System.Data.SqlClient
 Imports System.Xml
 Imports System.Configuration
+Imports System.Text
 
 Public Class FrmTrackerMain
     Implements IMessageFilter
@@ -297,16 +298,6 @@ Public Class FrmTrackerMain
             Me.dtNextINR.Value = DateAdd(DateInterval.Day, 28, Today)
         Else
             Me.dtNextINR.Value = DateAdd(DateInterval.Day, 28, Me.dtNextINR.Value)
-        End If
-
-    End Sub
-
-    Private Sub Btn6Wk_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Btn6Wk.Click
-
-        If Me.dtNextINR Is Nothing Then
-            Me.dtNextINR.Value = DateAdd(DateInterval.Day, 42, Today)
-        Else
-            Me.dtNextINR.Value = DateAdd(DateInterval.Day, 42, Me.dtNextINR.Value)
         End If
 
     End Sub
@@ -856,16 +847,30 @@ Public Class FrmTrackerMain
                 Exit Sub
             End Try
 
-            Dim NoteContent As String = "Instructions for Current Dose: " & Me.txtInstructions.Text & vbCrLf & _
-            "Patient should get their next PT/INR on " & Me.dtNextINR.Value & vbCrLf & vbCrLf & _
-            "Comments: " & Me.txtComments.Text & vbCrLf & _
-            "Previous Patient Instructions: " & Me.txtCurDosageInstructions.Text & vbCrLf & _
-            "Task Owner: " & Me.cmbTaskOwner.SelectedValue & vbCrLf & _
-            "Anticoagulation Managed By: " & Me.cmbManagedBy.SelectedValue & vbCrLf & vbCrLf & vbCrLf & _
-            "Patient Notified: "
+            'Dim NoteContent As String = "Instructions for Current Dose: " & Me.txtInstructions.Text & vbCrLf & _
+            '"Patient should get their next PT/INR on " & Me.dtNextINR.Value & vbCrLf & vbCrLf & _
+            '"Comments: " & Me.txtComments.Text & vbCrLf & _
+            '"Previous Patient Instructions: " & Me.txtCurDosageInstructions.Text & vbCrLf & _
+            '"Task Owner: " & Me.cmbTaskOwner.SelectedValue & vbCrLf & _
+            '"Anticoagulation Managed By: " & Me.cmbManagedBy.SelectedValue & vbCrLf & vbCrLf & vbCrLf & _
+            '"Patient Notified: "
             '********************use string.format for the above
 
-            Dim MyNoteDS As DataSet = unitySvc.Magic("SaveNote", twusername, appName, PatID, MyToken, NoteContent, NoteType, "Final", "N", "", "", Nothing)
+            Dim NoteBuilder As New StringBuilder
+
+            NoteBuilder.Append("{\rtf1\ansi\deff0 {\fonttbl {\f0 Times New Roman;}}")
+            NoteBuilder.Append("\pard \ql \fs34 \b \ul Instructions for Current Dose:\ul0  ").Append(Me.txtInstructions.Text).Append(" \line")
+            NoteBuilder.Append("\fs30 Patient should get their next PT/INR on ").Append(Me.dtNextINR.Value.ToString("MM'/'dd'/'yyyy")).Append(" \line \line ")
+            NoteBuilder.Append("\fs26 \ul Comments:\ul0 \b0  ").Append(Me.txtComments.Text).Append(" \line \line \par ")
+            NoteBuilder.Append("\pard \qc \fs56 \b *   *   *   *   *   *   *   *   *   *   * \line \b0 \par ")
+            NoteBuilder.Append("\pard \ql \fs26 \i Previous \i0 Patient Instructions: ").Append(Me.txtCurDosageInstructions.Text).Append(" \line ")
+            NoteBuilder.Append("Task Owner: ").Append(Me.cmbTaskOwner.SelectedValue).Append(" \line ")
+            NoteBuilder.Append("Anticoagulation Managed By: ").Append(Me.cmbManagedBy.SelectedValue).Append(" \line \line \line Patient Notified: \line \par ")
+
+            Dim NoteContent As String = NoteBuilder.ToString
+
+
+            Dim MyNoteDS As DataSet = unitySvc.Magic("SaveNote", twusername, appName, PatID, MyToken, NoteContent, NoteType, "Final", "Y", "", "", Nothing)
             NoteID = MyNoteDS.Tables(0).Rows(0)("DocumentID")
 
             ConnSettingsInfo.Close()
@@ -1091,6 +1096,27 @@ Public Class FrmTrackerMain
     End Sub
 
     Private Sub btnCDS_Click(sender As System.Object, e As System.EventArgs) Handles btnCDS.Click
+        Dim IntCount As Integer
+        Dim ConnThpInfo As SqlConnection
+
+        Dim settings As ConnectionStringSettings = ConfigurationManager.ConnectionStrings("PVConnString")
+
+        ' If found, return the connection string.
+        If Not settings Is Nothing Then
+            ConnString = settings.ConnectionString
+        End If
+
+        ConnThpInfo = New SqlConnection(ConnString)     ' Creates connection
+        ConnThpInfo.Open()
+
+        SelectString = "Select Count(*) as returncount FROM tblTherapy WHERE PatientID = " & PatID
+        MyCommand = New SqlCommand(SelectString, ConnThpInfo)
+        IntCount = MyCommand.ExecuteScalar
+
+        If IntCount = 0 Then
+            MsgBox("Record must be saved before accessing Clinical Decision Support Module.")
+            Exit Sub
+        End If
 
         Dim oForm As FrmCDS
 
@@ -1101,6 +1127,19 @@ Public Class FrmTrackerMain
         Me.Hide()
 
     End Sub
+
+
+    Private Sub Btn12Wk_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Btn12Wk.Click
+
+        If Me.dtNextINR Is Nothing Then
+            Me.dtNextINR.Value = DateAdd(DateInterval.Day, 84, Today)
+        Else
+            Me.dtNextINR.Value = DateAdd(DateInterval.Day, 84, Me.dtNextINR.Value)
+        End If
+
+    End Sub
+
+
 
 
 End Class
