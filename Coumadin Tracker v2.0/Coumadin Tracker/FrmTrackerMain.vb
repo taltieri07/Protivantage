@@ -331,6 +331,7 @@ Public Class FrmTrackerMain
         Inactivity = 0
 
         Dim CoumadinFlowsheet As String
+        Dim OrgINRCode As String
         Dim ConnThpInfo As SqlConnection
 
         '****Commented out to disable encryption unless executable is run outside of TouchWorks
@@ -427,6 +428,10 @@ Public Class FrmTrackerMain
             If Not IsDBNull(drSettingsInfo("FlowsheetName")) Then
                 CoumadinFlowsheet = drSettingsInfo("FlowsheetName")
             End If
+
+            If Not IsDBNull(drSettingsInfo("INRCode")) Then
+                OrgINRCode = drSettingsInfo("INRCode".TrimEnd)
+            End If
         End While
 
         Dim MyFlowsheetDS As DataSet = unitySvc.Magic("GetFlowsheetDatapoints", twusername, appName, PatID, MyToken, CoumadinFlowsheet, "", "", "", "", "", Nothing)
@@ -434,6 +439,10 @@ Public Class FrmTrackerMain
         'populate patient results from MyDS
         Dim tblResults As DataTable = MyFlowsheetDS.Tables(0)
         Dim myResultView As DataView = New DataView(tblResults)
+
+
+        Dim INRresult() As DataRow = tblResults.Select("resultname = '" & OrgINRCode & "'", "resultdate DESC")
+        Me.txtMostRecentINR = INRresult(0).Item("resultvalue")
 
         myResultView.Sort = "resultdate DESC, resultname DESC"
 
@@ -504,6 +513,10 @@ Public Class FrmTrackerMain
 
             If Not IsDBNull(drThpInfo("PillSizeAtHome")) Then
                 Me.cmbPillSize.Text = drThpInfo("PillSizeAtHome")
+            End If
+
+            If Not IsDBNull(drThpInfo("AdditionalPillSizeAtHome")) Then
+                Me.cmbPillSize2.Text = drThpInfo("AdditionalPillSizeAtHome")
             End If
 
             If Not IsDBNull(drThpInfo("INRRange")) Then
@@ -795,8 +808,8 @@ Public Class FrmTrackerMain
 
         MyCommand.Connection = ConnThpInfo
 
-        MyCommand.CommandText = "INSERT INTO tblTherapyDetails([PatientID], [NextINR], [Instructions], [EvaluationDate], [EnteredBy], [TaskOwner], [EnteredDTTM]) VALUES (" & _
-        PatID & ", @pNextINR, @pInstructions, @pEvaluationDate, " & UserID & ", @pTaskOwner, GetDate());"
+        MyCommand.CommandText = "INSERT INTO tblTherapyDetails([PatientID], [NextINR], [Instructions], [EvaluationDate], [EnteredBy], [TaskOwner], [EnteredDTTM], [MostRecentInr], [InRange], [TargetRange]) VALUES (" & _
+        PatID & ", @pNextINR, @pInstructions, @pEvaluationDate, " & UserID & ", @pTaskOwner, GetDate(), @pMostRecentInr, @pInRange, @pTargetRange);"
 
         MyCommand.Parameters.AddWithValue("@pNextINR", Me.dtNextINR.Value)
         MyCommand.Parameters.AddWithValue("@pInstructions", Me.txtInstructions.Text)
@@ -805,6 +818,12 @@ Public Class FrmTrackerMain
 
         MyCommand.Parameters.AddWithValue("@pEvaluationDate", ThpEvalDate)
         MyCommand.Parameters.AddWithValue("@pTaskOwner", Me.cmbTaskOwner.SelectedValue)
+
+        Dim IsInRange As Boolean = Me.IsInRange(Me.txtMostRecentINR.Text, Me.cmbINRRange.SelectedValue)
+
+        MyCommand.Parameters.AddWithValue("@pMostRecentInr", Me.txtMostRecentINR.Text)
+        MyCommand.Parameters.AddWithValue("@pInRange", IsInRange)
+        MyCommand.Parameters.AddWithValue("@pTargetRange", Me.cmbINRRange.SelectedValue)
 
         MyCommand.ExecuteNonQuery()
 
@@ -965,6 +984,21 @@ Public Class FrmTrackerMain
         Me.Close()
 
     End Sub
+
+    Public Function IsInRange(ByVal inr As Double, ByVal target As String) As Boolean
+        target = target.Replace(" ", "")
+        Dim Bounds = target.Split("-")
+        Dim LowerBounds = CDbl(Bounds(0))
+        Dim UpperBounds = CDbl(Bounds(1))
+
+        If inr <= UpperBounds And inr >= LowerBounds Then
+            Return True
+        Else
+            Return False
+        End If
+
+
+    End Function
 
     Private Sub dtNextINR_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles dtNextINR.ValueChanged
 
@@ -1138,9 +1172,6 @@ Public Class FrmTrackerMain
         End If
 
     End Sub
-
-
-
 
 End Class
 
