@@ -24,8 +24,8 @@ Partial Class FrmTrackerMain
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmTrackerMain))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.BtnVerifySend = New System.Windows.Forms.Button()
         Me.dtNextINR = New System.Windows.Forms.DateTimePicker()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -116,6 +116,10 @@ Partial Class FrmTrackerMain
         Me.lblDaysAway = New System.Windows.Forms.Label()
         Me.btnCDS = New System.Windows.Forms.Button()
         Me.Btn12Wk = New System.Windows.Forms.Button()
+        Me.txtMostRecentINR = New System.Windows.Forms.TextBox()
+        Me.lblMostRecentInr = New System.Windows.Forms.Label()
+        Me.cmbPillSize2 = New System.Windows.Forms.ComboBox()
+        Me.lblPillSize2 = New System.Windows.Forms.Label()
         CType(Me.txtNotifyInterval, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -147,7 +151,7 @@ Partial Class FrmTrackerMain
         '
         Me.dtNextINR.CustomFormat = ""
         Me.dtNextINR.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtNextINR.Location = New System.Drawing.Point(84, 309)
+        Me.dtNextINR.Location = New System.Drawing.Point(84, 325)
         Me.dtNextINR.Name = "dtNextINR"
         Me.dtNextINR.Size = New System.Drawing.Size(95, 20)
         Me.dtNextINR.TabIndex = 1
@@ -156,7 +160,7 @@ Partial Class FrmTrackerMain
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(10, 312)
+        Me.Label1.Location = New System.Drawing.Point(10, 328)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(70, 13)
         Me.Label1.TabIndex = 5
@@ -166,7 +170,7 @@ Partial Class FrmTrackerMain
         '
         Me.Btn1Wk.BackColor = System.Drawing.SystemColors.InactiveCaption
         Me.Btn1Wk.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
-        Me.Btn1Wk.Location = New System.Drawing.Point(11, 335)
+        Me.Btn1Wk.Location = New System.Drawing.Point(11, 351)
         Me.Btn1Wk.Name = "Btn1Wk"
         Me.Btn1Wk.Size = New System.Drawing.Size(36, 21)
         Me.Btn1Wk.TabIndex = 2
@@ -177,7 +181,7 @@ Partial Class FrmTrackerMain
         '
         Me.Btn2Wk.BackColor = System.Drawing.SystemColors.InactiveCaption
         Me.Btn2Wk.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
-        Me.Btn2Wk.Location = New System.Drawing.Point(50, 335)
+        Me.Btn2Wk.Location = New System.Drawing.Point(50, 351)
         Me.Btn2Wk.Name = "Btn2Wk"
         Me.Btn2Wk.Size = New System.Drawing.Size(36, 21)
         Me.Btn2Wk.TabIndex = 3
@@ -188,7 +192,7 @@ Partial Class FrmTrackerMain
         '
         Me.Btn3Wk.BackColor = System.Drawing.SystemColors.InactiveCaption
         Me.Btn3Wk.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
-        Me.Btn3Wk.Location = New System.Drawing.Point(89, 335)
+        Me.Btn3Wk.Location = New System.Drawing.Point(89, 351)
         Me.Btn3Wk.Name = "Btn3Wk"
         Me.Btn3Wk.Size = New System.Drawing.Size(36, 21)
         Me.Btn3Wk.TabIndex = 4
@@ -199,7 +203,7 @@ Partial Class FrmTrackerMain
         '
         Me.Btn4Wk.BackColor = System.Drawing.SystemColors.InactiveCaption
         Me.Btn4Wk.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
-        Me.Btn4Wk.Location = New System.Drawing.Point(127, 335)
+        Me.Btn4Wk.Location = New System.Drawing.Point(127, 351)
         Me.Btn4Wk.Name = "Btn4Wk"
         Me.Btn4Wk.Size = New System.Drawing.Size(36, 21)
         Me.Btn4Wk.TabIndex = 5
@@ -209,7 +213,7 @@ Partial Class FrmTrackerMain
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(9, 404)
+        Me.Label2.Location = New System.Drawing.Point(9, 420)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(61, 13)
         Me.Label2.TabIndex = 10
@@ -217,7 +221,7 @@ Partial Class FrmTrackerMain
         '
         'txtInstructions
         '
-        Me.txtInstructions.Location = New System.Drawing.Point(12, 420)
+        Me.txtInstructions.Location = New System.Drawing.Point(12, 436)
         Me.txtInstructions.MaxLength = 200
         Me.txtInstructions.Multiline = True
         Me.txtInstructions.Name = "txtInstructions"
@@ -229,7 +233,7 @@ Partial Class FrmTrackerMain
         '
         Me.Btn8Wk.BackColor = System.Drawing.SystemColors.InactiveCaption
         Me.Btn8Wk.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
-        Me.Btn8Wk.Location = New System.Drawing.Point(166, 335)
+        Me.Btn8Wk.Location = New System.Drawing.Point(166, 351)
         Me.Btn8Wk.Name = "Btn8Wk"
         Me.Btn8Wk.Size = New System.Drawing.Size(36, 21)
         Me.Btn8Wk.TabIndex = 6
@@ -240,7 +244,7 @@ Partial Class FrmTrackerMain
         '
         Me.BtnSameDose.BackColor = System.Drawing.SystemColors.InactiveCaption
         Me.BtnSameDose.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
-        Me.BtnSameDose.Location = New System.Drawing.Point(50, 480)
+        Me.BtnSameDose.Location = New System.Drawing.Point(50, 496)
         Me.BtnSameDose.Name = "BtnSameDose"
         Me.BtnSameDose.Size = New System.Drawing.Size(150, 22)
         Me.BtnSameDose.TabIndex = 11
@@ -253,7 +257,7 @@ Partial Class FrmTrackerMain
         Me.txtCurDosageInstructions.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtCurDosageInstructions.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.5!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtCurDosageInstructions.ForeColor = System.Drawing.Color.Red
-        Me.txtCurDosageInstructions.Location = New System.Drawing.Point(232, 255)
+        Me.txtCurDosageInstructions.Location = New System.Drawing.Point(232, 271)
         Me.txtCurDosageInstructions.MaximumSize = New System.Drawing.Size(811, 44)
         Me.txtCurDosageInstructions.Multiline = True
         Me.txtCurDosageInstructions.Name = "txtCurDosageInstructions"
@@ -265,7 +269,7 @@ Partial Class FrmTrackerMain
         '
         Me.txtPrevious.AutoSize = True
         Me.txtPrevious.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPrevious.Location = New System.Drawing.Point(9, 255)
+        Me.txtPrevious.Location = New System.Drawing.Point(9, 271)
         Me.txtPrevious.Name = "txtPrevious"
         Me.txtPrevious.Size = New System.Drawing.Size(216, 17)
         Me.txtPrevious.TabIndex = 15
@@ -356,7 +360,7 @@ Partial Class FrmTrackerMain
         Me.cmbINRRange.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbINRRange.FormattingEnabled = True
         Me.cmbINRRange.Items.AddRange(New Object() {"1.8 - 2.0", "1.8 - 2.3", "2.0 - 2.5", "2.0 - 3.0", "2.0 - 4.0", "2.5 - 3.0", "2.5 - 3.5", "3.0 - 4.0"})
-        Me.cmbINRRange.Location = New System.Drawing.Point(449, 144)
+        Me.cmbINRRange.Location = New System.Drawing.Point(449, 170)
         Me.cmbINRRange.Name = "cmbINRRange"
         Me.cmbINRRange.Size = New System.Drawing.Size(113, 21)
         Me.cmbINRRange.TabIndex = 25
@@ -364,7 +368,7 @@ Partial Class FrmTrackerMain
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(357, 148)
+        Me.Label7.Location = New System.Drawing.Point(352, 174)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(61, 13)
         Me.Label7.TabIndex = 26
@@ -383,7 +387,7 @@ Partial Class FrmTrackerMain
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(357, 123)
+        Me.Label8.Location = New System.Drawing.Point(352, 123)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(86, 13)
         Me.Label8.TabIndex = 28
@@ -392,7 +396,7 @@ Partial Class FrmTrackerMain
         'cbNotify
         '
         Me.cbNotify.AutoSize = True
-        Me.cbNotify.Location = New System.Drawing.Point(359, 174)
+        Me.cbNotify.Location = New System.Drawing.Point(359, 198)
         Me.cbNotify.Name = "cbNotify"
         Me.cbNotify.Size = New System.Drawing.Size(85, 17)
         Me.cbNotify.TabIndex = 26
@@ -401,7 +405,7 @@ Partial Class FrmTrackerMain
         '
         'txtNotifyInterval
         '
-        Me.txtNotifyInterval.Location = New System.Drawing.Point(449, 173)
+        Me.txtNotifyInterval.Location = New System.Drawing.Point(449, 197)
         Me.txtNotifyInterval.Name = "txtNotifyInterval"
         Me.txtNotifyInterval.Size = New System.Drawing.Size(39, 20)
         Me.txtNotifyInterval.TabIndex = 27
@@ -409,7 +413,7 @@ Partial Class FrmTrackerMain
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(491, 175)
+        Me.Label9.Location = New System.Drawing.Point(491, 199)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(71, 13)
         Me.Label9.TabIndex = 32
@@ -660,8 +664,8 @@ Partial Class FrmTrackerMain
         '
         Me.TblTherapyDetailsDataGridView.AllowUserToAddRows = False
         Me.TblTherapyDetailsDataGridView.AllowUserToDeleteRows = False
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.InactiveCaptionText
-        Me.TblTherapyDetailsDataGridView.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.InactiveCaptionText
+        Me.TblTherapyDetailsDataGridView.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle3
         Me.TblTherapyDetailsDataGridView.AutoGenerateColumns = False
         Me.TblTherapyDetailsDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
         Me.TblTherapyDetailsDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders
@@ -669,7 +673,7 @@ Partial Class FrmTrackerMain
         Me.TblTherapyDetailsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.TblTherapyDetailsDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.EvaluationDate, Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn4})
         Me.TblTherapyDetailsDataGridView.DataSource = Me.TblTherapyDetailsBindingSource
-        Me.TblTherapyDetailsDataGridView.Location = New System.Drawing.Point(264, 308)
+        Me.TblTherapyDetailsDataGridView.Location = New System.Drawing.Point(264, 324)
         Me.TblTherapyDetailsDataGridView.Name = "TblTherapyDetailsDataGridView"
         Me.TblTherapyDetailsDataGridView.ReadOnly = True
         Me.TblTherapyDetailsDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
@@ -693,8 +697,8 @@ Partial Class FrmTrackerMain
         '
         Me.DataGridViewTextBoxColumn5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.DataGridViewTextBoxColumn5.DataPropertyName = "Instructions"
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridViewTextBoxColumn5.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridViewTextBoxColumn5.DefaultCellStyle = DataGridViewCellStyle4
         Me.DataGridViewTextBoxColumn5.HeaderText = "Instructions"
         Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
         Me.DataGridViewTextBoxColumn5.ReadOnly = True
@@ -713,7 +717,7 @@ Partial Class FrmTrackerMain
         'Label16
         '
         Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(17, 510)
+        Me.Label16.Location = New System.Drawing.Point(17, 526)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(83, 13)
         Me.Label16.TabIndex = 40
@@ -723,7 +727,7 @@ Partial Class FrmTrackerMain
         '
         Me.dtEvalDate.CustomFormat = ""
         Me.dtEvalDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtEvalDate.Location = New System.Drawing.Point(146, 506)
+        Me.dtEvalDate.Location = New System.Drawing.Point(146, 522)
         Me.dtEvalDate.Name = "dtEvalDate"
         Me.dtEvalDate.Size = New System.Drawing.Size(103, 20)
         Me.dtEvalDate.TabIndex = 12
@@ -764,7 +768,7 @@ Partial Class FrmTrackerMain
         Me.Panel2.Controls.Add(Me.ChkSendTask)
         Me.Panel2.Controls.Add(Me.BtnVerifySend)
         Me.Panel2.Controls.Add(Me.BtnCancel)
-        Me.Panel2.Location = New System.Drawing.Point(12, 540)
+        Me.Panel2.Location = New System.Drawing.Point(12, 556)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(1014, 44)
         Me.Panel2.TabIndex = 43
@@ -836,10 +840,10 @@ Partial Class FrmTrackerMain
         Me.ResultsDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
         Me.ResultsDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders
         Me.ResultsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.ResultsDataGridView.Location = New System.Drawing.Point(585, 89)
+        Me.ResultsDataGridView.Location = New System.Drawing.Point(585, 105)
         Me.ResultsDataGridView.Name = "ResultsDataGridView"
         Me.ResultsDataGridView.ReadOnly = True
-        Me.ResultsDataGridView.Size = New System.Drawing.Size(441, 160)
+        Me.ResultsDataGridView.Size = New System.Drawing.Size(441, 161)
         Me.ResultsDataGridView.TabIndex = 44
         Me.ResultsDataGridView.TabStop = False
         '
@@ -865,7 +869,7 @@ Partial Class FrmTrackerMain
         'Label17
         '
         Me.Label17.AutoSize = True
-        Me.Label17.Location = New System.Drawing.Point(9, 203)
+        Me.Label17.Location = New System.Drawing.Point(9, 224)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(56, 13)
         Me.Label17.TabIndex = 45
@@ -873,12 +877,12 @@ Partial Class FrmTrackerMain
         '
         'txtComments
         '
-        Me.txtComments.Location = New System.Drawing.Point(191, 203)
+        Me.txtComments.Location = New System.Drawing.Point(84, 225)
         Me.txtComments.MaxLength = 200
         Me.txtComments.Multiline = True
         Me.txtComments.Name = "txtComments"
         Me.txtComments.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtComments.Size = New System.Drawing.Size(371, 46)
+        Me.txtComments.Size = New System.Drawing.Size(478, 41)
         Me.txtComments.TabIndex = 28
         '
         'TblResultViewTableAdapter
@@ -889,7 +893,7 @@ Partial Class FrmTrackerMain
         '
         Me.btnMyInterval1.BackColor = System.Drawing.SystemColors.InactiveCaption
         Me.btnMyInterval1.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
-        Me.btnMyInterval1.Location = New System.Drawing.Point(11, 363)
+        Me.btnMyInterval1.Location = New System.Drawing.Point(11, 379)
         Me.btnMyInterval1.Name = "btnMyInterval1"
         Me.btnMyInterval1.Size = New System.Drawing.Size(82, 21)
         Me.btnMyInterval1.TabIndex = 8
@@ -900,7 +904,7 @@ Partial Class FrmTrackerMain
         '
         Me.btnMyInterval2.BackColor = System.Drawing.SystemColors.InactiveCaption
         Me.btnMyInterval2.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
-        Me.btnMyInterval2.Location = New System.Drawing.Point(127, 363)
+        Me.btnMyInterval2.Location = New System.Drawing.Point(127, 379)
         Me.btnMyInterval2.Name = "btnMyInterval2"
         Me.btnMyInterval2.Size = New System.Drawing.Size(82, 21)
         Me.btnMyInterval2.TabIndex = 9
@@ -910,7 +914,7 @@ Partial Class FrmTrackerMain
         'LinkLabel1
         '
         Me.LinkLabel1.AutoSize = True
-        Me.LinkLabel1.Location = New System.Drawing.Point(961, 258)
+        Me.LinkLabel1.Location = New System.Drawing.Point(961, 284)
         Me.LinkLabel1.Name = "LinkLabel1"
         Me.LinkLabel1.Size = New System.Drawing.Size(71, 13)
         Me.LinkLabel1.TabIndex = 50
@@ -923,7 +927,7 @@ Partial Class FrmTrackerMain
         Me.txtMyInterval1.BackColor = System.Drawing.SystemColors.Control
         Me.txtMyInterval1.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtMyInterval1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtMyInterval1.Location = New System.Drawing.Point(96, 366)
+        Me.txtMyInterval1.Location = New System.Drawing.Point(96, 382)
         Me.txtMyInterval1.Name = "txtMyInterval1"
         Me.txtMyInterval1.Size = New System.Drawing.Size(18, 14)
         Me.txtMyInterval1.TabIndex = 52
@@ -935,7 +939,7 @@ Partial Class FrmTrackerMain
         Me.txtMyInterval2.BackColor = System.Drawing.SystemColors.Control
         Me.txtMyInterval2.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtMyInterval2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtMyInterval2.Location = New System.Drawing.Point(212, 366)
+        Me.txtMyInterval2.Location = New System.Drawing.Point(212, 382)
         Me.txtMyInterval2.Name = "txtMyInterval2"
         Me.txtMyInterval2.Size = New System.Drawing.Size(18, 14)
         Me.txtMyInterval2.TabIndex = 53
@@ -945,7 +949,7 @@ Partial Class FrmTrackerMain
         'Label18
         '
         Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label18.Location = New System.Drawing.Point(114, 366)
+        Me.Label18.Location = New System.Drawing.Point(114, 382)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(11, 13)
         Me.Label18.TabIndex = 54
@@ -954,7 +958,7 @@ Partial Class FrmTrackerMain
         'Label19
         '
         Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label19.Location = New System.Drawing.Point(230, 366)
+        Me.Label19.Location = New System.Drawing.Point(230, 382)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(12, 13)
         Me.Label19.TabIndex = 55
@@ -963,7 +967,7 @@ Partial Class FrmTrackerMain
         'lblManagedBy
         '
         Me.lblManagedBy.AutoSize = True
-        Me.lblManagedBy.Location = New System.Drawing.Point(358, 96)
+        Me.lblManagedBy.Location = New System.Drawing.Point(353, 96)
         Me.lblManagedBy.Name = "lblManagedBy"
         Me.lblManagedBy.Size = New System.Drawing.Size(67, 13)
         Me.lblManagedBy.TabIndex = 56
@@ -984,7 +988,7 @@ Partial Class FrmTrackerMain
         'lnkEditDetails
         '
         Me.lnkEditDetails.AutoSize = True
-        Me.lnkEditDetails.Location = New System.Drawing.Point(1011, 292)
+        Me.lnkEditDetails.Location = New System.Drawing.Point(1011, 308)
         Me.lnkEditDetails.Name = "lnkEditDetails"
         Me.lnkEditDetails.Size = New System.Drawing.Size(25, 13)
         Me.lnkEditDetails.TabIndex = 29
@@ -999,7 +1003,7 @@ Partial Class FrmTrackerMain
         'lblDaysAway
         '
         Me.lblDaysAway.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.lblDaysAway.Location = New System.Drawing.Point(182, 310)
+        Me.lblDaysAway.Location = New System.Drawing.Point(182, 326)
         Me.lblDaysAway.Name = "lblDaysAway"
         Me.lblDaysAway.Size = New System.Drawing.Size(79, 20)
         Me.lblDaysAway.TabIndex = 57
@@ -1010,7 +1014,7 @@ Partial Class FrmTrackerMain
         Me.btnCDS.BackColor = System.Drawing.Color.Plum
         Me.btnCDS.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Bold)
         Me.btnCDS.ForeColor = System.Drawing.Color.MidnightBlue
-        Me.btnCDS.Location = New System.Drawing.Point(203, 392)
+        Me.btnCDS.Location = New System.Drawing.Point(203, 408)
         Me.btnCDS.Name = "btnCDS"
         Me.btnCDS.Size = New System.Drawing.Size(40, 22)
         Me.btnCDS.TabIndex = 58
@@ -1021,19 +1025,58 @@ Partial Class FrmTrackerMain
         '
         Me.Btn12Wk.BackColor = System.Drawing.SystemColors.InactiveCaption
         Me.Btn12Wk.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
-        Me.Btn12Wk.Location = New System.Drawing.Point(206, 335)
+        Me.Btn12Wk.Location = New System.Drawing.Point(206, 351)
         Me.Btn12Wk.Name = "Btn12Wk"
         Me.Btn12Wk.Size = New System.Drawing.Size(38, 21)
         Me.Btn12Wk.TabIndex = 7
         Me.Btn12Wk.Text = "+12&W"
         Me.Btn12Wk.UseVisualStyleBackColor = False
         '
+        'txtMostRecentINR
+        '
+        Me.txtMostRecentINR.Location = New System.Drawing.Point(1000, 81)
+        Me.txtMostRecentINR.Name = "txtMostRecentINR"
+        Me.txtMostRecentINR.Size = New System.Drawing.Size(26, 20)
+        Me.txtMostRecentINR.TabIndex = 59
+        '
+        'lblMostRecentInr
+        '
+        Me.lblMostRecentInr.AutoSize = True
+        Me.lblMostRecentInr.Location = New System.Drawing.Point(901, 85)
+        Me.lblMostRecentInr.Name = "lblMostRecentInr"
+        Me.lblMostRecentInr.Size = New System.Drawing.Size(93, 13)
+        Me.lblMostRecentInr.TabIndex = 60
+        Me.lblMostRecentInr.Text = "Most Recent INR:"
+        '
+        'cmbPillSize2
+        '
+        Me.cmbPillSize2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.cmbPillSize2.FormattingEnabled = True
+        Me.cmbPillSize2.Items.AddRange(New Object() {"1 mg", "2 mg", "2.5 mg", "3 mg", "4 mg", "5 mg", "7.5 mg", "10 mg"})
+        Me.cmbPillSize2.Location = New System.Drawing.Point(449, 144)
+        Me.cmbPillSize2.Name = "cmbPillSize2"
+        Me.cmbPillSize2.Size = New System.Drawing.Size(113, 21)
+        Me.cmbPillSize2.TabIndex = 61
+        '
+        'lblPillSize2
+        '
+        Me.lblPillSize2.AutoSize = True
+        Me.lblPillSize2.Location = New System.Drawing.Point(352, 148)
+        Me.lblPillSize2.Name = "lblPillSize2"
+        Me.lblPillSize2.Size = New System.Drawing.Size(92, 13)
+        Me.lblPillSize2.TabIndex = 62
+        Me.lblPillSize2.Text = "Additional Pill Size"
+        '
         'FrmTrackerMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1046, 595)
+        Me.ClientSize = New System.Drawing.Size(1046, 614)
         Me.ControlBox = False
+        Me.Controls.Add(Me.cmbPillSize2)
+        Me.Controls.Add(Me.lblPillSize2)
+        Me.Controls.Add(Me.lblMostRecentInr)
+        Me.Controls.Add(Me.txtMostRecentINR)
         Me.Controls.Add(Me.Btn12Wk)
         Me.Controls.Add(Me.btnCDS)
         Me.Controls.Add(Me.lblDaysAway)
@@ -1195,5 +1238,9 @@ Partial Class FrmTrackerMain
     Friend WithEvents lblDaysAway As System.Windows.Forms.Label
     Friend WithEvents btnCDS As System.Windows.Forms.Button
     Friend WithEvents Btn12Wk As System.Windows.Forms.Button
+    Friend WithEvents txtMostRecentINR As System.Windows.Forms.TextBox
+    Friend WithEvents lblMostRecentInr As System.Windows.Forms.Label
+    Friend WithEvents cmbPillSize2 As System.Windows.Forms.ComboBox
+    Friend WithEvents lblPillSize2 As System.Windows.Forms.Label
 
 End Class
